@@ -1,0 +1,8 @@
+parameters:
+    # services
+    standing_service.class:               EliteFifa\StandingBundle\Service\StandingService
+
+services:
+    # services
+    elite_fifa.standing_service:
+        class: %standing_service.class%

@@ -1,0 +1,62 @@
+EliteFifa\TeamBundle\Entity\Team:
+  type: entity
+  repositoryClass: EliteFifa\TeamBundle\Repository\TeamRepository
+  table: team
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          fields:
+            - name
+    logo:
+      type: string
+      nullable: true
+    rating:
+      type: integer
+  oneToMany:
+    players:
+      targetEntity: EliteFifa\PlayerBundle\Entity\Player
+      mappedBy: team
+      cascade: ["persist"]
+    homeMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: homeTeam
+      cascade: ["persist"]
+    awayMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: awayTeam
+      cascade: ["persist"]
+    events:
+      targetEntity: EliteFifa\MatchBundle\Entity\Event
+      mappedBy: team
+      cascade: ["persist"]
+    competitors:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      mappedBy: team
+      cascade: ["persist"]
+  oneToOne:
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: team
+      cascade: ["persist"]
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        onDelete: set null
+  manyToOne:
+    stadium:
+      targetEntity: EliteFifa\StadiumBundle\Entity\Stadium
+      inversedBy: teams
+      cascade: ["persist"]
+      joinColumn:
+        name: stadium_id
+        referencedColumnName: id

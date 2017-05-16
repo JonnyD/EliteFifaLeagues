@@ -1,0 +1,104 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set username = user.username %}
+    {% set team = user.team.name %}
+
+    <h3>Profile</h3>
+    username: {{ username }} <br />
+    manages: {{ team }} <br />
+    form:
+    {% for match in results %}
+        {% set result = match.result(user)|slice(0,1) %}
+        {% if result == 'W' %}
+            <span class="label label-success">{{ result }}</span>
+        {% elseif result == 'D' %}
+            <span class="label label-warning">{{ result }}</span>
+        {% elseif result == 'L' %}
+            <span class="label label-danger">{{ result }}</span>
+        {% endif %}
+    {% endfor %}
+
+    <h3>Results</h3>
+    <table class="table">
+        <tbody>
+        {% for match in results|slice(0,5) %}
+            <tr>
+                {% set homeTeam = match.homeTeam %}
+                {% set awayTeam = match.awayTeam %}
+                {% set homeTeamName = homeTeam.name %}
+                {% set awayTeamName = awayTeam.name %}
+                {% set homeUser = homeTeam.user.username %}
+                {% set awayUser = awayTeam.user.username %}
+                {% set reported = match.reported %}
+                {% set confirmed = match.confirmed %}
+                {% set homeScore = match.homeScore %}
+                {% set awayScore = match.awayScore %}
+
+                <td class="text-right"><a href="{{ path('elite_fifa.show_user', {'username': homeUser }) }}">{{ homeUser }}</a></td>
+                <td class="text-right">{{ homeTeamName }} <img width="20" height="20" src="{{ asset('crest/' ~ homeTeam.slug ~ '.png') }}" /></td>
+                <td class="text-center">
+                        <a class="open-modal" href="{{ path('elite_fifa.show_match', {'id': match.id}) }}" data-remote="{{ path('elite_fifa.show_match', {'id': match.id}) }}"
+                                >{{ homeScore }} - {{ awayScore }}</a>
+                </td>
+                <td class="text-left"><img width="20" height="20" src="{{ asset('crest/' ~ awayTeam.slug ~ '.png') }}" /> {{ awayTeamName }}</td>
+                <td class="text-left"><a href="{{ path('elite_fifa.show_user', {'username': awayUser }) }}">{{ awayUser }}</a></td>
+                <td>
+                    {% set result = match.result(user)|slice(0,1) %}
+                    {% if result == 'W' %}
+                        <span class="label label-success">{{ result }}</span>
+                    {% elseif result == 'D' %}
+                        <span class="label label-warning">{{ result }}</span>
+                    {% elseif result == 'L' %}
+                        <span class="label label-danger">{{ result }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Matches</h3>
+    <table class="table table-bordered">
+        <tbody>
+        {% for match in matches %}
+            <tr>
+                {{ include('EliteFifaBundle:Match:showMatchRow.html.twig', { 'match': match }) }}
+
+                {% set homeUser = match.homeTeam.user.username %}
+                {% set awayUser = match.awayTeam.user.username %}
+                {% set reported = match.reported %}
+                {% set confirmed = match.confirmed %}
+
+                {% if homeUser == username and reported is null %}
+                    <a href="{{ path('elite_fifa.report_match', {'id': match.id }) }}">Report</a>
+                {% elseif awayUser == username and reported is not null and confirmed is null %}
+                    <a href="{{ path('elite_fifa.confirm_match', {'id': match.id }) }}">Confirm</a>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(function(){
+            $("a.open-modal").click(function(e){
+                $('#onLoad').show();
+                e.preventDefault();
+                var modal=$("#myModal");
+                modal.empty();
+                modal.modal({
+                }).load($(e.currentTarget).attr("data-remote"), function (e) {
+                    $('#onLoad').hide();
+                });
+            });
+        });
+    </script>
+
+    <span id="onLoad" style="position:absolute;left:100px;top:100px;z-index:1000000;" hidden>Loading...</span>
+    <a href='#' class="open-modal" data-remote='http://localhost/EliteFifa2/web/app_dev.php/test'><i class='icon-pencil color-orange'></i>fffff</a>
+    <br/>
+
+    <div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'></div>
+
+{% endblock %}

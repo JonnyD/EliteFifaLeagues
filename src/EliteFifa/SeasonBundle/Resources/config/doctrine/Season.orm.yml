@@ -1,0 +1,48 @@
+EliteFifa\SeasonBundle\Entity\Season:
+  type: entity
+  repositoryClass: EliteFifa\SeasonBundle\Repository\SeasonRepository
+  table: season
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    startDate:
+      type: datetime
+      column: start_date
+      nullable: true
+    endDate:
+      type: datetime
+      column: end_date
+      nullable: true
+    status:
+      type: string
+    number:
+      type: integer
+  oneToMany:
+    matches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: season
+      cascade: ["persist"]
+    competitors:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      mappedBy: season
+      cascade: ["persist"]
+  manyToMany:
+    competitions:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      mappedBy: seasons
+      cascade: ["persist"]
+    associations:
+      targetEntity: EliteFifa\AssociationBundle\Entity\Association
+      mappedBy: seasons
+      cascade: ["persist"]
+  manyToOne:
+    region:
+      targetEntity: EliteFifa\RegionBundle\Entity\Region
+      inversedBy: seasons
+      cascade: ["persist"]
+      joinColumn:
+        name: region_id
+        referencedColumnName: id

@@ -1,0 +1,3 @@
+elite_fifa.change_competitor:
+    path: /admin/competitor/change/{id}
+    defaults: { _controller: CompetitorBundle:AdminCompetitor:change }

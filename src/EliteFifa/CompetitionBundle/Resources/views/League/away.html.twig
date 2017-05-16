@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Pos</th>
+            <th></th>
+            <th>Team</th>
+            <th>Manager</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>PTS</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for standing in standings %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>({{ standing.position }})</td>
+                <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }} </td>
+                <td><a href="{{ path('elite_fifa.show_user', {'username': standing.team.user.username }) }}">{{ standing.team.user.username }}</a></td>
+                <td>{{ standing.awayPlayed }}</td>
+                <td>{{ standing.awayWon }}</td>
+                <td>{{ standing.awayDrawn }}</td>
+                <td>{{ standing.awayLost }}</td>
+                <td>{{ standing.awayGoalsFor }}</td>
+                <td>{{ standing.awayGoalsAgainst }}</td>
+                <td>{{ standing.awayGoalsFor - standing.awayGoalsAgainst }}</td>
+                <td>{{ standing.awayPoints }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

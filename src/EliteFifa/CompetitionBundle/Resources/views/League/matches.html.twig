@@ -1,0 +1,37 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set slug = league.slug %}
+    {% set routeParams = routeParams|merge({'slug': slug}) %}
+
+    {{ include('EliteFifaBundle:League:competitionHeader.html.twig') }}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form(selectRoundForm) }}
+        </div>
+
+        <div class="col-md-6 text-right">
+            <div class="btn-group btn-group-sm">
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-default dropdown-toggle disabled" data-toggle="dropdown">
+                        Current Season
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dropdown link</a></li>
+                        <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="btn btn-default disabled"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                <button type="button" class="btn btn-default disabled"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    {{ include('EliteFifaBundle:Match:listMatches.html.twig') }}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+EliteFifa\PlayerBundle\Entity\Player:
+  type: entity
+  repositoryClass: EliteFifa\PlayerBundle\Repository\PlayerRepository
+  table: player
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    firstName:
+      type: string
+      column: first_name
+    lastName:
+      type: string
+      column: last_name
+    slug:
+      type: string
+      length: 128
+      unique: true
+      gedmo:
+        slug:
+          fields:
+            - firstName
+            - lastName
+  manyToOne:
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      inversedBy: players
+      cascade: ["persist"]
+      joinColumn:
+        name: team_id
+        referencedColumnName: id

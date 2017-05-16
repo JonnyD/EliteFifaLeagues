@@ -1,0 +1,8 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set slug = league.slug %}
+    {% set routeParams = routeParams|merge({'slug': slug}) %}
+
+    {{ include('EliteFifaBundle:League:competitionHeader.html.twig') }}
+{% endblock %}

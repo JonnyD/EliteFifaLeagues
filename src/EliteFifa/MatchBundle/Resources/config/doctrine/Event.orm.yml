@@ -1,0 +1,35 @@
+EliteFifa\MatchBundle\Entity\Event:
+  type: entity
+  repositoryClass: EliteFifa\MatchBundle\Repository\EventRepository
+  table: event
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    eventType:
+      targetEntity: EliteFifa\MatchBundle\Entity\EventType
+      inversedBy: events
+      cascade: ["persist"]
+      joinColumn:
+        name: event_type_id
+        referencedColumnName: id
+    player:
+      targetEntity: EliteFifa\PlayerBundle\Entity\Player
+      inversedBy: events
+      cascade: ["persist"]
+      joinColumn:
+        name: event_type_id
+        referencedColumnName: id
+    match:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      inversedBy: events
+      cascade: ["persist"]
+      joinColumn:
+        name: match_id
+        referencedColumnName: id
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      inversedBy: events
+      cascade: ["persist"]

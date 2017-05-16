@@ -1,0 +1,11 @@
+elite_fifa.list_teams:
+    pattern: /teams
+    defaults: { _controller: EliteFifaBundle:Team:list }
+
+elite_fifa.show_team:
+    pattern: /team/{slug}
+    defaults: { _controller: EliteFifaBundle:Team:show }
+
+elite_fifa.select_team:
+    pattern: /user/selectTeam
+    defaults: { _controller: EliteFifaBundle:User:selectTeam }

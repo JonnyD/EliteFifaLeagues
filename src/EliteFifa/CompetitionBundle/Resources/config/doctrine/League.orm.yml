@@ -1,0 +1,29 @@
+EliteFifa\CompetitionBundle\Entity\League:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\LeagueRepository
+  fields:
+    division:
+      type: integer
+      nullable: true
+    promotionSpots:
+      type: integer
+      nullable: true
+    playoffSpots:
+      type: integer
+      nullable: true
+    relegationSpots:
+      type: integer
+      nullable: true
+  oneToOne:
+    promotedTo:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\League
+      joinColumn:
+        name: promoted_to
+        referencedColumnName: id
+        onDelete: set null
+    relegatedTo:
+       targetEntity: EliteFifa\CompetitionBundle\Entity\League
+       joinColumn:
+         name: relegated_to
+         referencedColumnName: id
+         onDelete: set null

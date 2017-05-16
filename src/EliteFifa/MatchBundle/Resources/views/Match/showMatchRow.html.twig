@@ -1,0 +1,23 @@
+{% set homeTeam = match.homeTeam %}
+{% set awayTeam = match.awayTeam %}
+{% set homeTeamName = homeTeam.name %}
+{% set awayTeamName = awayTeam.name %}
+{% set homeUser = homeTeam.user.username %}
+{% set awayUser = awayTeam.user.username %}
+{% set reported = match.reported %}
+{% set confirmed = match.confirmed %}
+{% set homeScore = match.homeScore %}
+{% set awayScore = match.awayScore %}
+
+<td class="text-right"><a href="{{ path('elite_fifa.show_user', {'username': homeUser }) }}">{{ homeUser }}</a></td>
+<td class="text-right">{{ homeTeamName }} <img width="20" height="20" src="{{ asset('crest/' ~ homeTeam.slug ~ '.png') }}" /></td>
+<td class="text-center">
+    {% if confirmed %}
+        <a class="open-modal" href="{{ path('elite_fifa.show_match', {'id': match.id}) }}" data-remote="{{ path('elite_fifa.show_match', {'id': match.id}) }}"
+                >{{ homeScore }} - {{ awayScore }}</a>
+    {% else %}
+        v
+    {% endif %}
+</td>
+<td class="text-left"><img width="20" height="20" src="{{ asset('crest/' ~ awayTeam.slug ~ '.png') }}" /> {{ awayTeamName }}</td>
+<td class="text-left"><a href="{{ path('elite_fifa.show_user', {'username': awayUser }) }}">{{ awayUser }}</a></td>

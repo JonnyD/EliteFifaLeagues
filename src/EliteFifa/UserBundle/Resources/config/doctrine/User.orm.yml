@@ -1,0 +1,29 @@
+EliteFifa\UserBundle\Entity\User:
+  type: entity
+  repositoryClass: EliteFifa\UserBundle\Repository\UserRepository
+  table: user
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  oneToOne:
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      joinColumn:
+        name: team_id
+        referencedColumnName: id
+        onDelete: set null
+  oneToMany:
+    homeMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: homeUser
+      cascade: ["persist"]
+    awayMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: awayUser
+      cascade: ["persist"]
+    competitors:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      mappedBy: user
+      cascade: ["persist"]

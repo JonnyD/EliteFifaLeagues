@@ -1,0 +1,21 @@
+parameters:
+    # repositories
+    participant_repository.class:            EliteFifa\ParticipantBundle\Repository\ParticipantRepository
+    participant_repository.factory_argument: 'ParticipantBundle:Participant'
+
+    # services
+    participant_service.class:          EliteFifa\ParticipantBundle\Service\ParticipantService
+    
+services:
+    # services
+    elite_fifa.participant_service:
+        class: %participant_service.class%
+        arguments:
+          - '@elite_fifa.participant_repository'
+
+    elite_fifa.participant_repository:
+        class: %participant_repository.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+          - %participant_repository.factory_argument%

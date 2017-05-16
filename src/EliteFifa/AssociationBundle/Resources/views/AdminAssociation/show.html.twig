@@ -1,0 +1,8 @@
+{{ association.name }} <br/>
+
+Competitions <a href="{{ path('elite_fifa.admin_create_competition', {'association': association.slug }) }}">
+    create</a> <br />
+{% for competition in competitions %}
+    <a href="{{ path('elite_fifa.admin_show_competition', {'slug': competition.slug }) }}">
+        {{ competition.name }}</a> <br />
+{% endfor %}

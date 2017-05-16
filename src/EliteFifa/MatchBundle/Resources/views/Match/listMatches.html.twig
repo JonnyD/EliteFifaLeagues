@@ -1,0 +1,50 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Matches
+        <div class="pull-right">
+            <div class="btn-group btn-group text-left">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    {{ table|capitalize  }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li role="presentation" {% if table == 'overall' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'overall'})) }}">Overall</a></li>
+                    <li role="presentation" {% if table == 'home' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'home'})) }}">Home</a></li>
+                    <li role="presentation" {% if table == 'away' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'away'})) }}">Away</a></li>
+                    <li role="presentation" {% if table == 'combined' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'combined'})) }}">Combined</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <tbody>
+            {% for match in matches %}
+                <tr>
+                    {% set homeTeam = match.homeTeam %}
+                    {% set awayTeam = match.awayTeam %}
+                    {% set homeTeamName = homeTeam.name %}
+                    {% set awayTeamName = awayTeam.name %}
+                    {% set homeUser = match.homeTeam.user.username %}
+                    {% set awayUser = match.awayTeam.user.username %}
+                    {% set reported = match.reported %}
+                    {% set confirmed = match.confirmed %}
+                    {% set homeScore = match.homeScore %}
+                    {% set awayScore = match.awayScore %}
+
+                    <td class="text-right">
+                        <a href="{{ path('elite_fifa.show_user', {'username': homeUser }) }}">{{ homeUser }}</a> <img width="20" height="20" src="{{ asset('crest/' ~ homeTeam.slug ~ '.png') }}" /></td>
+                    <td class="text-center">
+                        {% if confirmed %}
+                            <a class="open-modal" href="{{ path('elite_fifa.show_match', {'id': match.id}) }}" data-remote="{{ path('elite_fifa.show_match', {'id': match.id}) }}"
+                                    >{{ homeScore }} - {{ awayScore }}</a>
+                        {% else %}
+                            v
+                        {% endif %}
+                    </td>
+                    <td class="text-left"><img width="20" height="20" src="{{ asset('crest/' ~ awayTeam.slug ~ '.png') }}" /> <a href="{{ path('elite_fifa.show_user', {'username': awayUser }) }}">{{ awayUser }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

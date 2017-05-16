@@ -1,0 +1,37 @@
+EliteFifa\AssociationBundle\Entity\Association:
+  type: entity
+  repositoryClass: EliteFifa\AssociationBundle\Repository\AssociationRepository
+  table: association
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          fields:
+            - name
+  manyToMany:
+    seasons:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: associations
+      cascade: ["persist"]
+  manyToOne:
+    region:
+      targetEntity: EliteFifa\RegionBundle\Entity\Region
+      inversedBy: associations
+      cascade: ["persist"]
+      joinColumn:
+        name: region_id
+        referencedColumnName: id
+  oneToMany:
+    competitions:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      mappedBy: association
+      cascade: ["persist"]

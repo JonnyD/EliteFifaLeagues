@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    window.onload = function () {
+        var seasons = document.getElementById('form_select_season');
+
+        seasons.onchange = function () {
+            var seasonNumber = seasons.options[seasons.selectedIndex].value;
+            window.location.replace("{{ path('elite_fifa.show_league', {'slug': slug }) }}?season=" + seasonNumber);
+        }
+
+        var rounds = document.getElementById('form_select_round');
+
+        rounds.onchange = function () {
+            var roundNumber = rounds.options[rounds.selectedIndex].value;
+            window.location.replace("{{ path('elite_fifa.show_league', {'slug': slug }) }}?round=" + roundNumber);
+        }
+    }
+</script>
+
+<div class="row">
+    <div class="col-md-6 text-left" style="font-family: inherit; font-weight: 500; line-height: 1.1;
+            color: inherit; margin-top: 20px; margin-bottom: 10px; font-size: 36px;">
+        {{ league.association.name }} {{ league.name }}
+    </div>
+    <div class="col-md-6 text-right" style="vertical-align: bottom; margin-top: 20px; margin-bottom: 10px;">
+        <div class="btn-group btn-group">
+            <div class="btn-group btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle disabled" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    Current Season
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Dropdown link</a></li>
+                    <li><a href="#">Dropdown link</a></li>
+                </ul>
+            </div>
+
+            <button type="button" class="btn btn-default disabled"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button type="button" class="btn btn-default disabled"><span class="glyphicon glyphicon-chevron-right"></span></button>
+        </div>
+    </div>
+</div>

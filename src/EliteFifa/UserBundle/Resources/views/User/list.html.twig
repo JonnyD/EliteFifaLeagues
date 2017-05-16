@@ -1,0 +1,11 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Users</h3>
+
+    {% for user in users %}
+        <a href="{{ path('elite_fifa.show_user', {'username': user.username }) }}">
+            {{ user.username }}</a> <br />
+    {% endfor %}
+
+{% endblock %}

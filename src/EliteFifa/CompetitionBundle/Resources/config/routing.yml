@@ -1,0 +1,11 @@
+elite_fifa.show_competition:
+    path: /competition/{slug}
+    defaults: { _controller: CompetitionBundle:Competition:show }
+
+elite_fifa.admin_create_competition:
+    path: /admin/competition/create
+    defaults: { _controller: CompetitionBundle:AdminCompetition:create }
+
+elite_fifa.admin_show_competition:
+    path: /admin/competition/{slug}
+    defaults: { _controller: CompetitionBundle:AdminCompetition:show }

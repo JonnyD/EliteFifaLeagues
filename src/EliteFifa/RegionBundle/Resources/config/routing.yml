@@ -1,0 +1,11 @@
+elite_fifa.admin_list_regions:
+    path: /admin/region
+    defaults: { _controller: RegionBundle:AdminRegion:list }
+
+elite_fifa.admin_create_region:
+    path: /admin/region/create
+    defaults: { _controller: RegionBundle:AdminRegion:create }
+
+elite_fifa.admin_show_region:
+    path: /admin/region/{slug}
+    defaults: { _controller: RegionBundle:AdminRegion:show }

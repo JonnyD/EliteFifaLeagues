@@ -1,0 +1,17 @@
+EliteFifa\MatchBundle\Entity\EventType:
+  type: entity
+  repositoryClass: EliteFifa\MatchBundle\Repository\EventTypeRepository
+  table: event_type
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+  oneToMany:
+    events:
+      targetEntity: EliteFifa\MatchBundle\Entity\Event
+      mappedBy: eventType
+      cascade: ["persist"]

@@ -1,0 +1,124 @@
+EliteFifa\CompetitionBundle\Entity\Stats:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\StatsRepository
+  table: stats
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    played:
+      type: integer
+    won:
+      type: integer
+    drawn:
+      type: integer
+    lost:
+      type: integer
+    yellows:
+      type: integer
+    reds:
+      type: integer
+    scored:
+      type: integer
+    conceded:
+      type: integer
+    points:
+      type: integer
+    currentWinStreak:
+      type: integer
+      column: current_win_streak
+    highestWinStreak:
+      type: integer
+      column: highest_win_streak
+    currentDrawStreak:
+      type: integer
+      column: current_draw_streak
+    currentLossStreak:
+      type: integer
+      column: current_loss_streak
+    highestLossStreak:
+      type: integer
+      column: highest_loss_streak
+    currentWithoutWinningStreak:
+      type: integer
+      column: current_without_winning_streak
+    highestWithoutWinningStreak:
+      type: integer
+      column: highest_without_winning_streak
+    currentWithoutLosingStreak:
+      type: integer
+      column: current_without_losing_streak
+    highestWithoutLosingStreak:
+      type: integer
+      column: highest_without_losing_streak
+    currentWithoutConcedingStreak:
+      type: integer
+      column: current_without_conceding_streak
+    highestWithoutConcedingStreak:
+      type: integer
+      column: highest_without_conceding_streak
+    currentWithoutScoringStreak:
+      type: integer
+      column: current_without_scoring_streak
+    currentScoredStreak:
+      type: integer
+      column: current_scored_streak
+    highestScoredStreak:
+      type: integer
+      column: highest_scored_streak
+    currentCombinedForm:
+      type: string
+      column: current_combined_form
+      nullable: true
+    currentCombinedFormPoints:
+      type: integer
+      column: current_combined_form_points
+    currentHomeForm:
+      type: string
+      column: current_home_form
+      nullable: true
+    currentHomeFormPoints:
+      type: integer
+      column: current_home_form_points
+      nullable: true
+    currentAwayForm:
+      type: string
+      column: current_away_form
+      nullable: true
+    currentAwayFormPoints:
+      type: integer
+      column: current_away_form_points
+      nullable: true
+  manyToOne:
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      joinColumn:
+        name: team_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    biggestWin:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      joinColumn:
+        name: biggest_win
+        referencedColumnName: id
+    biggestLoss:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      joinColumn:
+        name: biggest_loss
+        referencedColumnName: id
+    highestScoringMatch:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      joinColumn:
+        name: highest_scoring_match
+        referencedColumnName: id

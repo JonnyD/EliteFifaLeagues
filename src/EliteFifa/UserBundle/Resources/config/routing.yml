@@ -1,0 +1,21 @@
+elite_fifa_homepage:
+    pattern:  /
+    defaults: { _controller: UserBundle:Office:show }
+
+login:
+    pattern:   /login
+    defaults:  { _controller: UserBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    path:   /logout
+
+elite_fifa.show_user:
+    pattern: /user/{username}
+    defaults: { _controller: UserBundle:User:show }
+
+elite_fifa.list_users:
+    pattern: /users
+    defaults: { _controller: UserBundle:User:list }

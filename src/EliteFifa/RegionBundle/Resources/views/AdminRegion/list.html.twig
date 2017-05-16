@@ -1,0 +1,6 @@
+Regions <a href="{{ path('elite_fifa.admin_create_region') }}">
+    create</a> <br />
+{% for region in regions %}
+    <a href="{{ path('elite_fifa.admin_show_region', {'slug': region.slug }) }}">
+        {{ region.name }}</a> <br />
+{% endfor %}

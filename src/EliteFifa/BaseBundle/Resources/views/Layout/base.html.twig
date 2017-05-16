@@ -1,0 +1,43 @@
+{% set routeParams = app.request.attributes.get('_route_params') %}
+{% set routeParams = routeParams|merge(app.request.query.all) %}
+{% set currentRoute = app.request.attributes.get('_route') %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Elite Fifa League</title>
+    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.flot.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+
+    <style type="text/css">
+        .placeholder { width: 450px; height: 200px; }
+    </style>
+</head>
+<body>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Office</a>
+                    <a href="#" class="list-group-item">World League</a>
+                    <a href="#" class="list-group-item">Ladder</a>
+                    <a href="#" class="list-group-item">Matches</a>
+                    <a href="#" class="list-group-item">Teams</a>
+                    <a href="#" class="list-group-item">Users</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+            {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head></head>
+<body>
+You can login with the following credentials: <br />
+<strong>username: </strong> user1 <strong>password: </strong> pass1 <br />
+<strong>username: </strong> user2 <strong>password: </strong> pass2 <br />
+<strong>username: </strong> user3 <strong>password: </strong> pass3 <br />
+<strong>username: </strong> user4 <strong>password: </strong> pass4 <br />
+
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('login_check') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    {#
+        If you want to control the URL the user
+        is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    <button type="submit">login</button>
+</form>
+</body>
+</html>

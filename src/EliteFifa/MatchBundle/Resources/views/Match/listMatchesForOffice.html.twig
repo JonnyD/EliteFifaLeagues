@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <tbody>
+        {% for match in matches %}
+            <tr>
+                {{ include('EliteFifaBundle:Match:showMatchRow.html.twig', { 'match': match }) }}
+
+                {% set homeUser = match.homeTeam.user.username %}
+                {% set awayUser = match.awayTeam.user.username %}
+                {% set reported = match.reported %}
+                {% set confirmed = match.confirmed %}
+
+                {% if homeUser == username and reported is null %}
+                    <a href="{{ path('elite_fifa.report_match', {'id': match.id }) }}">Report</a>
+                {% elseif awayUser == username and reported is not null and confirmed is null %}
+                    <a href="{{ path('elite_fifa.confirm_match', {'id': match.id }) }}">Confirm</a>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

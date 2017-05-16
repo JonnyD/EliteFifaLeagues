@@ -1,0 +1,24 @@
+EliteFifa\StadiumBundle\Entity\Stadium:
+  type: entity
+  repositoryClass: EliteFifa\SeasonBundle\Repository\StadiumRepository
+  table: stadium
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+    slug:
+      type: string
+      length: 128
+      gedmo:
+        slug:
+          fields:
+            - name
+  oneToMany:
+    teams:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      mappedBy: stadium
+      cascade: ["persist"]

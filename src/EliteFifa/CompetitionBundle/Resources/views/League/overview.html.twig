@@ -1,0 +1,29 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set slug = league.slug %}
+    {% set routeParams = routeParams|merge({'slug': slug}) %}
+
+    {{ include('EliteFifaBundle:League:competitionHeader.html.twig') }}
+
+    {% if table == 'overall' %}
+        {{ include('EliteFifaBundle:League:overall.html.twig', { 'standings': standings }) }}
+    {% elseif table == 'combined' %}
+        {{ include('EliteFifaBundle:League:homeaway.html.twig', { 'standings': standings }) }}
+    {% elseif table == 'home' %}
+        {{ include('EliteFifaBundle:League:home.html.twig', { 'standings': standings }) }}
+    {% elseif table == 'away' %}
+        {{ include('EliteFifaBundle:League:away.html.twig', { 'standings': standings }) }}
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ include('EliteFifaBundle:Match:listMatches.html.twig') }}
+        </div>
+        <div class="col-md-6">
+            sdfasdfdsf
+        </div>
+    </div>
+
+{% endblock %}

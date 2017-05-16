@@ -1,0 +1,10 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Confirm</h3>
+
+    [{{ match.homeTeam.user.username }}] {{ match.HomeTeam.name }} {{ match.homeScore }} -
+    {{ match.awayScore }} {{ match.awayTeam.name }} [{{ match.awayTeam.user.username }}]<br />
+
+    {{ form(form) }}
+{% endblock %}

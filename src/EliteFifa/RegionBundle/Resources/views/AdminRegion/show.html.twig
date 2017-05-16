@@ -1,0 +1,8 @@
+{{ region.name }} <br />
+
+Seasons <a href="{{ path('elite_fifa.admin_create_season', {'regionId': region.id }) }}">
+    create</a> <br />
+{% for season in region.seasons %}
+    <a href="{{ path('elite_fifa.admin_show_season', {'number': season.number }) }}">
+        {{ season.number }}</a> <br />
+{% endfor %}

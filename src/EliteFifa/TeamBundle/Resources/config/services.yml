@@ -1,0 +1,22 @@
+parameters:
+    # repositories
+    team_repository.class:              EliteFifa\TeamBundle\Repository\TeamRepository
+    team_repository.factory_argument:   'TeamBundle:Team'
+
+    # services
+    team_service.class:                 EliteFifa\TeamBundle\Service\TeamService
+    
+services:
+    # services
+    elite_fifa.team_service:
+        class: %team_service.class%
+        arguments:
+          - '@elite_fifa.team_repository'
+          - '@elite_fifa.match_service'
+
+    # repositories
+    elite_fifa.team_repository:
+        class:           %team_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %team_repository.factory_argument%

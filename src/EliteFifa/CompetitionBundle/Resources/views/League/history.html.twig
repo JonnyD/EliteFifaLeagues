@@ -1,0 +1,69 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set slug = league.slug %}
+    {% set routeParams = routeParams|merge({'slug': slug}) %}
+
+    {{ include('EliteFifaBundle:League:competitionHeader.html.twig') }}
+
+    {% set biggestWin = teamWithBiggestWin|first.biggestWin %}
+    Biggest win
+        {{ biggestWin.homeTeam.name }}
+        {{ biggestWin.awayTeam.name }}
+        {{ biggestWin.homeScore }}
+        {{ biggestWin.awayScore }}
+
+    <br />
+
+    Highest Scoring Match
+    {% set highestScoringMatch = highestScoringMatch|first.highestScoringMatch %}
+    {{ include('EliteFifaBundle:Match:showMatchRow.html.twig', { 'match': highestScoringMatch }) }}
+
+    <br />
+
+    Highest Without Winning Streak
+    {{ highestWithoutWinningStreak.highestWithoutWinningStreak }}
+    {{ highestWithoutWinningStreak.team.name }}
+
+    <br />
+
+    Highest Without Losing Streak
+    {{ highestWithoutLosingStreak.highestWithoutLosingStreak }}
+    {{ highestWithoutLosingStreak.team.name }}
+
+    <br />
+
+    Highest Without Scoring Streak
+    {{ highestWithoutScoringStreak.highestWithoutScoringStreak }}
+    {{ highestWithoutScoringStreak.team.name }}
+
+    <br />
+
+    Highest Scored Streak
+    {{ highestScoredStreak.highestScoredStreak }}
+    {{ highestScoredStreak.team.name }}
+
+    <br />
+
+    Most Points
+    {{ mostPoints.points }}
+    {{ mostPoints.team.name }}
+
+    <br />
+
+    Most Wins
+    {{ mostWins.won }}
+    {{ mostWins.team.name }}
+
+    <br />
+
+    Most Draws
+    {{ mostDraws.drawn }}
+    {{ mostDraws.team.name }}
+
+    <br />
+
+    Most Losses
+    {{ mostLosses.lost }}
+    {{ mostLosses.team.name }}
+{% endblock %}

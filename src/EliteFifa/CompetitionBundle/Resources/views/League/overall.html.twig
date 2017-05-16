@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        League Table
+        <div class="pull-right">
+        <div class="btn-group btn-group text-left">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                {{ table|capitalize  }}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li role="presentation" {% if table == 'overall' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'overall'})) }}">Overall</a></li>
+                <li role="presentation" {% if table == 'home' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'home'})) }}">Home</a></li>
+                <li role="presentation" {% if table == 'away' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'away'})) }}">Away</a></li>
+                <li role="presentation" {% if table == 'combined' %}class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ path(currentRoute, routeParams|merge({'table': 'combined'})) }}">Combined</a></li>
+            </ul>
+        </div>
+            </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Manager</th>
+            <th>Team</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>PTS</th>
+            <th>Form</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for standing in standings %}
+            {% set pos = loop.index %}
+            <tr {% if pos == 1 %}class="success"{% elseif pos == 11 or pos == 12 %}class="danger"{% endif %}>
+                <td>{{ pos }}</td>
+                <td>user</td>
+                <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }} </td>
+                <td>{{ standing.played }}</td>
+                <td>{{ standing.won }}</td>
+                <td>{{ standing.drawn }}</td>
+                <td>{{ standing.lost }}</td>
+                <td>{{ standing.goalsFor }}</td>
+                <td>{{ standing.goalsAgainst }}</td>
+                <td>{{ standing.goalDifference }}</td>
+                <td>{{ standing.points }}</td>
+                <td>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

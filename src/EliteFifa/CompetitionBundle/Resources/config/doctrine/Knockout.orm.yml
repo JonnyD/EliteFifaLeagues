@@ -1,0 +1,3 @@
+EliteFifa\CompetitionBundle\Entity\Knockout:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\KnockoutRepository

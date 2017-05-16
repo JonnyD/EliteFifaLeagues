@@ -1,0 +1,43 @@
+EliteFifa\CompetitorBundle\Entity\Competitor:
+  type: entity
+  repositoryClass: EliteFifa\CompetitorBundle\Repository\CompetitorRepository
+  table: competitor
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      inversedBy: competitors
+      joinColumn:
+        name: team_id
+        referencedColumnName: id
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: competitors
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: competitors
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: competitors
+      joinColumn:
+        name: season_id
+        referencedColumnName: id
+  oneToMany:
+    homeMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: homeCompetitor
+      cascade: ["persist"]
+    awayMatches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: awayCompetitor
+      cascade: ["persist"]

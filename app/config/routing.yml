@@ -1,0 +1,22 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+elite_fifa.association_bundle:
+    resource: "@AssociationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+elite_fifa.competition_bundle:
+    resource: "@CompetitionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+elite_fifa.competitor_bundle:
+    resource: "@CompetitorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+elite_fifa.season_bundle:
+    resource: "@SeasonBundle/Resources/config/routing.yml"
+    prefix:   /
+
+elite_fifa.region_bundle:
+    resource: "@RegionBundle/Resources/config/routing.yml"
+    prefix:   /

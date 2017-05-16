@@ -1,0 +1,26 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Team</h3>
+
+    {% set crestUrl = 'crest/' ~ team.slug ~ '.png' %}
+
+    <img src="{{ asset(crestUrl) }}" /> <br />
+    {{ team.name }} <br />
+    {{ team.stadium.name }}
+
+    <h3>Matches</h3>
+
+    {% for match in matches %}
+        {% if match.submitted is not null %}
+            <a href="{{ path('elite_fifa.show_match', {'id': match.id }) }}">
+                {{ match.homeTeam.name }} {{ match.homeScore }} -
+                {{ match.awayScore }} {{ match.awayTeam.name }}</a> <br />
+        {% else %}
+            <a href="{{ path('elite_fifa.show_match', {'id': match.id }) }}">
+                {{ match.HomeTeam.name }} v
+                {{ match.awayTeam.name }}</a> <br />
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

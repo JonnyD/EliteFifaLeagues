@@ -1,0 +1,22 @@
+parameters:
+    # repositories
+    player_repository.class:            EliteFifa\PlayerBundle\Repository\PlayerRepository
+    player_repository.factory_argument: 'PlayerBundle:Player'
+
+    # services
+    player_service.class:               EliteFifa\PlayerBundle\Service\PlayerService
+    
+services:
+    # services
+    elite_fifa.player_service:
+        class: %player_service.class%
+        arguments:
+          - '@elite_fifa.player_repository'
+
+    # repositories
+    elite_fifa.player_repository:
+        class: %player_repository.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+          - %player_repository.factory_argument%

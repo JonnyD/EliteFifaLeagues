@@ -1,0 +1,22 @@
+EliteFifa\MatchBundle\Entity\Round:
+  type: entity
+  repositoryClass: EliteFifa\MatchBundle\Repository\RoundRepository
+  table: round
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    round:
+      type: integer
+      nullable: true
+    startDate:
+      type: datetime
+      column: start_date
+  oneToMany:
+    matches:
+      targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: round
+      cascade: ["persist"]
+      fetch: EXTRA_LAZY

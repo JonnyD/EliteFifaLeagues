@@ -1,0 +1,12 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Teams</h3>
+
+    {% for team in teams %}
+        <a href="{{ path('elite_fifa.show_team', {'slug': team.slug }) }}">
+            {{ team.name }}</a>
+        <br />
+    {% endfor %}
+
+{% endblock %}

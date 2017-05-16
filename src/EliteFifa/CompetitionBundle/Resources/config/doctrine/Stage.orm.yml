@@ -1,0 +1,26 @@
+EliteFifa\CompetitionBundle\Entity\Stage:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\StageRepository
+  table: stage
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    parent:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\MultiStage
+      inversedBy: stages
+      cascade: ["persist"]
+      joinColumn:
+        name: parent_id
+        referencedColumnName: id
+  oneToOne:
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: stage
+      cascade: ["persist"]
+      joinColumn:
+        name: stage_id
+        referencedColumnName: id
+        onDelete: set null

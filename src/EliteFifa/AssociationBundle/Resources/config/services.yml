@@ -1,0 +1,21 @@
+parameters:
+    # repositories
+    association_repository.class:       EliteFifa\AssociationBundle\Repository\AssociationRepository
+    association_repository.factory_argument: 'AssociationBundle:Association'
+
+    # services
+    association_service.class:          EliteFifa\AssociationBundle\Service\AssociationService
+    
+services:
+    # services
+    elite_fifa.association_service:
+        class: %association_service.class%
+        arguments:
+          - '@elite_fifa.association_repository'
+
+    # repositories
+    elite_fifa.association_repository:
+        class: %association_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %association_repository.factory_argument%

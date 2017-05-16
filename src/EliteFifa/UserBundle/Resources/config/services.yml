@@ -1,0 +1,35 @@
+parameters:
+    # repositories
+    user_repository.class:              EliteFifa\UserBundle\Repository\UserRepository
+    user_repository.factory_argument:   'UserBundle:User'
+    role_repository.class:              EliteFifa\UserBundle\Repository\RoleRepository
+    role_repository.factory_argument:   'UserBundle:Role'
+
+    # services
+    user_service.class:                 EliteFifa\UserBundle\Service\UserService
+    role_service.class:                 EliteFifa\UserBundle\Service\RoleService
+
+services:
+    # services
+    elite_fifa.user_service:
+        class: %user_service.class%
+        arguments:
+          - '@elite_fifa.user_repository'
+
+    elite_fifa.role_manager:
+        class: %role_service.class%
+        arguments:
+          - '@elite_fifa.role_repository'
+
+    # repositories
+    elite_fifa.user_repository:
+        class:           %user_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %user_repository.factory_argument%
+
+    elite_fifa.role_repository:
+        class:           %role_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %role_repository.factory_argument%

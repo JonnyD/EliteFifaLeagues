@@ -1,0 +1,21 @@
+parameters:
+    # repositories
+    region_repository.class:            EliteFifa\RegionBundle\Repository\RegionRepository
+    region_repository.factory_argument: 'RegionBundle:Region'
+
+    # services
+    region_service.class:               EliteFifa\RegionBundle\Service\RegionService
+    
+services:
+    # services
+    elite_fifa.region_service:
+        class: %region_service.class%
+        arguments:
+          - '@elite_fifa.region_repository'
+
+    # repositories
+    elite_fifa.region_repository:
+        class: %region_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %region_repository.factory_argument%

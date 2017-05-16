@@ -1,0 +1,34 @@
+EliteFifa\ParticipantBundle\Entity\Participant:
+  type: entity
+  repositoryClass: EliteFifa\StadiumBundle\Repository\ParticipantRepository
+  table: participant
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    created:
+      type: datetime
+      nullable: true
+  manyToOne:
+    team:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      joinColumn:
+        name: team_id
+        referencedColumnName: id
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      joinColumn:
+        name: season_id
+        referencedColumnName: id

@@ -1,0 +1,22 @@
+parameters:
+    # repositories
+    season_repository.class:            EliteFifa\SeasonBundle\Repository\SeasonRepository
+    season_repository.factory_argument: 'SeasonBundle:Season'
+
+    # services
+    season_service.class:               EliteFifa\SeasonBundle\Service\SeasonService
+    
+services:
+    # services
+    elite_fifa.season_service:
+        class: %season_service.class%
+        arguments:
+          - '@elite_fifa.season_repository'
+          - '@=service("form.factory")'
+
+    # repositories
+    elite_fifa.season_repository:
+        class: %season_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %season_repository.factory_argument%

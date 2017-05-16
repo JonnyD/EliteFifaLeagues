@@ -1,0 +1,149 @@
+{{ competition.name }} <br />
+
+Standings Overall<br />
+<table>
+    <thead>
+        <tr>
+            <td>Team</td>
+            <td>User</td>
+            <td>Played</td>
+            <td>Won</td>
+            <td>Drawn</td>
+            <td>Lost</td>
+            <td>GF</td>
+            <td>GA</td>
+            <td>GD </td>
+            <td>Points</td>
+        </tr>
+    </thead>
+    {% for standing in standings %}
+    <tbody>
+        <tr>
+            <td>{{ standing.competitor.team.name }}</td>
+            <td>{{ standing.competitor.user.username }}</td>
+            <td>{{ standing.played }}</td>
+            <td>{{ standing.won }}</td>
+            <td>{{ standing.drawn }}</td>
+            <td>{{ standing.lost }}</td>
+            <td>{{ standing.goalsFor }}</td>
+            <td>{{ standing.goalsAgainst }}</td>
+            <td>{{ standing.goalDifference }}</td>
+            <td>{{ standing.points }}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+Standings Home<br />
+<table>
+    <thead>
+    <tr>
+        <td>Team</td>
+        <td>User</td>
+        <td>Played</td>
+        <td>Won</td>
+        <td>Drawn</td>
+        <td>Lost</td>
+        <td>GF</td>
+        <td>GA</td>
+        <td>GD </td>
+        <td>Points</td>
+    </tr>
+    </thead>
+    {% for standing in standings %}
+        <tbody>
+        <tr>
+            <td>{{ standing.competitor.team.name }}</td>
+            <td>{{ standing.competitor.user.username }}</td>
+            <td>{{ standing.homePlayed }}</td>
+            <td>{{ standing.homeWon }}</td>
+            <td>{{ standing.homeDrawn }}</td>
+            <td>{{ standing.homeLost }}</td>
+            <td>{{ standing.homeGoalsFor }}</td>
+            <td>{{ standing.homeGoalsAgainst }}</td>
+            <td>{{ standing.homeGoalDifference }}</td>
+            <td>{{ standing.homePoints }}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+
+Standings Away<br />
+<table>
+    <thead>
+    <tr>
+        <td>Team</td>
+        <td>User</td>
+        <td>Played</td>
+        <td>Won</td>
+        <td>Drawn</td>
+        <td>Lost</td>
+        <td>GF</td>
+        <td>GA</td>
+        <td>GD </td>
+        <td>Points</td>
+    </tr>
+    </thead>
+    {% for standing in standings %}
+        <tbody>
+        <tr>
+            <td>{{ standing.competitor.team.name }}</td>
+            <td>{{ standing.competitor.user.username }}</td>
+            <td>{{ standing.awayPlayed }}</td>
+            <td>{{ standing.awayWon }}</td>
+            <td>{{ standing.awayDrawn }}</td>
+            <td>{{ standing.awayLost }}</td>
+            <td>{{ standing.awayGoalsFor }}</td>
+            <td>{{ standing.awayGoalsAgainst }}</td>
+            <td>{{ standing.awayGoalDifference }}</td>
+            <td>{{ standing.awayPoints }}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+
+Matches <br />
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Home Team</td>
+            <td>Away Team</td>
+            <td>Home User</td>
+            <td>Away User</td>
+            <td>Home Score</td>
+            <td>Away Score</td>
+            <td>Reported</td>
+            <td>Confirmed</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matches %}
+            <tr>
+                <td>{{ match.id }}</td>
+                <td>{{ match.homeCompetitor.team.name }}</td>
+                <td>{{ match.awayCompetitor.team.name }}</td>
+                <td>{{ match.homeCompetitor.user.username }}</td>
+                <td>{{ match.awayCompetitor.user.username }}</td>
+                <td>{{ match.homeScore }}</td>
+                <td>{{ match.awayScore }}</td>
+                <td>{{ match.reported|date('Y-m-d H:i:s') }}</td>
+                <td>{{ match.confirmed|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+Competitors <br />
+<table>
+    <thead></thead>
+    <tbody>
+    {% for competitor in competitors %}
+        <tr>
+            <td>{{ competitor.id }}</td>
+            <td>{{ competitor.team.name }}</td>
+            <td>{{ competitor.user.username }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

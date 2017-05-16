@@ -1,0 +1,19 @@
+elite_fifa.show_match:
+    pattern: /match/{id}
+    defaults: { _controller: EliteFifaBundle:Match:show }
+
+elite_fifa.list_matches:
+    pattern: /matches
+    defaults: { _controller: EliteFifaBundle:Match:list }
+
+elite_fifa.report_ladder_match:
+    pattern: /match/report/ladder
+    defaults: { _controller: EliteFifaBundle:Match:reportLadder }
+
+elite_fifa.report_match:
+    pattern: /match/report/{id}
+    defaults: { _controller: EliteFifaBundle:Match:report }
+
+elite_fifa.confirm_match:
+    pattern: /match/confirm/{id}
+    defaults: { _controller: EliteFifaBundle:Match:confirm }

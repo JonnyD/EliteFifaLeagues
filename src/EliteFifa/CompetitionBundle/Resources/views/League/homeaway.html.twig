@@ -1,0 +1,63 @@
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th colspan="8">Home</th>
+            <th colspan="8">Away</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Pos</th>
+            <th>Team</th>
+            <th>Manager</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>PTS</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>PTS</th>
+            <th>TPTS</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for standing in standings %}
+            {% set pos = loop.index %}
+            <tr {% if pos == 1 %}class="success"{% elseif pos == 11 or pos == 12 %}class="danger"{% endif %}>
+                <td>{{ pos }}</td>
+                <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }} </td>
+                <td><a href="{{ path('elite_fifa.show_user', {'username': standing.team.user.username }) }}">{{ standing.team.user.username }}</a></td>
+                <td>{{ standing.homePlayed }}</td>
+                <td>{{ standing.homeWon }}</td>
+                <td>{{ standing.homeDrawn }}</td>
+                <td>{{ standing.homeLost }}</td>
+                <td>{{ standing.homeGoalsFor }}</td>
+                <td>{{ standing.homeGoalsAgainst }}</td>
+                <td>{{ standing.homeGoalsFor - standing.homeGoalsAgainst }}</td>
+                <td>{{ standing.homePoints }}</td>
+                <td>{{ standing.awayPlayed }}</td>
+                <td>{{ standing.awayWon }}</td>
+                <td>{{ standing.awayDrawn }}</td>
+                <td>{{ standing.awayLost }}</td>
+                <td>{{ standing.awayGoalsFor }}</td>
+                <td>{{ standing.awayGoalsAgainst }}</td>
+                <td>{{ standing.awayGoalsFor - standing.awayGoalsAgainst }}</td>
+                <td>{{ standing.awayPoints }}</td>
+                <td>{{ standing.points }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

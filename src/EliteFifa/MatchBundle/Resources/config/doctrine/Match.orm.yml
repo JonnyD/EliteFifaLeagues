@@ -1,0 +1,80 @@
+EliteFifa\MatchBundle\Entity\Match:
+  type: entity
+  repositoryClass: EliteFifa\MatchBundle\Repository\MatchRepository
+  table: matches
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    homeScore:
+      type: integer
+      column: home_score
+      nullable: true
+    awayScore:
+      type: integer
+      column: away_score
+      nullable: true
+    reported:
+      type: datetime
+    confirmed:
+      type: datetime
+    status:
+      type: string
+  manyToOne:
+    round:
+      targetEntity: EliteFifa\MatchBundle\Entity\Round
+      inversedBy: matches
+      cascade: ["persist"]
+      joinColumn:
+        name: round_id
+        referencedColumnName: id
+    homeCompetitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: homeMatches
+      joinColumn:
+        name: home_competitor_id
+        referencedColumnName: id
+    awayCompetitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: awayMatches
+      joinColumn:
+        name: away_competitor_id
+        referencedColumnName: id
+    homeTeam:
+      targetEntity: EliteFifa\TeamBundle\Entity\Team
+      inversedBy: homeMatches
+      joinColumn:
+        name: home_team_id
+        referencedColumnName: id
+    awayTeam:
+      targetEntity: EliteFifa\TeamBundle\Entity\team
+      inversedBy: awayMatches
+      joinColumn:
+        name: away_team_id
+        referencedColumnName: id
+    homeUser:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: homeMatches
+      joinColumn:
+        name: home_user_id
+        referencedColumnName: id
+    awayUser:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: awayMatches
+      joinColumn:
+        name: away_user_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: matches
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: matches
+      joinColumn:
+        name: season_id
+        referencedColumnName: id

@@ -1,0 +1,33 @@
+parameters:
+    # repositories
+    competitor_repository.class:        EliteFifa\CompetitorBundle\Repository\CompetitorRepository
+    competitor_repository.factory_argument: 'CompetitorBundle:Competitor'
+
+    # services
+    competitor_service.class:           EliteFifa\CompetitorBundle\Service\CompetitorService
+
+    # forms
+    change_competitor_form.class:       EliteFifa\CompetitorBundle\Form\ChangeCompetitorForm
+    
+services:
+    # services
+    elite_fifa.competitor_service:
+        class: %competitor_service.class%
+        arguments:
+          - '@elite_fifa.competitor_repository'
+
+    # repositories
+    elite_fifa.competitor_repository:
+        class: %competitor_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %competitor_repository.factory_argument%
+
+    # forms
+    elite_fifa.change_competitor_form:
+        class: %change_competitor_form.class%
+        tags:
+          - { name: form.type, alias: change_competitor }
+        arguments:
+          - '@elite_fifa.user_service'
+          - '@elite_fifa.team_service'

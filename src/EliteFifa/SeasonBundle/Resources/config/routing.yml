@@ -1,0 +1,11 @@
+elite_fifa.admin_end_season:
+    path: /admin/season/end/{id}
+    defaults: { _controller: SeasonBundle:AdminSeason:end }
+
+elite_fifa.admin_create_season:
+    path: /admin/season/create
+    defaults: { _controller: SeasonBundle:AdminSeason:create }
+
+elite_fifa.admin_show_season:
+    path: /admin/season/show/{number}
+    defaults: { _controller: SeasonBundle:AdminSeason:show }

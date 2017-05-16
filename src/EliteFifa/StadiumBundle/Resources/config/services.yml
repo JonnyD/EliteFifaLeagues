@@ -1,0 +1,22 @@
+parameters:
+    # repositories
+    stadium_repository.class:            EliteFifa\StadiumBundle\Repository\StadiumRepository
+    stadium_repository.factory_argument: 'StadiumBundle:Stadium'
+
+    # services
+    stadium_service.class:              EliteFifa\StadiumBundle\Service\StadiumService
+    
+services:
+    # services
+    elite_fifa.stadium_service:
+        class: %stadium_service.class%
+        arguments:
+          - '@elite_fifa.stadium_repository'
+
+    # repositories
+    elite_fifa.stadium_repository:
+        class: %stadium_repository.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+          - %stadium_repository.factory_argument%

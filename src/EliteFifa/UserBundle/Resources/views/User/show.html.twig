@@ -1,0 +1,42 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>User</h3>
+
+    {% set username = user.username %}
+    {% set team = user.team.name %}
+
+    <h3>Profile</h3>
+    username: {{ username }} <br />
+    manages: {{ team }} <br />
+    form:
+    {% for match, result in form %}
+        <a href="{{ path('elite_fifa.show_match', {'id': match }) }}">
+            {{ result }}</a>
+    {% endfor %}
+
+    <h3>Matches</h3>
+    {% for match in matches %}
+        {% set homeTeam = match.homeTeam.name %}
+        {% set awayTeam = match.awayTeam.name %}
+        {% set homeUser = match.homeTeam.user.username %}
+        {% set awayUser = match.awayTeam.user.username %}
+        {% set reported = match.reported %}
+        {% set confirmed = match.confirmed %}
+
+        {% if confirmed %}
+            {% set homeScore = match.homeScore %}
+            {% set awayScore = match.awayScore %}
+
+            [<a href="{{ path('elite_fifa.show_user', {'username': homeUser }) }}">{{ homeUser }}</a>] {{ homeTeam }}
+            <a href="{{ path('elite_fifa.show_match', {'id': match.id}) }}">{{ homeScore }} - {{ awayScore }}</a>
+            {{ awayTeam }} [<a href="{{ path('elite_fifa.show_user', {'username': awayUser }) }}">
+            {{ awayUser }}</a>]
+        {% else %}
+            [<a href="{{ path('elite_fifa.show_user', {'username': homeUser }) }}">{{ homeUser }}</a>] {{ homeTeam }} v
+            {{ awayTeam }} [<a href="{{ path('elite_fifa.show_user', {'username': awayUser }) }}">{{ awayUser }}</a>]
+        {% endif %}
+        <br />
+    {% endfor %}
+
+{% endblock %}

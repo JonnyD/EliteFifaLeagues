@@ -1,0 +1,6 @@
+Associations <a href="{{ path('elite_fifa.admin_create_association', {'seasonId': season.id }) }}">
+    create</a> <br />
+{% for association in season.associations %}
+    <a href="{{ path('elite_fifa.admin_show_association', {'slug': association.slug, 'season': season.number }) }}">
+        {{ association.name }}</a>
+{% endfor %}

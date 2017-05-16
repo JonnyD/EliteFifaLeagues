@@ -1,0 +1,36 @@
+parameters:
+    # repositories
+    competition_repository.class:            EliteFifa\CompetitionBundle\Repository\CompetitionRepository
+    competition_repository.factory_argument: 'CompetitionBundle:Competition'
+    stats_repository.class:                  EliteFifa\CompetitionBundle\Repository\StatsRepository
+    stats_repository.factory_argument:       'CompetitionBundle:Stats'
+
+    # services
+    league_service.class:               EliteFifa\CompetitionBundle\Service\LeagueService
+    stats_service.class:                EliteFifa\CompetitionBundle\Service\StatsService
+    competition_service.class:          EliteFifa\CompetitionBundle\Service\CompetitionService
+    
+services:
+    # services
+    elite_fifa.competition_service:
+        class: %competition_service.class%
+        arguments:
+          - '@elite_fifa.competition_repository'
+
+    elite_fifa.stats_service:
+        class: %stats_service.class%
+        arguments:
+          - '@elite_fifa.stats_repository'
+
+    # repositories
+    elite_fifa.competition_repository:
+        class: %competition_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %competition_repository.factory_argument%
+
+    elite_fifa.stats_repository:
+        class: %stats_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %stats_repository.factory_argument%

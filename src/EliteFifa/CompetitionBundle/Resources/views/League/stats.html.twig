@@ -1,0 +1,299 @@
+{% extends 'EliteFifaBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% set slug = league.slug %}
+    {% set routeParams = routeParams|merge({'slug': slug}) %}
+
+    {{ include('EliteFifaBundle:League:competitionHeader.html.twig') }}
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Most Played</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsPlayed|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.played }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Most Wins</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsWon|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.won }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Most Draws</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsDrawn|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.drawn }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Most Losses</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsLost|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="danger"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.lost }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Best Form</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsForm|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentCombinedForm }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Best Home Form</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsHomeForm|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentHomeForm }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Best Away Form</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsAwayForm|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentAwayForm }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Goals Scored</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsScored|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.scored }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Goals Conceded</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsConceded|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr {% if pos == 1 %}class="success"{% endif %}>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.conceded }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Win Streak</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentWinStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentWinStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Draw Streak</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentDrawStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentDrawStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Loss Streak</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentLossStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentLossStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Games without conceding</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentWithoutConcedingStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentWithoutConcedingStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Games without scoring</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentWithoutScoringStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentWithoutScoringStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Games Scored in a row</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsByCurrentScoredStreak|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.currentScoredStreak }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Yellows</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsYellows|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.yellows }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Reds</strong></div>
+                <table class="table">
+                    <tbody>
+                    {% for standing in teamsReds|slice(0, 5) %}
+                        {% set pos = loop.index %}
+                        <tr>
+                            <td><img width="20" height="20" src="{{ asset('crest/' ~ standing.team.slug ~ '.png') }}" /> {{ standing.team.name }}</td>
+                            <td>{{ standing.reds }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

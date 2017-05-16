@@ -1,0 +1,6 @@
+{% extends 'EliteFifaBundle::base.html.twig' %}
+
+{% block body %}
+    <h3>Matches</h3>
+    {{ include('EliteFifaBundle:Match:listMatches.html.twig', { 'matches': matches }) }}
+{% endblock %}
