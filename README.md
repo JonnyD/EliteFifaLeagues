@@ -1,4 +1,4 @@
 EFL
 ===
 
-A Symfony project created on December 4, 2016, 4:28 pm.
+Lots of refactoring to do. Still some legacy/bad code.
