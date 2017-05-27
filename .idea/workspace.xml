@@ -4,16 +4,8 @@
     <list default="true" id="2c80037e-896a-4c01-9606-a791ff4a27df" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/EFL.iml" afterPath="$PROJECT_DIR$/.idea/EFL.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/DataFixtures/ORM/Association/AssociationFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/DataFixtures/ORM/Association/AssociationFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Resources/views/AdminAssociation/show.html.twig" afterPath="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Resources/views/AdminAssociation/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/DataFixtures/ORM/Competition/CompetitionFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/DataFixtures/ORM/Competition/CompetitionFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/DataFixtures/ORM/Competitor/CompetitorFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/DataFixtures/ORM/Competitor/CompetitorFixtures.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/SeasonBundle/DataFixtures/ORM/Season/SeasonFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/SeasonBundle/DataFixtures/ORM/Season/SeasonFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/StadiumBundle/DataFixtures/ORM/Stadium/StadiumFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/StadiumBundle/DataFixtures/ORM/Stadium/StadiumFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/TeamBundle/DataFixtures/ORM/Team/TeamFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/TeamBundle/DataFixtures/ORM/Team/TeamFixtures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/UserBundle/DataFixtures/ORM/User/UserFixtures.php" afterPath="$PROJECT_DIR$/src/EliteFifa/UserBundle/DataFixtures/ORM/User/UserFixtures.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp" afterPath="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,184 +22,99 @@
     <favorites_list name="EFL" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.32189402">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-          <file leaf-file-name="MatchFixtures.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="980" column="5" lean-forward="false" selection-start-line="980" selection-start-column="5" selection-end-line="980" selection-end-column="5" />
-                  <folding>
-                    <element signature="e#1516#10947#0#PHP" expanded="false" />
-                    <element signature="e#10953#20410#0#PHP" expanded="false" />
-                    <element signature="e#20416#29977#0#PHP" expanded="false" />
-                    <element signature="e#29983#39544#0#PHP" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="AdminCompetitionController.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/AdminCompetitionController.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-165">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Resources/views/AdminAssociation/show.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="185">
-                  <caret line="5" column="83" lean-forward="false" selection-start-line="5" selection-start-column="83" selection-end-line="5" selection-end-column="83" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CompetitionController.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/CompetitionController.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="routing.yml" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/config/routing.yml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-          <file leaf-file-name="TeamFixtures.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/TeamBundle/DataFixtures/ORM/Team/TeamFixtures.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1303">
-                  <caret line="64" column="81" lean-forward="false" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/show.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="homeaway.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/homeaway.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="overall.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/overall.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-807">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="matches.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/matches.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="history.html.twig" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/history.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/Competition/show.html.twig">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CompetitionFixtures.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/DataFixtures/ORM/Competition/CompetitionFixtures.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3517">
-                  <caret line="146" column="62" lean-forward="false" selection-start-line="146" selection-start-column="62" selection-end-line="146" selection-end-column="62" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CompetitionService.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Service/CompetitionService.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1487">
-                  <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CompetitorFixtures.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/DataFixtures/ORM/Competitor/CompetitorFixtures.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="177">
-                  <caret line="120" column="21" lean-forward="false" selection-start-line="120" selection-start-column="21" selection-end-line="120" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#5182#6876#0#PHP" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+      <file leaf-file-name="MatchFixtures.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="282" column="5" lean-forward="true" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+              <folding>
+                <element signature="e#1724#11155#0#PHP" expanded="false" />
+                <element signature="e#20624#30185#0#PHP" expanded="false" />
+                <element signature="e#30191#39752#0#PHP" expanded="false" />
+                <element signature="e#39758#49365#0#PHP" expanded="false" />
+                <element signature="e#49371#58978#0#PHP" expanded="false" />
+                <element signature="e#58984#68545#0#PHP" expanded="false" />
+                <element signature="e#68551#78112#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventTypeFixtures.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/EventTypeFixtures.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="temp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="7" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="234" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminCompetitionController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/AdminCompetitionController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Resources/views/AdminAssociation/show.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="5" column="83" lean-forward="false" selection-start-line="5" selection-start-column="83" selection-end-line="5" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompetitionController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/CompetitionController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routing.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/config/routing.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onetoone</find>
-      <find>updateGo</find>
-      <find>update</find>
-      <find>setpro</find>
-      <find>EliteFifaBundle</find>
-      <find>2, 1</find>
-      <find>createselec</find>
-      <find>setrou</find>
       <find>setst</find>
       <find>getn</find>
       <find>$manager-&gt;persist</find>
@@ -230,10 +137,26 @@
       <find>competitor10</find>
       <find>madrid</find>
       <find>fey</find>
+      <find>competitor20</find>
+      <find>premierLeague1</find>
+      <find>competitor26</find>
+      <find>competitor25</find>
+      <find>competitor30</find>
+      <find>premierLeague2</find>
+      <find>superLeague2</find>
+      <find>ultraLeague1</find>
     </findStrings>
     <replaceStrings>
       <replace>$this-&gt;manager-&gt;persist</replace>
       <replace>competitor20</replace>
+      <replace>competitor25</replace>
+      <replace>premierLeague2</replace>
+      <replace>competitor</replace>
+      <replace>competitor30</replace>
+      <replace>competitor35</replace>
+      <replace>ultraLeague1</replace>
+      <replace>premierLeague1</replace>
+      <replace>ultraLeague2</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -256,7 +179,6 @@
         <option value="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Entity/Association.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Entity/League.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/config/doctrine/League.orm.yml" />
-        <option value="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp" />
         <option value="$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/Entity/Competitor.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/SeasonBundle/Entity/Season.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/SeasonBundle/Resources/config/doctrine/Season.orm.yml" />
@@ -276,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/EliteFifa/StandingBundle/DataFixtures/ORM/TableFixtures.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/StandingBundle/Enum/StandingType.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/StandingBundle/Entity/Standing.php" />
-        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/src/EliteFifa/MatchBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/EliteFifa/StandingBundle/DataFixtures/ORM/StandingFixtures.php" />
@@ -294,9 +215,11 @@
         <option value="$PROJECT_DIR$/src/EliteFifa/UserBundle/DataFixtures/ORM/User/UserFixtures.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/StadiumBundle/DataFixtures/ORM/Stadium/StadiumFixtures.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/DataFixtures/ORM/Competitor/CompetitorFixtures.php" />
-        <option value="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php" />
         <option value="$PROJECT_DIR$/src/EliteFifa/AssociationBundle/Resources/views/AdminAssociation/show.html.twig" />
         <option value="$PROJECT_DIR$/src/EliteFifa/TeamBundle/DataFixtures/ORM/Team/TeamFixtures.php" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp" />
+        <option value="$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php" />
       </list>
     </option>
   </component>
@@ -2014,13 +1937,13 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DocumentaryWIRE" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
@@ -2157,11 +2080,12 @@
       <workItem from="1492977263591" duration="9977000" />
       <workItem from="1493603528019" duration="11803000" />
       <workItem from="1494019582947" duration="8904000" />
+      <workItem from="1495826711104" duration="5518000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187954000" />
+    <option name="totallyTimeSpent" value="193472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="130" y="-8" width="3070" height="1808" extended-state="6" />
@@ -2199,7 +2123,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/EliteFifa/StandingBundle/DataFixtures/ORM/TableFixtures.php" />
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/BaseBundle/DataFixtures/Test/TestFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="962">
@@ -2268,13 +2191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -2445,30 +2361,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="980" column="5" lean-forward="false" selection-start-line="980" selection-start-column="5" selection-end-line="980" selection-end-column="5" />
-          <folding>
-            <element signature="e#1516#10947#0#PHP" expanded="false" />
-            <element signature="e#10953#20410#0#PHP" expanded="false" />
-            <element signature="e#20416#29977#0#PHP" expanded="false" />
-            <element signature="e#29983#39544#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/AdminCompetitionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-165">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -2483,14 +2378,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Controller/CompetitionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -2516,7 +2403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/views/League/overall.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-807">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -2532,7 +2419,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Service/CompetitionService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1487">
+        <state relative-caret-position="1702">
           <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
           <folding />
         </state>
@@ -2548,7 +2435,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/DataFixtures/ORM/Competition/CompetitionFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3517">
+        <state relative-caret-position="5032">
           <caret line="146" column="62" lean-forward="false" selection-start-line="146" selection-start-column="62" selection-end-line="146" selection-end-column="62" />
           <folding />
         </state>
@@ -2556,7 +2443,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitorBundle/DataFixtures/ORM/Competitor/CompetitorFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
+        <state relative-caret-position="3959">
           <caret line="120" column="21" lean-forward="false" selection-start-line="120" selection-start-column="21" selection-end-line="120" selection-end-column="21" />
           <folding>
             <element signature="e#5182#6876#0#PHP" expanded="false" />
@@ -2566,7 +2453,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EliteFifa/TeamBundle/DataFixtures/ORM/Team/TeamFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1303">
+        <state relative-caret-position="2109">
           <caret line="64" column="81" lean-forward="false" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
           <folding />
         </state>
@@ -2585,6 +2472,54 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EliteFifa/CompetitionBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/EventTypeFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/temp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="7" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="234" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EliteFifa/MatchBundle/DataFixtures/ORM/Match/MatchFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="282" column="5" lean-forward="true" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+          <folding>
+            <element signature="e#1724#11155#0#PHP" expanded="false" />
+            <element signature="e#20624#30185#0#PHP" expanded="false" />
+            <element signature="e#30191#39752#0#PHP" expanded="false" />
+            <element signature="e#39758#49365#0#PHP" expanded="false" />
+            <element signature="e#49371#58978#0#PHP" expanded="false" />
+            <element signature="e#58984#68545#0#PHP" expanded="false" />
+            <element signature="e#68551#78112#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

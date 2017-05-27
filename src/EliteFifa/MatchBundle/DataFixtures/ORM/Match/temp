@@ -1,0 +1,235 @@
+
+    private function createUltraLeague2Season1Matches()
+    {
+        $ultraLeague2 = $this->getCompetition('ultra-league-2');
+        $worldSeason1 = $this->getSeason('season-1');
+
+        $competitor36 = $this->getCompetitor('competitor36');
+        $competitor37 = $this->getCompetitor('competitor37');
+        $competitor38 = $this->getCompetitor('competitor38');
+        $competitor39 = $this->getCompetitor('competitor39');
+        $competitor40 = $this->getCompetitor('competitor40');
+
+        $round = $this->createRound(new \DateTime('2014-01-01'), 1);
+        $reported = new \DateTime('2014-01-01');
+        $confirmed = new \DateTime('2014-01-01');
+        $match1 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor38, $competitor40,
+            $competitor38->getTeam(), $competitor40->getTeam(),
+            $competitor38->getUser(), $competitor40->getUser(),
+            2, 1,
+            $reported, $confirmed,
+            $round);
+        $match2 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor39, $competitor36,
+            $competitor39->getTeam(), $competitor36->getTeam(),
+            $competitor39->getUser(), $competitor36->getUser(),
+            0, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-03'), 2);
+        $reported = new \DateTime('2014-01-03');
+        $confirmed = new \DateTime('2014-01-03');
+        $match3 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor37, $competitor39,
+            $competitor37->getTeam(), $competitor39->getTeam(),
+            $competitor37->getUser(), $competitor39->getUser(),
+            3, 1,
+            $reported, $confirmed,
+            $round);
+        $match4 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor36, $competitor38,
+            $competitor36->getTeam(), $competitor38->getTeam(),
+            $competitor36->getUser(), $competitor38->getUser(),
+            2, 4,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-05'), 3);
+        $reported = new \DateTime('2014-01-05');
+        $confirmed = new \DateTime('2014-01-05');
+        $match5 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor40, $competitor36,
+            $competitor40->getTeam(), $competitor36->getTeam(),
+            $competitor40->getUser(), $competitor36->getUser(),
+            2, 2,
+            $reported, $confirmed,
+            $round);
+        $match6 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor38, $competitor37,
+            $competitor38->getTeam(), $competitor37->getTeam(),
+            $competitor38->getUser(), $competitor37->getUser(),
+            2, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-07'), 4);
+        $reported = new \DateTime('2014-01-07');
+        $confirmed = new \DateTime('2014-01-07');
+        $match7 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor39, $competitor38,
+            $competitor39->getTeam(), $competitor38->getTeam(),
+            $competitor39->getUser(), $competitor38->getUser(),
+            1, 1,
+            $reported, $confirmed,
+            $round);
+        $match8 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor37, $competitor40,
+            $competitor37->getTeam(), $competitor40->getTeam(),
+            $competitor37->getUser(), $competitor40->getUser(),
+            0, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-09'), 5);
+        $reported = new \DateTime('2014-01-09');
+        $confirmed = new \DateTime('2014-01-09');
+        $match9 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor36, $competitor37,
+            $competitor36->getTeam(), $competitor37->getTeam(),
+            $competitor36->getUser(), $competitor37->getUser(),
+            2, 1,
+            $reported, $confirmed,
+            $round);
+        $match10 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor40, $competitor39,
+            $competitor40->getTeam(), $competitor39->getTeam(),
+            $competitor40->getUser(), $competitor39->getUser(),
+            3, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-11'), 6);
+        $reported = new \DateTime('2014-01-11');
+        $confirmed = new \DateTime('2014-01-11');
+        $match11 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor40, $competitor38,
+            $competitor40->getTeam(), $competitor38->getTeam(),
+            $competitor40->getUser(), $competitor38->getUser(),
+            3, 3,
+            $reported, $confirmed,
+            $round);
+        $match12 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor36, $competitor39,
+            $competitor36->getTeam(), $competitor39->getTeam(),
+            $competitor36->getUser(), $competitor39->getUser(),
+            4, 3,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-13'), 7);
+        $reported = new \DateTime('2014-01-13');
+        $confirmed = new \DateTime('2014-01-13');
+        $match13 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor39, $competitor37,
+            $competitor39->getTeam(), $competitor37->getTeam(),
+            $competitor39->getUser(), $competitor37->getUser(),
+            2, 3,
+            $reported, $confirmed,
+            $round);
+        $match14 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor38, $competitor36,
+            $competitor38->getTeam(), $competitor36->getTeam(),
+            $competitor38->getUser(), $competitor36->getUser(),
+            2, 2,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-15'), 8);
+        $reported = new \DateTime('2014-01-15');
+        $confirmed = new \DateTime('2014-01-15');
+        $match15 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor36, $competitor40,
+            $competitor36->getTeam(), $competitor40->getTeam(),
+            $competitor36->getUser(), $competitor40->getUser(),
+            0, 0,
+            $reported, $confirmed,
+            $round);
+        $match16 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor37, $competitor38,
+            $competitor37->getTeam(), $competitor38->getTeam(),
+            $competitor37->getUser(), $competitor38->getUser(),
+            2, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-17'), 9);
+        $reported = new \DateTime('2014-01-17');
+        $confirmed = new \DateTime('2014-01-17');
+        $match17 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor38, $competitor39,
+            $competitor38->getTeam(), $competitor39->getTeam(),
+            $competitor38->getUser(), $competitor39->getUser(),
+            3, 1,
+            $reported, $confirmed,
+            $round);
+        $match18 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor40, $competitor37,
+            $competitor40->getTeam(), $competitor37->getTeam(),
+            $competitor40->getUser(), $competitor37->getUser(),
+            4, 1,
+            $reported, $confirmed,
+            $round);
+
+        $round = $this->createRound(new \DateTime('2014-01-19'), 10);
+        $reported = new \DateTime('2014-01-19');
+        $confirmed = new \DateTime('2014-01-19');
+        $match19 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor37, $competitor36,
+            $competitor37->getTeam(), $competitor36->getTeam(),
+            $competitor37->getUser(), $competitor36->getUser(),
+            5, 1,
+            $reported, $confirmed,
+            $round);
+        $match20 = $this->createMatch(
+            $ultraLeague2, $worldSeason1,
+            $competitor39, $competitor40,
+            $competitor39->getTeam(), $competitor40->getTeam(),
+            $competitor39->getUser(), $competitor40->getUser(),
+            0, 1,
+            $reported, $confirmed,
+            $round);
+
+        $this->manager->persist($match1);
+        $this->manager->persist($match2);
+        $this->manager->persist($match3);
+        $this->manager->persist($match4);
+        $this->manager->persist($match5);
+        $this->manager->persist($match6);
+        $this->manager->persist($match7);
+        $this->manager->persist($match8);
+        $this->manager->persist($match9);
+        $this->manager->persist($match10);
+        $this->manager->persist($match11);
+        $this->manager->persist($match12);
+        $this->manager->persist($match13);
+        $this->manager->persist($match14);
+        $this->manager->persist($match15);
+        $this->manager->persist($match16);
+        $this->manager->persist($match17);
+        $this->manager->persist($match18);
+        $this->manager->persist($match19);
+        $this->manager->persist($match20);
+
+        $this->manager->flush();
+    }
