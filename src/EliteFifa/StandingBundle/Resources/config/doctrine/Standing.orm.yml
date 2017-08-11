@@ -1,0 +1,54 @@
+EliteFifa\StandingBundle\Entity\Standing:
+  type: entity
+  repositoryClass: EliteFifa\StandingBundle\Repository\StandingRepository
+  table: standing
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+      tableType:
+        type: string
+        column: table_type
+      standingType:
+        type: string
+        column: standing_type
+      played:
+        type: integer
+      won:
+        type: integer
+      drawn:
+        type: integer
+      lost:
+        type: integer
+      goalsFor:
+        type: integer
+        column: goals_for
+      goalsAgainst:
+        type: integer
+        column: goals_against
+      goalDifference:
+        type: integer
+        column: goal_difference
+      points:
+        type: integer
+  manyToOne:
+    competitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: standings
+      joinColumn:
+        name: competitor_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: standings
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: standings
+      joinColumn:
+        name: season_id
+        referencedColumnName: id
