@@ -2,11 +2,13 @@
 
 namespace EliteFifa\StandingBundle\Service;
 
+use EliteFifa\BaseBundle\Enum\Order;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\StandingBundle\Criteria\StandingCriteria;
 use EliteFifa\StandingBundle\Entity\Standing;
+use EliteFifa\StandingBundle\Enum\OrderBy;
 use EliteFifa\StandingBundle\Enum\StandingType;
 use EliteFifa\StandingBundle\Enum\TableType;
 use EliteFifa\StandingBundle\Repository\StandingRepository;
@@ -39,6 +41,9 @@ class StandingService
         $criteria->setStandingType(StandingType::OVERALL);
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC
+        ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
         return $standings;
@@ -56,6 +61,9 @@ class StandingService
         $criteria->setStandingType(StandingType::HOME);
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC
+        ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
         return $standings;
@@ -73,6 +81,9 @@ class StandingService
         $criteria->setStandingType(StandingType::AWAY);
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC
+        ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
         return $standings;

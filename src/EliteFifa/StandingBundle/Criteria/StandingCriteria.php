@@ -28,6 +28,11 @@ class StandingCriteria
     private $season;
 
     /**
+     * @var array
+     */
+    private $sort;
+
+    /**
      * @return string
      */
     public function getTableType()
@@ -89,5 +94,21 @@ class StandingCriteria
     public function setSeason(Season $season)
     {
         $this->season = $season;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param array $sort
+     */
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
     }
 }

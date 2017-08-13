@@ -54,6 +54,12 @@ class StandingRepository extends EntityRepository
                 ->setParameter('season', $criteria->getSeason());
         }
 
+        if ($criteria->getSort()) {
+            foreach ($criteria->getSort() as $column => $direction) {
+                $qb->addOrderBy($qb->getRootAliases()[0] . '.' . $column, $direction);
+            }
+        }
+
         return $qb;
     }
 }
