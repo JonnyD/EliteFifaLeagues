@@ -29,7 +29,9 @@ class AdminCompetitionController extends Controller
         $matches = $matchService->getMatchesByCompetitionAndSeason($competition, $season);
 
         $standingService = $this->getStandingService();
-        $standings = $standingService->getStandingsByMatches($matches);
+        $overallStandings = $standingService->getOverallStandingsByCompetitionAndSeason($competition, $season);
+        $homeStandings = $standingService->getHomeStandingsByCompetitionAndSeason($competition, $season);
+        $awayStandings = $standingService->getAwayStandingsByCompetitionAndSeason($competition, $season);
 
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetition($competition);
@@ -38,7 +40,9 @@ class AdminCompetitionController extends Controller
             'competition' => $competition,
             'season' => $season,
             'matches' => $matches,
-            'standings' => $standings,
+            'overallStandings' => $overallStandings,
+            'homeStandings' => $homeStandings,
+            'awayStandings' => $awayStandings,
             'competitors' => $competitors
         ]);
     }

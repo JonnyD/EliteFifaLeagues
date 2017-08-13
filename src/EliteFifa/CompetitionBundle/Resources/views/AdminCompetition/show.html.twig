@@ -16,7 +16,7 @@ Standings Overall<br />
             <td>Points</td>
         </tr>
     </thead>
-    {% for standing in standings %}
+    {% for standing in overallStandings %}
     <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
@@ -50,19 +50,19 @@ Standings Home<br />
         <td>Points</td>
     </tr>
     </thead>
-    {% for standing in standings %}
+    {% for standing in homeStandings %}
         <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
             <td>{{ standing.competitor.user.username }}</td>
-            <td>{{ standing.homePlayed }}</td>
-            <td>{{ standing.homeWon }}</td>
-            <td>{{ standing.homeDrawn }}</td>
-            <td>{{ standing.homeLost }}</td>
-            <td>{{ standing.homeGoalsFor }}</td>
-            <td>{{ standing.homeGoalsAgainst }}</td>
-            <td>{{ standing.homeGoalDifference }}</td>
-            <td>{{ standing.homePoints }}</td>
+            <td>{{ standing.played }}</td>
+            <td>{{ standing.won }}</td>
+            <td>{{ standing.drawn }}</td>
+            <td>{{ standing.lost }}</td>
+            <td>{{ standing.goalsFor }}</td>
+            <td>{{ standing.goalsAgainst }}</td>
+            <td>{{ standing.goalDifference }}</td>
+            <td>{{ standing.points }}</td>
         </tr>
         </tbody>
     {% endfor %}
@@ -84,19 +84,19 @@ Standings Away<br />
         <td>Points</td>
     </tr>
     </thead>
-    {% for standing in standings %}
+    {% for standing in awayStandings %}
         <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
             <td>{{ standing.competitor.user.username }}</td>
-            <td>{{ standing.awayPlayed }}</td>
-            <td>{{ standing.awayWon }}</td>
-            <td>{{ standing.awayDrawn }}</td>
-            <td>{{ standing.awayLost }}</td>
-            <td>{{ standing.awayGoalsFor }}</td>
-            <td>{{ standing.awayGoalsAgainst }}</td>
-            <td>{{ standing.awayGoalDifference }}</td>
-            <td>{{ standing.awayPoints }}</td>
+            <td>{{ standing.played }}</td>
+            <td>{{ standing.won }}</td>
+            <td>{{ standing.drawn }}</td>
+            <td>{{ standing.lost }}</td>
+            <td>{{ standing.goalsFor }}</td>
+            <td>{{ standing.goalsAgainst }}</td>
+            <td>{{ standing.goalDifference }}</td>
+            <td>{{ standing.points }}</td>
         </tr>
         </tbody>
     {% endfor %}

@@ -2,11 +2,82 @@
 
 namespace EliteFifa\StandingBundle\Service;
 
+use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\MatchBundle\Entity\Match;
-use EliteFifa\StandingBundle\VO\Standing;
+use EliteFifa\SeasonBundle\Entity\Season;
+use EliteFifa\StandingBundle\Criteria\StandingCriteria;
+use EliteFifa\StandingBundle\Entity\Standing;
+use EliteFifa\StandingBundle\Enum\StandingType;
+use EliteFifa\StandingBundle\Enum\TableType;
+use EliteFifa\StandingBundle\Repository\StandingRepository;
+use EliteFifa\StandingBundle\VO\Standing as StandingVO;
 
 class StandingService
 {
+    /**
+     * @var StandingRepository
+     */
+    private $standingRepository;
+
+    /**
+     * @param StandingRepository $standingRepository
+     */
+    public function __construct(StandingRepository $standingRepository)
+    {
+        $this->standingRepository = $standingRepository;
+    }
+
+    /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getOverallStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::STANDARD);
+        $criteria->setStandingType(StandingType::OVERALL);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getHomeStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::STANDARD);
+        $criteria->setStandingType(StandingType::HOME);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getAwayStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::STANDARD);
+        $criteria->setStandingType(StandingType::AWAY);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
     /**
      * @param Match[] $matches
      * @return Standing[]
@@ -20,22 +91,22 @@ class StandingService
             $awayCompetitor = $match->getAwayCompetitor();
 
             if (!array_key_exists($homeCompetitor->getId(), $standings)) {
-                $standings[$homeCompetitor->getId()] = new Standing();
-                /** @var Standing $standing */
+                $standings[$homeCompetitor->getId()] = new StandingVO();
+                /** @var StandingVO $standing */
                 $standing = $standings[$homeCompetitor->getId()];
                 $standing->setCompetitor($homeCompetitor);
             }
 
             if (!array_key_exists($awayCompetitor->getId(), $standings)) {
-                $standings[$awayCompetitor->getId()] = new Standing();
-                /** @var Standing $standing */
+                $standings[$awayCompetitor->getId()] = new StandingVO();
+                /** @var StandingVO $standing */
                 $standing = $standings[$awayCompetitor->getId()];
                 $standing->setCompetitor($awayCompetitor);
             }
 
-            /** @var Standing $homeStanding */
+            /** @var StandingVO $homeStanding */
             $homeStanding = $standings[$homeCompetitor->getId()];
-            /** @var Standing $awayStanding */
+            /** @var StandingVO $awayStanding */
             $awayStanding = $standings[$awayCompetitor->getId()];
 
             $homeStanding->incrementPlayed();

@@ -32,7 +32,7 @@ class StandingRepository extends EntityRepository
         $qb = $em->createQueryBuilder();
 
         $qb->select('standing')
-            ->from('DW\StandingBundle\Entity\Standing', 'standing');
+            ->from('EliteFifa\StandingBundle\Entity\Standing', 'standing');
 
         if ($criteria->getTableType()) {
             $qb->andWhere('standing.tableType = :tableType')

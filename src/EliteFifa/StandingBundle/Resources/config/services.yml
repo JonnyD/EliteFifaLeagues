@@ -1,8 +1,20 @@
 parameters:
+    # repositories
+    standing_repository.class: EliteFifa\StandingBundle\Repository\StandingRepository
+    standing_repository.factory_argument: 'StandingBundle:Standing'
     # services
-    standing_service.class:               EliteFifa\StandingBundle\Service\StandingService
+    standing_service.class: EliteFifa\StandingBundle\Service\StandingService
 
 services:
     # services
     elite_fifa.standing_service:
         class: %standing_service.class%
+        arguments:
+          - '@elite_fifa.standing_repository'
+
+    # repositories
+    elite_fifa.standing_repository:
+        class: %standing_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %standing_repository.factory_argument%
