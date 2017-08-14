@@ -42,7 +42,9 @@ class StandingService
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
         $criteria->setSort([
-            OrderBy::POINTS => Order::DESC
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
         ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
@@ -62,7 +64,9 @@ class StandingService
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
         $criteria->setSort([
-            OrderBy::POINTS => Order::DESC
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
         ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
@@ -82,7 +86,9 @@ class StandingService
         $criteria->setCompetition($competition);
         $criteria->setSeason($season);
         $criteria->setSort([
-            OrderBy::POINTS => Order::DESC
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
         ]);
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
