@@ -4,3 +4,17 @@ Associations <a href="{{ path('elite_fifa.admin_create_association', {'seasonId'
     <a href="{{ path('elite_fifa.admin_show_association', {'slug': association.slug, 'season': season.number }) }}">
         {{ association.name }}</a>
 {% endfor %}
+<br />
+Competitors <br />
+<table>
+    <thead></thead>
+    <tbody>
+    {% for competitor in season.competitors %}
+        <tr>
+            <td>{{ competitor.id }}</td>
+            <td>{{ competitor.team.name }}</td>
+            <td>{{ competitor.user.username }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

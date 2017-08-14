@@ -5,6 +5,7 @@ namespace EliteFifa\CompetitorBundle\Service;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\CompetitorBundle\Repository\CompetitorRepository;
+use EliteFifa\SeasonBundle\Entity\Season;
 
 class CompetitorService
 {

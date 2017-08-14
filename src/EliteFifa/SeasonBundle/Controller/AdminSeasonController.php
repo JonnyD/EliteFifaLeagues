@@ -3,6 +3,7 @@
 namespace EliteFifa\SeasonBundle\Controller;
 
 use EliteFifa\AssociationBundle\Service\AssociationService;
+use EliteFifa\CompetitorBundle\Service\CompetitorService;
 use EliteFifa\MatchBundle\Enum\MatchStatus;
 use EliteFifa\MatchBundle\Service\MatchService;
 use EliteFifa\RegionBundle\Service\RegionService;
@@ -130,11 +131,11 @@ class AdminSeasonController extends Controller
     }
 
     /**
-     * @return AssociationService
+     * @return CompetitorService
      */
-    private function getAssociationService()
+    private function getCompetitorService()
     {
-        return $this->get('elite_fifa.association_service');
+        return $this->get('elite_fifa.competitor_service');
     }
 
     /**
