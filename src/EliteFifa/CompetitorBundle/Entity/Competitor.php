@@ -17,6 +17,11 @@ class Competitor
     private $id;
 
     /**
+     * @var string
+     */
+    private $status;
+
+    /**
      * @var Team
      */
     private $team;
@@ -59,6 +64,22 @@ class Competitor
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
     }
 
     /**
