@@ -14,6 +14,7 @@ Competitors <br />
             <td>{{ competitor.id }}</td>
             <td>{{ competitor.team.name }}</td>
             <td>{{ competitor.user.username }}</td>
+            <td><a href="{{ path('elite_fifa.change_competitor', { 'id': competitor.id }) }}">Change</a></td>
         </tr>
     {% endfor %}
     </tbody>
