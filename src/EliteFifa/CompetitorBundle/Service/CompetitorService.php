@@ -36,9 +36,7 @@ class CompetitorService
      */
     public function getCompetitorsByCompetition(Competition $competition)
     {
-        return $this->competitorRepository->findBy([
-            'competition' => $competition
-        ]);
+        return $this->competitorRepository->findByCompetitions(array($competition));
     }
 
     /**

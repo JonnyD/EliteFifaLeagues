@@ -29,6 +29,14 @@ EliteFifa\CompetitionBundle\Entity\Competition:
         slug:
           fields:
             - name
+  manyToMany:
+    competitors:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      mappedBy: competitors
+    seasons:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: competitions
+      cascade: ["persist"]
   manyToOne:
     association:
       targetEntity: EliteFifa\AssociationBundle\Entity\Association
@@ -44,18 +52,9 @@ EliteFifa\CompetitionBundle\Entity\Competition:
       joinColumn:
         name: region_id
         referencedColumnName: id
-  manyToMany:
-    seasons:
-      targetEntity: EliteFifa\SeasonBundle\Entity\Season
-      inversedBy: competitions
-      cascade: ["persist"]
   oneToMany:
     matches:
       targetEntity: EliteFifa\MatchBundle\Entity\Match
-      mappedBy: competition
-      cascade: ["persist"]
-    competitors:
-      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
       mappedBy: competition
       cascade: ["persist"]
   oneToOne:

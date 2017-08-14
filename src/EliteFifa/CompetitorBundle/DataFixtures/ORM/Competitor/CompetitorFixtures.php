@@ -388,7 +388,7 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $competitor = new Competitor();
         $competitor->setTeam($team);
         $competitor->setUser($user);
-        $competitor->setCompetition($competition);
+        $competitor->addCompetition($competition);
         $competitor->setSeason($season);
         return $competitor;
     }

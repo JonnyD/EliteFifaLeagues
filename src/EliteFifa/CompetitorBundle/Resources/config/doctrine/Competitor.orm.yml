@@ -7,6 +7,18 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
       type: integer
       generator:
         strategy: AUTO
+  manyToMany:
+    competitions:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: competitors
+      joinTable:
+        name: competitors_competitions
+        joinColumns:
+          competitor_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          competition_id:
+            referencedColumnName: id
   manyToOne:
     team:
       targetEntity: EliteFifa\TeamBundle\Entity\Team
@@ -19,12 +31,6 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
       inversedBy: competitors
       joinColumn:
         name: user_id
-        referencedColumnName: id
-    competition:
-      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
-      inversedBy: competitors
-      joinColumn:
-        name: competition_id
         referencedColumnName: id
     season:
       targetEntity: EliteFifa\SeasonBundle\Entity\Season

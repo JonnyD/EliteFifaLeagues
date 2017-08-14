@@ -27,9 +27,9 @@ class Competitor
     private $user;
 
     /**
-     * @var Competition
+     * @var ArrayCollection|Competition[]
      */
-    private $competition;
+    private $competitions;
 
     /**
      * @var Season
@@ -48,6 +48,7 @@ class Competitor
 
     public function __construct()
     {
+        $this->competitions = new ArrayCollection();
         $this->homeMatches = new ArrayCollection();
         $this->awayMatches = new ArrayCollection();
     }
@@ -93,19 +94,40 @@ class Competitor
     }
 
     /**
-     * @return Competition
+     * @return ArrayCollection|Competition[]
      */
-    public function getCompetition()
+    public function getCompetitions()
     {
-        return $this->competition;
+        return $this->competitions;
+    }
+
+    /**
+     * @param ArrayCollection|Competition[] $competitions
+     */
+    public function setCompetitions($competitions)
+    {
+        foreach ($competitions as $competition) {
+            $this->addCompetition($competition);
+        }
+    }
+
+    /**
+     * @param Competition $competition
+     * @return bool
+     */
+    public function hasCompetition(Competition $competition)
+    {
+        return $this->competitions->contains($competition);
     }
 
     /**
      * @param Competition $competition
      */
-    public function setCompetition(Competition $competition)
+    public function addCompetition(Competition $competition)
     {
-        $this->competition = $competition;
+        if (!$this->hasCompetition($competition)) {
+            $this->competitions->add($competition);
+        }
     }
 
     /**
