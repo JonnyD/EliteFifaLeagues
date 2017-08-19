@@ -487,6 +487,14 @@ class Match
     }
 
     /**
+     * @return bool
+     */
+    public function isReported()
+    {
+        return ($this->reported != null);
+    }
+
+    /**
      * Set reported to right now
      */
     public function setReportedToNow()
@@ -512,6 +520,14 @@ class Match
     public function setConfirmed($confirmed)
     {
         $this->confirmed = $confirmed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return ($this->confirmed != null);
     }
 
     /**

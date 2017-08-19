@@ -1,0 +1,3 @@
+elite_fifa.show_office:
+    path: /office
+    defaults: { _controller: OfficeBundle:Office:show }

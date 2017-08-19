@@ -3,12 +3,78 @@
 namespace EliteFifa\MatchBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\UserBundle\Entity\User;
 
 class MatchRepository extends EntityRepository
 {
+    /**
+     * @param MatchCriteria $criteria
+     * @return Match[]
+     */
+    public function findMatchesByCriteria(MatchCriteria $criteria)
+    {
+        $qb = $this->findMatchesByCriteriaQueryBuilder($criteria);
+
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
+    }
+
+    /**
+     * @param MatchCriteria $criteria
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findMatchesByCriteriaQueryBuilder(MatchCriteria $criteria)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('match')
+            ->from('EliteFifa\MatchBundle\Entity\Match', 'match');
+
+        if ($criteria->getHomeCompetitor()) {
+            $qb->andWhere('match.homeCompetitor = :homeCompetitor')
+                ->setParameter('homeCompetitor', $criteria->getHomeCompetitor());
+        }
+
+        if ($criteria->getAwayCompetitor()) {
+            $qb->andWhere('match.awayCompetitor = :awayCompetitor')
+                ->setParameter('awayCompetitor', $criteria->getAwayCompetitor());
+        }
+
+        if ($criteria->getHomeTeam()) {
+            $qb->andWhere('match.homeTeam = :homeTeam')
+                ->setParameter('homeTeam', $criteria->getHomeTeam());
+        }
+
+        if ($criteria->getAwayTeam()) {
+            $qb->andWhere('match.awayTeam = :awayTeam')
+                ->setParameter('awayTeam', $criteria->getAwayTeam());
+        }
+
+        if ($criteria->getHomeUser()) {
+            $qb->andWhere('match.homeUser = :homeUser')
+                ->setParameter('homeUser', $criteria->getHomeUser());
+        }
+
+        if ($criteria->getAwayUser()) {
+            $qb->andWhere('match.awayUser = :awayUser')
+                ->setParameter('awayUser', $criteria->getAwayUser());
+        }
+
+        if ($criteria->getSort()) {
+            foreach ($criteria->getSort() as $column => $direction) {
+                $qb->addOrderBy($qb->getRootAliases()[0] . '.' . $column, $direction);
+            }
+        }
+
+        return $qb;
+    }
+
     public function findMatchesByTeam($team)
     {
         $query = $this->getEntityManager()

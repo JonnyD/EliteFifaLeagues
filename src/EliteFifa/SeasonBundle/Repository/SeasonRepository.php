@@ -4,6 +4,7 @@ namespace EliteFifa\SeasonBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use EliteFifa\AssociationBundle\Entity\Association;
+use EliteFifa\SeasonBundle\Criteria\SeasonCriteria;
 use EliteFifa\SeasonBundle\Entity\Season;
 
 class SeasonRepository extends EntityRepository
@@ -124,5 +125,55 @@ class SeasonRepository extends EntityRepository
             ->setParameter('competition', $competition);
 
         return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @param SeasonCriteria $criteria
+     * @return Season
+     */
+    public function findSeasonByCriteria(SeasonCriteria $criteria)
+    {
+        $qb = $this->findSeasonsByCriteriaQueryBuilder($criteria);
+        $qb->setMaxResults(1);
+
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+
+        return $result;
+    }
+
+    /**
+     * @param SeasonCriteria $criteria
+     * @return Season[]
+     */
+    public function findSeasonsByCriteria(SeasonCriteria $criteria)
+    {
+        $qb = $this->findSeasonsByCriteriaQueryBuilder($criteria);
+
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+
+        return $result;
+    }
+
+    /**
+     * @param SeasonCriteria $criteria
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findSeasonsByCriteriaQueryBuilder(SeasonCriteria $criteria)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('season')
+            ->from('EliteFifa\SeasonBundle\Entity\Season', 'season');
+
+        if ($criteria->getSort()) {
+            foreach ($criteria->getSort() as $column => $direction) {
+                $qb->addOrderBy($qb->getRootAliases()[0] . '.' . $column, $direction);
+            }
+        }
+
+        return $qb;
     }
 }

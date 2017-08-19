@@ -3,6 +3,7 @@
 namespace EliteFifa\CompetitorBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use EliteFifa\CareerBundle\Entity\Career;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
@@ -51,11 +52,17 @@ class Competitor
      */
     private $awayMatches;
 
+    /**
+     * @var ArrayCollection|Career[]
+     */
+    private $careers;
+
     public function __construct()
     {
         $this->competitions = new ArrayCollection();
         $this->homeMatches = new ArrayCollection();
         $this->awayMatches = new ArrayCollection();
+        $this->careers = new ArrayCollection();
     }
 
     /**
@@ -239,5 +246,21 @@ class Competitor
         if (!$this->hasAwayMatch($match)) {
             $this->awayMatches->add($match);
         }
+    }
+
+    /**
+     * @return ArrayCollection|Career[]
+     */
+    public function getCareers()
+    {
+        return $this->careers;
+    }
+
+    /**
+     * @param $careers
+     */
+    public function setCareers($careers)
+    {
+        $this->careers = $careers;
     }
 }

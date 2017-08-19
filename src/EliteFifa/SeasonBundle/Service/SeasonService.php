@@ -3,7 +3,10 @@
 namespace EliteFifa\SeasonBundle\Service;
 
 use EliteFifa\AssociationBundle\Entity\Association;
+use EliteFifa\BaseBundle\Enum\Order;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\SeasonBundle\Criteria\SeasonCriteria;
+use EliteFifa\SeasonBundle\Enum\OrderBy;
 use EliteFifa\SeasonBundle\Repository\SeasonRepository;
 use EliteFifa\SeasonBundle\Entity\Season;
 use Doctrine\ORM\EntityManager;
@@ -137,6 +140,20 @@ class SeasonService
     public function getSeasonByCompetitionAndDate($competition, $date)
     {
         return $this->seasonRepository->findSeasonByCompetitionAndDate($competition, $date);
+    }
+
+    /**
+     * @return Season
+     */
+    public function getLatestSeason()
+    {
+        $criteria = new SeasonCriteria();
+        $criteria->setSort([
+            OrderBy::START_DATE => Order::DESC
+        ]);
+
+        $season = $this->seasonRepository->findSeasonByCriteria($criteria);
+        return $season;
     }
 
     /**

@@ -20,3 +20,7 @@ elite_fifa.season_bundle:
 elite_fifa.region_bundle:
     resource: "@RegionBundle/Resources/config/routing.yml"
     prefix:   /
+
+elite_fifa.office_bundle:
+    resource: "@OfficeBundle/Resources/config/routing.yml"
+    prefix:   /

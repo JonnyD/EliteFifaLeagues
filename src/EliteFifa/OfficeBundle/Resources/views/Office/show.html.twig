@@ -1,0 +1,34 @@
+{% extends 'BaseBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Home Matches</div>
+                <table class="table">
+                    <tbody>
+                    {% for match in homeMatches %}
+                        <tr>
+                            <td>{{ match.homeTeam.name }} v {{ match.awayTeam.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Away Matches</div>
+                <table class="table">
+                    <tbody>
+                    {% for match in awayMatches %}
+                        <tr>
+                            <td>{{ match.homeTeam.name }} v {{ match.awayTeam.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

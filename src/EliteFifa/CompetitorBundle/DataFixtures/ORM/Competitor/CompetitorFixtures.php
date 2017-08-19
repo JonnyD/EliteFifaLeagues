@@ -400,7 +400,7 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
      * @param string $key
      * @param Competitor $competitor
      */
-    private function addCompetitor($key, Competitor $competitor)
+    private function addCompetitor(string $key, Competitor $competitor)
     {
         $this->addReference('competitor.'.$key, $competitor);
     }

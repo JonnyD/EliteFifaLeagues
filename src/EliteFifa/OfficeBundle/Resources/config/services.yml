@@ -1,0 +1,87 @@
+parameters:
+    # repositories
+    match_repository.class:             EliteFifa\MatchBundle\Repository\MatchRepository
+    match_repository.factory_argument:  'MatchBundle:Match'
+    event_repository.class:             EliteFifa\MatchBundle\Repository\EventRepository
+    event_repository.factory_argument:  'MatchBundle:Event'
+    event_type_repository.class:        EliteFifa\MatchBundle\Repository\EventTypeRepository
+    event_type_repository.factory_argument: 'MatchBundle:EventType'
+    round_repository.class:             EliteFifa\MatchBundle\Repository\RoundRepository
+    round_repository.factory_argument:  'MatchBundle:Round'
+
+    # services
+    match_service.class:                EliteFifa\MatchBundle\Service\MatchService
+    goal_service.class:                 EliteFifa\MatchBundle\Service\GoalService
+    event_service.class:                EliteFifa\MatchBundle\Service\EventService
+    result_service.class:               EliteFifa\MatchBundle\Service\ResultService
+    round_service.class:                EliteFifa\MatchBundle\Service\RoundService
+
+    # forms
+    report_match_form.class:            EliteFifa\MatchBundle\Form\ReportMatchForm
+    confirm_match_form.class:           EliteFifa\MatchBundle\Form\ConfirmMatchForm
+    report_ladder_match_form.class:     EliteFifa\MAtchBundle\Form\ReportLadderMatchForm
+    
+services:
+    # services
+    elite_fifa.match_service:
+        class: %match_service.class%
+        arguments:
+          - '@elite_fifa.match_repository'
+          - '@=service("form.factory")'
+
+    elite_fifa.event_service:
+        class: %event_service.class%
+        arguments:
+          - '@elite_fifa.event_repository'
+          - '@elite_fifa.event_type_repository'
+
+    elite_fifa.result_service:
+        class: %result_service.class%
+        arguments:
+          - '@doctrine.orm.entity_manager'
+
+    elite_fifa.round_service:
+        class: %round_service.class%
+        arguments:
+          - '@elite_fifa.round_repository'
+
+    # repositories
+    elite_fifa.match_repository:
+        class:           %match_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %match_repository.factory_argument%
+
+    elite_fifa.event_repository:
+        class: %event_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %event_repository.factory_argument%
+
+    elite_fifa.event_type_repository:
+        class: %event_type_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %event_type_repository.factory_argument%
+
+    elite_fifa.round_repository:
+        class: %round_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %round_repository.factory_argument%
+
+    # forms
+    elite_fifa.form.report_match:
+        class: %report_match_form.class%
+        tags:
+          - { name: form.type, alias: report_match }
+
+    elite_fifa.form.confirm_match:
+        class: %confirm_match_form.class%
+        tags:
+          - { name: form.type, alias: confirm_match }
+
+    elite_fifa.form.report_ladder_match:
+        class: %report_ladder_match_form.class%
+        tags:
+          - { name: form.type, alias: report_ladder_match }

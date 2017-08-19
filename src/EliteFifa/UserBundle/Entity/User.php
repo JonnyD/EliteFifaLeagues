@@ -3,7 +3,7 @@
 namespace EliteFifa\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use EliteFifa\CareerBundle\Entity\Career;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\TeamBundle\Entity\Team;
@@ -38,6 +38,11 @@ class User extends BaseUser implements UserInterface, \Serializable
     private $competitors;
 
     /**
+     * @var ArrayCollection|Career[]
+     */
+    private $careers;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -47,6 +52,7 @@ class User extends BaseUser implements UserInterface, \Serializable
         $this->homeMatches = new ArrayCollection();
         $this->awayMatches = new ArrayCollection();
         $this->competitors = new ArrayCollection();
+        $this->careers = new ArrayCollection();
     }
 
     /**
@@ -194,5 +200,21 @@ class User extends BaseUser implements UserInterface, \Serializable
     public function setCompetitors($competitors)
     {
         $this->competitors = $competitors;
+    }
+
+    /**
+     * @return ArrayCollection|Career[]
+     */
+    public function getCareers()
+    {
+        return $this->careers;
+    }
+
+    /**
+     * @param ArrayCollection|Career[] $careers
+     */
+    public function setCareers($careers)
+    {
+        $this->careers = $careers;
     }
 }

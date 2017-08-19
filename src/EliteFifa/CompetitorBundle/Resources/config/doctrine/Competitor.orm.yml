@@ -51,3 +51,7 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
       targetEntity: EliteFifa\MatchBundle\Entity\Match
       mappedBy: awayCompetitor
       cascade: ["persist"]
+    careers:
+      targetEntity: EliteFifa\CareerBundle\Entity\Career
+      mappedBy: competitor
+      cascade: ["persist"]

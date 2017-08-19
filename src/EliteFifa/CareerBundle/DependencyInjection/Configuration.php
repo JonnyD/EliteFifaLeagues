@@ -1,6 +1,6 @@
 <?php
 
-namespace EliteFifa\BaseBundle\DependencyInjection;
+namespace EliteFifa\CareerBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

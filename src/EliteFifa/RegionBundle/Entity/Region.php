@@ -4,6 +4,7 @@ namespace EliteFifa\RegionBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\AssociationBundle\Entity\Association;
+use EliteFifa\CareerBundle\Entity\Career;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\SeasonBundle\Entity\Season;
 
@@ -39,11 +40,17 @@ class Region
      */
     private $competitions;
 
+    /**
+     * @var ArrayCollection|Career[]
+     */
+    private $careers;
+
     public function __construct()
     {
         $this->associations = new ArrayCollection();
         $this->seasons = new ArrayCollection();
         $this->competitions = new ArrayCollection();
+        $this->careers = new ArrayCollection();
     }
 
     /**
@@ -132,5 +139,21 @@ class Region
     public function setCompetitions($competitions)
     {
         $this->competitions = $competitions;
+    }
+
+    /**
+     * @return ArrayCollection|Career[]
+     */
+    public function getCareers()
+    {
+        return $this->careers;
+    }
+
+    /**
+     * @param $careers
+     */
+    public function setCareers($careers)
+    {
+        $this->careers = $careers;
     }
 }

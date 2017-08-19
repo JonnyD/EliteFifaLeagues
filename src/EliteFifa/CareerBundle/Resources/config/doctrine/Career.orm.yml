@@ -1,0 +1,28 @@
+EliteFifa\CareerBundle\Entity\Career:
+  type: entity
+  repositoryClass: EliteFifa\CareerBundle\Repository\CareerRepository
+  table: career
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    competitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: careers
+      joinColumn:
+        name: competitor_id
+        referencedColumnName: id
+    region:
+      targetEntity: EliteFifa\RegionBundle\Entity\Region
+      inversedBy: careers
+      joinColumn:
+        name: region_id
+        referencedColumnName: id
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: careers
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

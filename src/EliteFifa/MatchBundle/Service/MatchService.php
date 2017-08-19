@@ -4,6 +4,8 @@ namespace EliteFifa\MatchBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\MatchBundle\Repository\MatchRepository;
 use Doctrine\ORM\EntityManager;
@@ -31,6 +33,32 @@ class MatchService
     {
         $this->matchRepository = $matchRepository;
         $this->formFactory = $formFactory;
+    }
+
+    /**
+     * @param Competitor $competitor
+     * @return Match[]
+     */
+    public function getHomeMatchesByCompetitor(Competitor $competitor)
+    {
+        $criteria = new MatchCriteria();
+        $criteria->setHomeCompetitor($competitor);
+
+        $matches = $this->matchRepository->findMatchesByCriteria($criteria);
+        return $matches;
+    }
+
+    /**
+     * @param Competitor $competitor
+     * @return Match[]
+     */
+    public function getAwayMatchesByCompetitor(Competitor $competitor)
+    {
+        $criteria = new MatchCriteria();
+        $criteria->setAwayCompetitor($competitor);
+
+        $matches = $this->matchRepository->findMatchesByCriteria($criteria);
+        return $matches;
     }
 
     public function createMatch(Team $homeTeam,
