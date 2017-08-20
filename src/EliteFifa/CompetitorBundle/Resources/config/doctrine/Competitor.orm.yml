@@ -11,6 +11,7 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
     status:
       type: string
       length: 20
+      nullable: true
   manyToMany:
     competitions:
       targetEntity: EliteFifa\CompetitionBundle\Entity\Competition

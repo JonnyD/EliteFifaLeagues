@@ -1,12 +1,12 @@
 <?php
 
-namespace EliteFifa\TeamBundle\DataFixtures\ORM\Dev\Team;
+namespace EliteFifa\TeamBundle\DataFixtures\ORM\Prod\Team;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use EliteFifa\BaseBundle\DataFixtures\ORM\Dev\Stadium\StadiumFixtures;
-use EliteFifa\BaseBundle\DataFixtures\ORM\Dev\User\UserFixtures;
+use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\Stadium\StadiumFixtures;
+use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\User\UserFixtures;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use EliteFifa\TeamBundle\Entity\Team;
