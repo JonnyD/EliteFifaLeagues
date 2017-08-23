@@ -56,3 +56,7 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
       targetEntity: EliteFifa\CareerBundle\Entity\Career
       mappedBy: competitor
       cascade: ["persist"]
+    jobs:
+      targetEntity: EliteFifa\JobBundle\Entity\Job
+      mappedBy: competitor
+      cascade: ["persist"]

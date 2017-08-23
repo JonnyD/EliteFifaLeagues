@@ -1,0 +1,30 @@
+parameters:
+    # repositories
+    job_repository.class: EliteFifa\JobBundle\Repository\JobRepository
+    job_repository.factory_argument: 'JobBundle:Job'
+
+    # services
+    job_service.class: EliteFifa\JobBundle\Service\JobService
+
+    add_job_listener.class: EliteFifa\JobBundle\EventListener\AddJobListener
+services:
+    # services
+    elite_fifa.job_service:
+        class: %job_service.class%
+        arguments:
+          - '@elite_fifa.job_repository'
+
+    # repositories
+    elite_fifa.job_repository:
+        class: %job_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %job_repository.factory_argument%
+
+    # listeners
+    elite_fifa.add_job_listener:
+        class: %add_job_listener.class%
+        arguments:
+            - '@elite_fifa.job_service'
+        tags:
+            - { name: kernel.event_listener, event: competitor.remove, method: onCompetitorRemoved }

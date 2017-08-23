@@ -1,0 +1,3 @@
+elite_fifa.list_jobs:
+    path: /jobs
+    defaults: { _controller: JobBundle:Job:list }

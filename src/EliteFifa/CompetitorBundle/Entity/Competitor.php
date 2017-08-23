@@ -4,7 +4,9 @@ namespace EliteFifa\CompetitorBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CareerBundle\Entity\Career;
+use EliteFifa\CompetitionBundle\Collection\CompetitionCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\TeamBundle\Entity\Team;
@@ -57,12 +59,18 @@ class Competitor
      */
     private $careers;
 
+    /**
+     * @var ArrayCollection|Job[]
+     */
+    private $jobs;
+
     public function __construct()
     {
         $this->competitions = new ArrayCollection();
         $this->homeMatches = new ArrayCollection();
         $this->awayMatches = new ArrayCollection();
         $this->careers = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     /**
@@ -106,6 +114,14 @@ class Competitor
     }
 
     /**
+     * @return bool
+     */
+    public function hasTeam()
+    {
+        return ($this->team != null);
+    }
+
+    /**
      * @return User
      */
     public function getUser()
@@ -122,11 +138,19 @@ class Competitor
     }
 
     /**
-     * @return ArrayCollection|Competition[]
+     * @return bool
+     */
+    public function hasUser()
+    {
+        return ($this->user != null);
+    }
+
+    /**
+     * @return CompetitionCollection
      */
     public function getCompetitions()
     {
-        return $this->competitions;
+        return new CompetitionCollection($this->competitions->toArray());
     }
 
     /**
@@ -262,5 +286,21 @@ class Competitor
     public function setCareers($careers)
     {
         $this->careers = $careers;
+    }
+
+    /**
+     * @return ArrayCollection|Job[]
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param ArrayCollection|Job[] $jobs
+     */
+    public function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
     }
 }

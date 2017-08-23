@@ -1,0 +1,35 @@
+EliteFifa\JobBundle\Entity\Job:
+  type: entity
+  repositoryClass: EliteFifa\JobBundle\Repository\JobRepository
+  table: job
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    totalApplications:
+      type: integer
+      column: total_applications
+  manyToOne:
+    region:
+      targetEntity: EliteFifa\RegionBundle\Entity\Region
+      inversedBy: jobs
+      cascade: ["persist"]
+      joinColumn:
+        name: region_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: jobs
+      cascade: ["persist"]
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    competitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: jobs
+      cascade: ["persist"]
+      joinColumn:
+        name: competitor_id
+        referencedColumnName: id

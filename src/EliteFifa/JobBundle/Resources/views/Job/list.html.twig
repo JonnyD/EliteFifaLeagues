@@ -1,0 +1,41 @@
+{% extends 'BaseBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Available Jobs</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Team</td>
+                        <td>Total Applications</td>
+                        <td>Region</td>
+                        <td>Competition</td>
+                        <td>Apply</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set hasJobs = false %}
+                {% for job in jobs if not job is empty %}
+                    {% set hasJobs = true %}
+                {% endfor %}
+                {% if not hasJobs %}
+                    <tr>
+                        Sorry, there are no available teams at the moment
+                    </tr>
+                {% endif %}
+                {% for job in jobs %}
+                    <tr>
+                        <td><img src="{{ asset( 'bundles/team/images/' ~ job.competitor.team.logo ) }}" width="40" height="40"/>
+                            {{ job.competitor.team.name }}</td>
+                        <td>{{ job.totalApplications }}</td>
+                        <td>{{ job.region.name }}</td>
+                        <td>{{ job.competition.name }}</td>
+                        <td><a class="btn btn-default" href="#" role="button">Apply</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

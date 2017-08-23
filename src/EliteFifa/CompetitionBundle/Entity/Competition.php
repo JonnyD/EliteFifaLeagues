@@ -5,6 +5,7 @@ namespace EliteFifa\CompetitionBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\RegionBundle\Entity\Region;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -32,6 +33,11 @@ abstract class Competition
      * @var string $slug
      */
     private $slug;
+
+    /**
+     * @var bool
+     */
+    private $main;
 
     /**
      * @var Region
@@ -63,11 +69,18 @@ abstract class Competition
      */
     private $stage;
 
+    /**
+     * @var ArrayCollection|Job[]
+     */
+    private $jobs;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
         $this->matches = new ArrayCollection();
         $this->competitors = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
+        $this->main = false;
     }
 
     /**
@@ -128,6 +141,22 @@ abstract class Competition
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMain()
+    {
+        return $this->main;
+    }
+
+    /**
+     * @param bool $main
+     */
+    public function setMain(bool $main)
+    {
+        $this->main = $main;
     }
 
     /**
@@ -301,5 +330,21 @@ abstract class Competition
     public function setStage(Stage $stage)
     {
         $this->stage = $stage;
+    }
+
+    /**
+     * @return ArrayCollection|Job[]
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param ArrayCollection|Job[] $jobs
+     */
+    public function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
     }
 }

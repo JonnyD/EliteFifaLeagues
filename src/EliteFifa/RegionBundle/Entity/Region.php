@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\AssociationBundle\Entity\Association;
 use EliteFifa\CareerBundle\Entity\Career;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\SeasonBundle\Entity\Season;
 
 class Region
@@ -45,12 +46,18 @@ class Region
      */
     private $careers;
 
+    /**
+     * @var ArrayCollection|Job[]
+     */
+    private $jobs;
+
     public function __construct()
     {
         $this->associations = new ArrayCollection();
         $this->seasons = new ArrayCollection();
         $this->competitions = new ArrayCollection();
         $this->careers = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     /**
@@ -155,5 +162,21 @@ class Region
     public function setCareers($careers)
     {
         $this->careers = $careers;
+    }
+
+    /**
+     * @return ArrayCollection|Job[]
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param ArrayCollection|Job[] $jobs
+     */
+    public function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
     }
 }

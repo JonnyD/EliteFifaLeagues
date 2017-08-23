@@ -29,4 +29,20 @@ class CompetitionCollection extends ArrayCollection
         }
         return $competitions;
     }
+
+    /**
+     * @return Competition|null
+     */
+    public function getMain()
+    {
+        $main = null;
+        /** @var Competition $competition */
+        foreach ($this->getIterator() as $competition) {
+            if ($competition->isMain()) {
+                $main = $competition;
+                break;
+            }
+        }
+        return $main;
+    }
 }

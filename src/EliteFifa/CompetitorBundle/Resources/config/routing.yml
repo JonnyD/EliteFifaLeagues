@@ -1,3 +1,7 @@
 elite_fifa.change_competitor:
     path: /admin/competitor/change/{id}
     defaults: { _controller: CompetitorBundle:AdminCompetitor:change }
+
+elite_fifa.remove_user:
+    path: /admin/competitor/remove/{id}
+    defaults: { _controller: CompetitorBundle:AdminCompetitor:remove }

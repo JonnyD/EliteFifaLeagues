@@ -12,7 +12,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminCompetitorController extends Controller
 {
-    public function changeAction(Request $request, $id)
+    /**
+     * @param int $id
+     */
+    public function removeAction(int $id)
+    {
+        $competitor = $this->getCompetitorService()->getCompetitorById($id);
+        $this->getCompetitorService()->removeUser($competitor);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function changeAction(Request $request, int $id)
     {
         $competitor = $this->getCompetitorService()->getCompetitorById($id);
 

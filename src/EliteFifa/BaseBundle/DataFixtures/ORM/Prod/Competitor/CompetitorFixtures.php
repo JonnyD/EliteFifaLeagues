@@ -12,7 +12,7 @@ use EliteFifa\CompetitorBundle\Enum\CompetitorStatus;
 use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\Season\SeasonFixtures;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\TeamBundle\DataFixtures\ORM\Prod\Team\TeamFixtures;
-use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\User\UserFixtures;
+use EliteFifa\TeamBundle\Entity\Team;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -48,11 +48,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $eliteLeague1 = $this->getCompetition('elite-league-1');
 
-        $competitor1 = $this->createCompetitor($eliteLeague1, $worldSeason1);
-        $competitor2 = $this->createCompetitor($eliteLeague1, $worldSeason1);
-        $competitor3 = $this->createCompetitor($eliteLeague1, $worldSeason1);
-        $competitor4 = $this->createCompetitor($eliteLeague1, $worldSeason1);
-        $competitor5 = $this->createCompetitor($eliteLeague1, $worldSeason1);
+        $liverpool = $this->getTeam('Liverpool');
+        $realMadrid = $this->getTeam('Real Madrid');
+        $borussiaDortmund = $this->getTeam('Borussia Dortmund');
+        $chelsea = $this->getTeam('Chelsea');
+        $barcelona = $this->getTeam('Barcelona');
+
+        $competitor1 = $this->createCompetitor($liverpool, $eliteLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor2 = $this->createCompetitor($realMadrid, $eliteLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor3 = $this->createCompetitor($borussiaDortmund, $eliteLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor4 = $this->createCompetitor($chelsea, $eliteLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor5 = $this->createCompetitor($barcelona, $eliteLeague1, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor1);
         $manager->persist($competitor2);
@@ -73,11 +79,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $eliteLeague2 = $this->getCompetition('elite-league-2');
 
-        $competitor6 = $this->createCompetitor($eliteLeague2, $worldSeason1);
-        $competitor7 = $this->createCompetitor($eliteLeague2, $worldSeason1);
-        $competitor8 = $this->createCompetitor($eliteLeague2, $worldSeason1);
-        $competitor9 = $this->createCompetitor($eliteLeague2, $worldSeason1);
-        $competitor10 = $this->createCompetitor($eliteLeague2, $worldSeason1);
+        $arsenal = $this->getTeam('Arsenal');
+        $manchesterUnited = $this->getTeam('Manchester United');
+        $bayernMunich = $this->getTeam('Bayern Munich');
+        $milan = $this->getTeam('Milan');
+        $athleticoMadrid = $this->getTeam('Athletico Madrid');
+
+        $competitor6 = $this->createCompetitor($arsenal, $eliteLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor7 = $this->createCompetitor($manchesterUnited, $eliteLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor8 = $this->createCompetitor($bayernMunich, $eliteLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor9 = $this->createCompetitor($milan, $eliteLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor10 = $this->createCompetitor($athleticoMadrid, $eliteLeague2, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor6);
         $manager->persist($competitor7);
@@ -98,11 +110,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $superLeague1 = $this->getCompetition('super-league-1');
 
-        $competitor11 = $this->createCompetitor($superLeague1, $worldSeason1);
-        $competitor12 = $this->createCompetitor($superLeague1, $worldSeason1);
-        $competitor13 = $this->createCompetitor($superLeague1, $worldSeason1);
-        $competitor14 = $this->createCompetitor($superLeague1, $worldSeason1);
-        $competitor15 = $this->createCompetitor($superLeague1, $worldSeason1);
+        $tottenham = $this->getTeam('Tottenham Hotspur');
+        $roma = $this->getTeam('Roma');
+        $inter = $this->getTeam('Inter');
+        $psg = $this->getTeam('Paris Saint-Germain');
+        $juventus = $this->getTeam('Juventus');
+
+        $competitor11 = $this->createCompetitor($tottenham, $superLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor12 = $this->createCompetitor($roma, $superLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor13 = $this->createCompetitor($inter, $superLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor14 = $this->createCompetitor($psg, $superLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor15 = $this->createCompetitor($juventus, $superLeague1, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor11);
         $manager->persist($competitor12);
@@ -123,11 +141,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $superLeague2 = $this->getCompetition('super-league-2');
 
-        $competitor16 = $this->createCompetitor($superLeague2, $worldSeason1);
-        $competitor17 = $this->createCompetitor($superLeague2, $worldSeason1);
-        $competitor18 = $this->createCompetitor($superLeague2, $worldSeason1);
-        $competitor19 = $this->createCompetitor($superLeague2, $worldSeason1);
-        $competitor20 = $this->createCompetitor($superLeague2, $worldSeason1);
+        $manCity = $this->getTeam('Manchester City');
+        $everton = $this->getTeam('Everton');
+        $southampton = $this->getTeam('Southampton');
+        $fcSchalke = $this->getTeam('FC Schalke');
+        $valencia = $this->getTeam('Valencia');
+
+        $competitor16 = $this->createCompetitor($manCity, $superLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor17 = $this->createCompetitor($everton, $superLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor18 = $this->createCompetitor($southampton, $superLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor19 = $this->createCompetitor($fcSchalke, $superLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor20 = $this->createCompetitor($valencia, $superLeague2, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor16);
         $manager->persist($competitor17);
@@ -148,11 +172,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $premierLeague1 = $this->getCompetition('premier-league-1');
 
-        $competitor21 = $this->createCompetitor($premierLeague1, $worldSeason1);
-        $competitor22 = $this->createCompetitor($premierLeague1, $worldSeason1);
-        $competitor23 = $this->createCompetitor($premierLeague1, $worldSeason1);
-        $competitor24 = $this->createCompetitor($premierLeague1, $worldSeason1);
-        $competitor25 = $this->createCompetitor($premierLeague1, $worldSeason1);
+        $napoli = $this->getTeam('Napoli');
+        $lyon = $this->getTeam('Lyon');
+        $asMonaco = $this->getTeam('AS Monaco');
+        $sportLisbon = $this->getTeam('Sport Lisbon');
+        $ajax = $this->getTeam('Ajax');
+
+        $competitor21 = $this->createCompetitor($napoli, $premierLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor22 = $this->createCompetitor($lyon, $premierLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor23 = $this->createCompetitor($asMonaco, $premierLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor24 = $this->createCompetitor($sportLisbon, $premierLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor25 = $this->createCompetitor($ajax, $premierLeague1, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor21);
         $manager->persist($competitor22);
@@ -173,11 +203,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $premierLeague2 = $this->getCompetition('premier-league-2');
 
-        $competitor26 = $this->createCompetitor($premierLeague2, $worldSeason1);
-        $competitor27 = $this->createCompetitor($premierLeague2, $worldSeason1);
-        $competitor28 = $this->createCompetitor($premierLeague2, $worldSeason1);
-        $competitor29 = $this->createCompetitor($premierLeague2, $worldSeason1);
-        $competitor30 = $this->createCompetitor($premierLeague2, $worldSeason1);
+        $fcPorto = $this->getTeam('FC Porto');
+        $sunderland = $this->getTeam('Sunderland');
+        $bayerLeverkusen = $this->getTeam('Bayer Leverkusen');
+        $galatasary = $this->getTeam('Galatasaray');
+        $sportingCP = $this->getTeam('Sporting CP');
+
+        $competitor26 = $this->createCompetitor($fcPorto, $premierLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor27 = $this->createCompetitor($sunderland, $premierLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor28 = $this->createCompetitor($bayerLeverkusen, $premierLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor29 = $this->createCompetitor($galatasary, $premierLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor30 = $this->createCompetitor($sportingCP, $premierLeague2, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor26);
         $manager->persist($competitor27);
@@ -198,11 +234,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $ultraLeague1 = $this->getCompetition('ultra-league-1');
 
-        $competitor31 = $this->createCompetitor($ultraLeague1, $worldSeason1);
-        $competitor32 = $this->createCompetitor($ultraLeague1, $worldSeason1);
-        $competitor33 = $this->createCompetitor($ultraLeague1, $worldSeason1);
-        $competitor34 = $this->createCompetitor($ultraLeague1, $worldSeason1);
-        $competitor35 = $this->createCompetitor($ultraLeague1, $worldSeason1);
+        $lazio = $this->getTeam('Lazio');
+        $astonVilla = $this->getTeam('Aston Villa');
+        $newcastleUnited = $this->getTeam('Newcastle United');
+        $hamburgerSV = $this->getTeam('Hamburger SV');
+        $realSociedad = $this->getTeam('Real Sociedad');
+
+        $competitor31 = $this->createCompetitor($lazio, $ultraLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor32 = $this->createCompetitor($astonVilla, $ultraLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor33 = $this->createCompetitor($newcastleUnited, $ultraLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor34 = $this->createCompetitor($hamburgerSV, $ultraLeague1, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor35 = $this->createCompetitor($realSociedad, $ultraLeague1, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor31);
         $manager->persist($competitor32);
@@ -223,11 +265,17 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $worldSeason1 = $this->getSeason('season-1');
         $ultraLeague2 = $this->getCompetition('ultra-league-2');
 
-        $competitor36 = $this->createCompetitor($ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
-        $competitor37 = $this->createCompetitor($ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
-        $competitor38 = $this->createCompetitor($ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
-        $competitor39 = $this->createCompetitor($ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
-        $competitor40 = $this->createCompetitor($ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $sevilla = $this->getTeam('Sevilla');
+        $ogcNice = $this->getTeam('OGC Nice');
+        $rbLeipzig = $this->getTeam('RB Leipzig');
+        $malaga = $this->getTeam('Malaga');
+        $leicesterCity = $this->getTeam('Leicester City');
+
+        $competitor36 = $this->createCompetitor($sevilla, $ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor37 = $this->createCompetitor($ogcNice, $ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor38 = $this->createCompetitor($rbLeipzig, $ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor39 = $this->createCompetitor($malaga, $ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
+        $competitor40 = $this->createCompetitor($leicesterCity, $ultraLeague2, $worldSeason1, CompetitorStatus::ENABLED);
 
         $manager->persist($competitor36);
         $manager->persist($competitor37);
@@ -244,10 +292,19 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
     }
 
     /**
+     * @param string $teamName
+     * @return Team
+     */
+    private function getTeam($teamName)
+    {
+        return $this->getReference('team.'.$teamName);
+    }
+
+    /**
      * @param string $slug
      * @return Competition
      */
-    private function getCompetition(string $slug)
+    private function getCompetition($slug)
     {
         return $this->getReference('competition.'.$slug);
     }
@@ -256,21 +313,25 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
      * @param $key
      * @return Season
      */
-    public function getSeason(string $key)
+    public function getSeason($key)
     {
         return $this->getReference('season.'.$key);
     }
 
     /**
+     * @param Team $team
      * @param Competition $competition
      * @param Season $season
+     * @param string $status
      * @return Competitor
      */
-    private function createCompetitor(Competition $competition, Season $season)
+    private function createCompetitor(Team $team, Competition $competition, Season $season, string $status)
     {
         $competitor = new Competitor();
+        $competitor->setTeam($team);
         $competitor->addCompetition($competition);
         $competitor->setSeason($season);
+        $competitor->setStatus($status);
         return $competitor;
     }
 
@@ -289,7 +350,6 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
     public function getDependencies()
     {
         return [
-            UserFixtures::class,
             TeamFixtures::class,
             CompetitionFixtures::class,
             SeasonFixtures::class

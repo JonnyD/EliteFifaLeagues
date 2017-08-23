@@ -24,3 +24,7 @@ elite_fifa.region_bundle:
 elite_fifa.office_bundle:
     resource: "@OfficeBundle/Resources/config/routing.yml"
     prefix:   /
+
+elite_fifa.job_bundle:
+    resource: "@JobBundle/Resources/config/routing.yml"
+    prefix:   /

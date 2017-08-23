@@ -39,11 +39,13 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
             0, 0, 2);
         $eliteLeague1->setRegion($worldRegion);
         $eliteLeague1->addSeason($season1);
+        $eliteLeague1->setMain(true);
 
         $eliteLeague2 = $this->createLeague("Elite League 2", "EL2", 2, $eliteAssociation,
             2, 0, 0);
         $eliteLeague2->setRegion($worldRegion);
         $eliteLeague2->addSeason($season1);
+        $eliteLeague2->setMain(true);
 
         $eliteLeague1->setRelegatedTo($eliteLeague2);
         $eliteLeague2->setPromotedTo($eliteLeague1);
@@ -67,11 +69,13 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
             0, 0, 2);
         $superLeague1->setRegion($worldRegion);
         $superLeague1->addSeason($season1);
+        $superLeague1->setMain(true);
 
         $superLeague2 = $this->createLeague('Super League 2', 'SL2', 2, $superAssociation,
             2, 0, 0);
         $superLeague2->setRegion($worldRegion);
         $superLeague2->addSeason($season1);
+        $superLeague2->setMain(true);
 
         $superLeague1->setRelegatedTo($superLeague2);
         $superLeague2->setPromotedTo($superLeague1);
@@ -95,11 +99,13 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
             0, 0, 2);
         $premierLeague1->setRegion($worldRegion);
         $premierLeague1->addSeason($season1);
+        $premierLeague1->setMain(true);
 
         $premierLeague2 = $this->createLeague('Premier League 2', 'PL2', 2, $premierAssociation,
             2, 0, 0);
         $premierLeague2->setRegion($worldRegion);
         $premierLeague2->addSeason($season1);
+        $premierLeague2->setMain(true);
 
         $premierLeague1->setRelegatedTo($premierLeague2);
         $premierLeague2->setPromotedTo($premierLeague1);
@@ -123,11 +129,13 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
             0, 0, 2);
         $ultraLeague1->setRegion($worldRegion);
         $ultraLeague1->addSeason($season1);
+        $ultraLeague1->setMain(true);
 
         $ultraLeague2 = $this->createLeague('Ultra League 2', 'UL2', 2, $ultraAssociation,
             2, 0, 0);
         $ultraLeague2->setRegion($worldRegion);
         $ultraLeague2->addSeason($season1);
+        $ultraLeague2->setMain(true);
 
         $ultraLeague1->setRelegatedTo($ultraLeague2);
         $ultraLeague2->setPromotedTo($ultraLeague1);

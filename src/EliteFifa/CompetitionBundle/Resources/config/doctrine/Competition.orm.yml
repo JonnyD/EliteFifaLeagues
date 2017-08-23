@@ -29,6 +29,8 @@ EliteFifa\CompetitionBundle\Entity\Competition:
         slug:
           fields:
             - name
+    main:
+      type: boolean
   manyToMany:
     competitors:
       targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
@@ -55,6 +57,10 @@ EliteFifa\CompetitionBundle\Entity\Competition:
   oneToMany:
     matches:
       targetEntity: EliteFifa\MatchBundle\Entity\Match
+      mappedBy: competition
+      cascade: ["persist"]
+    jobs:
+      targetEntity: EliteFifa\JobBundle\Entity\Job
       mappedBy: competition
       cascade: ["persist"]
   oneToOne:

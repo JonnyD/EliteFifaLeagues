@@ -41,7 +41,8 @@ class AppKernel extends Kernel
             new EliteFifa\CompetitorBundle\CompetitorBundle(),
             new EliteFifa\StandingBundle\StandingBundle(),
             new EliteFifa\OfficeBundle\OfficeBundle(),
-            new EliteFifa\CareerBundle\CareerBundle()
+            new EliteFifa\CareerBundle\CareerBundle(),
+            new EliteFifa\JobBundle\JobBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

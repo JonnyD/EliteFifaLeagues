@@ -34,3 +34,7 @@ EliteFifa\RegionBundle\Entity\Region:
       targetEntity: EliteFifa\CareerBundle\Entity\Career
       mappedBy: region
       cascade: ["persist"]
+    jobs:
+      targetEntity: EliteFifa\JobBundle\Entity\Job
+      mappedBy: region
+      cascade: ["persist"]

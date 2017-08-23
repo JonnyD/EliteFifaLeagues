@@ -15,6 +15,7 @@ services:
         class: %competitor_service.class%
         arguments:
           - '@elite_fifa.competitor_repository'
+          - '@event_dispatcher'
 
     # repositories
     elite_fifa.competitor_repository:

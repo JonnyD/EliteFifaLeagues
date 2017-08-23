@@ -12,8 +12,9 @@ Competitors <br />
     {% for competitor in season.competitors %}
         <tr>
             <td>{{ competitor.id }}</td>
-            <td>{{ competitor.team.name }}</td>
-            <td>{{ competitor.user.username }}</td>
+            <td>{% if competitor.hasTeam %}{{ competitor.team.name }}{% endif %}</td>
+            <td>{% if competitor.hasUser %}{{ competitor.user.username }}{% endif %}</td>
+            <td><a href="{{ path('elite_fifa.remove_user', { 'id': competitor.id }) }}">Remove</a></td>
             <td><a href="{{ path('elite_fifa.change_competitor', { 'id': competitor.id }) }}">Change</a></td>
         </tr>
     {% endfor %}
