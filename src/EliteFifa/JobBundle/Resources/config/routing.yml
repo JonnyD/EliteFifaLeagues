@@ -1,3 +1,19 @@
 elite_fifa.list_jobs:
     path: /jobs
     defaults: { _controller: JobBundle:Job:list }
+
+elite_fifa.apply_job:
+    path: /jobs/{id}/apply
+    defaults: { _controller: JobBundle:Job:apply }
+
+elite_fifa.admin_list_jobs:
+    path: /admin/jobs
+    defaults: { _controller: JobBundle:AdminJob:list }
+
+elite_fifa.admin_show_job:
+   path: /admin/job/{id}
+   defaults: { _controller: JobBundle:AdminJob:show }
+
+elite_fifa.admin_accept_job:
+   path: /admin/job-application/{id}/accept
+   defaults: { _controller: JobBundle:AdminJobApplication:accept }

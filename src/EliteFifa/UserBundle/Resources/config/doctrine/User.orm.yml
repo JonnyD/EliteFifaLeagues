@@ -27,3 +27,7 @@ EliteFifa\UserBundle\Entity\User:
       targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
       mappedBy: user
       cascade: ["persist"]
+    jobApplications:
+      targetEntity: EliteFifa\JobBundle\Entity\JobApplication
+      mappedBy: user
+      cascade: ["persist"]

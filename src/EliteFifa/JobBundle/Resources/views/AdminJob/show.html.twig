@@ -1,0 +1,10 @@
+{{ job.competitor.team.name }}
+
+<table>
+    {% for application in job.jobApplications %}
+        <tr>
+            <td>{{ application.message }}</td>
+            <td><a class="btn btn-default" href="{{ path('elite_fifa.admin_accept_job', {'id': application.id}) }}" role="button">Accept</a></td>
+        </tr>
+    {% endfor %}
+</table>

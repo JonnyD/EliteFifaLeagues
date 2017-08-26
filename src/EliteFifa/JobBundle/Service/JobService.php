@@ -30,6 +30,15 @@ class JobService
     }
 
     /**
+     * @param int $id
+     * @return null|Job
+     */
+    public function getJobById(int $id)
+    {
+        return $this->jobRepository->find($id);
+    }
+
+    /**
      * @param Competitor $competitor
      */
     public function addJobFromCompetitor(Competitor $competitor)
@@ -43,5 +52,13 @@ class JobService
         $job->setCompetition($competition);
 
         $this->jobRepository->save($job);
+    }
+
+    /**
+     * @param Job $job
+     */
+    public function remove(Job $job)
+    {
+        $this->jobRepository->remove($job);
     }
 }

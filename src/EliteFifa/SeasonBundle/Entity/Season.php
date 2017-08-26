@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use EliteFifa\AssociationBundle\Entity\Association;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\RegionBundle\Entity\Region;
 use EliteFifa\SeasonBundle\Enum\SeasonStatus;
@@ -64,6 +65,11 @@ class Season
     private $associations;
 
     /**
+     * @var ArrayCollection|Job[]
+     */
+    private $jobs;
+
+    /**
      * @var Region
      */
     private $region;
@@ -74,6 +80,7 @@ class Season
         $this->competitions = new ArrayCollection();
         $this->associations = new ArrayCollection();
         $this->competitors = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     /**
@@ -333,6 +340,22 @@ class Season
     }
 
     /**
+     * @return ArrayCollection|Job[]
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param ArrayCollection|Job[] $jobs
+     */
+    public function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
+    }
+
+    /**
      * @return Region
      */
     public function getRegion()
@@ -343,7 +366,7 @@ class Season
     /**
      * @param Region $region
      */
-    public function setRegion($region)
+    public function setRegion(Region $region)
     {
         $this->region = $region;
     }

@@ -6,6 +6,9 @@ parameters:
     # services
     career_service.class:           EliteFifa\CareerBundle\Service\CareerService
 
+    # listeners
+    update_career_listener.class: EliteFifa\CareerBundle\EventListener\UpdateCareerListener
+
 services:
     # services
     elite_fifa.career_service:
@@ -19,3 +22,11 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
           - %career_repository.factory_argument%
+
+    # listeners
+    elite_fifa.update_career_listener:
+        class: %update_career_listener.class%
+        arguments:
+            - '@elite_fifa.career_service'
+        tags:
+            - { name: kernel.event_listener, event: job-application.accepted, method: onJobApplicationAccepted }

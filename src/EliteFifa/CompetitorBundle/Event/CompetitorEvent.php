@@ -13,6 +13,14 @@ class CompetitorEvent extends Event
     private $competitor;
 
     /**
+     * @param Competitor $competitor
+     */
+    public function __construct(Competitor $competitor)
+    {
+        $this->competitor = $competitor;
+    }
+
+    /**
      * @return Competitor
      */
     public function getCompetitor()

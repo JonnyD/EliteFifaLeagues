@@ -1,0 +1,27 @@
+EliteFifa\JobBundle\Entity\JobApplication:
+  type: entity
+  repositoryClass: EliteFifa\JobBundle\Repository\JobApplicationRepository
+  table: job_application
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    message:
+      type: string
+  manyToOne:
+    job:
+      targetEntity: EliteFifa\JobBundle\Entity\Job
+      inversedBy: jobApplications
+      cascade: ["persist"]
+      joinColumn:
+        name: job_id
+        referencedColumnName: id
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: jobApplications
+      cascade: ["persist"]
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

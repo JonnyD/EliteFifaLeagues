@@ -7,10 +7,11 @@ EliteFifa\JobBundle\Entity\Job:
       type: integer
       generator:
         strategy: AUTO
-  fields:
-    totalApplications:
-      type: integer
-      column: total_applications
+  oneToMany:
+    jobApplications:
+      targetEntity: EliteFifa\JobBundle\Entity\JobApplication
+      mappedBy: job
+      cascade: ["persist", "remove"]
   manyToOne:
     region:
       targetEntity: EliteFifa\RegionBundle\Entity\Region
@@ -32,4 +33,11 @@ EliteFifa\JobBundle\Entity\Job:
       cascade: ["persist"]
       joinColumn:
         name: competitor_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: jobs
+      cascade: ["persist"]
+      joinColumn:
+        name: season_id
         referencedColumnName: id

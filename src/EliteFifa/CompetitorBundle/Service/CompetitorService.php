@@ -3,10 +3,12 @@
 namespace EliteFifa\CompetitorBundle\Service;
 
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitorBundle\Criteria\CompetitorCriteria;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\CompetitorBundle\Event\CompetitorEvent;
 use EliteFifa\CompetitorBundle\Event\CompetitorEvents;
 use EliteFifa\CompetitorBundle\Repository\CompetitorRepository;
+use EliteFifa\JobBundle\Entity\JobApplication;
 use EliteFifa\SeasonBundle\Entity\Season;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -63,14 +65,33 @@ class CompetitorService
     }
 
     /**
+     * @param JobApplication $jobApplication
+     */
+    public function updateUserFromJobApplication(JobApplication $jobApplication)
+    {
+        $job = $jobApplication->getJob();
+        $season = $job->getSeason();
+        $competitor = $job->getCompetitor();
+        $user = $jobApplication->getUser();
+
+        $criteria = new CompetitorCriteria();
+        $criteria->setSeason($season);
+        $criteria->setUser($user);
+        $oldCompetitor = $this->competitorRepository->findCompetitorByCriteria($criteria);
+        if ($oldCompetitor != null) {
+            $this->removeUser($oldCompetitor);
+        }
+
+        $competitor->setUser($user);
+        $this->save($competitor);
+    }
+
+    /**
      * @param Competitor $competitor
      * @param bool $sync
      */
     public function save(Competitor $competitor, bool $sync = true)
     {
-        $this->competitorRepository->persist($competitor);
-        if ($sync) {
-            $this->competitorRepository->flush();
-        }
+        $this->competitorRepository->save($competitor, $sync);
     }
 }

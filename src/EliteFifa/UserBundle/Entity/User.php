@@ -5,6 +5,7 @@ namespace EliteFifa\UserBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CareerBundle\Entity\Career;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\JobBundle\Entity\JobApplication;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\TeamBundle\Entity\Team;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,6 +44,11 @@ class User extends BaseUser implements UserInterface, \Serializable
     private $careers;
 
     /**
+     * @var ArrayCollection|JobApplication[]
+     */
+    private $jobApplications;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -53,6 +59,7 @@ class User extends BaseUser implements UserInterface, \Serializable
         $this->awayMatches = new ArrayCollection();
         $this->competitors = new ArrayCollection();
         $this->careers = new ArrayCollection();
+        $this->jobApplications = new ArrayCollection();
     }
 
     /**
@@ -216,5 +223,21 @@ class User extends BaseUser implements UserInterface, \Serializable
     public function setCareers($careers)
     {
         $this->careers = $careers;
+    }
+
+    /**
+     * @return ArrayCollection|JobApplication[]
+     */
+    public function getJobApplications()
+    {
+        return $this->jobApplications;
+    }
+
+    /**
+     * @param ArrayCollection|JobApplication[] $jobApplications
+     */
+    public function setJobApplications($jobApplications)
+    {
+        $this->jobApplications = $jobApplications;
     }
 }

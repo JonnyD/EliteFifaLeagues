@@ -29,6 +29,10 @@ EliteFifa\SeasonBundle\Entity\Season:
       targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
       mappedBy: season
       cascade: ["persist"]
+    jobs:
+      targetEntity: EliteFifa\JobBundle\Entity\Job
+      mappedBy: season
+      cascade: ["persist"]
   manyToMany:
     competitions:
       targetEntity: EliteFifa\CompetitionBundle\Entity\Competition

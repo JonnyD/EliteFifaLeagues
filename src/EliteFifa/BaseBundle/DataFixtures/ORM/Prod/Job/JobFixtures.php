@@ -12,6 +12,7 @@ use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\RegionBundle\Entity\Region;
+use EliteFifa\SeasonBundle\Entity\Season;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -187,6 +188,7 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $job->setRegion($region);
         $job->setCompetition($competition);
         $job->setCompetitor($competitor);
+        $job->setSeason($this->getSeason('season-1'));
         return $job;
     }
 
@@ -215,6 +217,15 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
     private function getCompetitor(string $key)
     {
         return $this->getReference('competitor.'.$key);
+    }
+
+    /**
+     * @param string $key
+     * @return Season
+     */
+    private function getSeason(string $key)
+    {
+        return $this->getReference('season.'.$key);
     }
 
     public function getDependencies()

@@ -1,6 +1,6 @@
 <?php
 
-namespace EliteFifa\Bundle\Controller;
+namespace EliteFifa\BaseBundle\Controller;
 
 use EliteFifa\Bundle\Form\SelectSeasonForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,19 +11,38 @@ class DefaultController extends Controller
 {
     public function showAction()
     {
-        $leagueManager = $this->container->get("elite_fifa.league_manager");
-        $seasonManager = $this->container->get("elite_fifa.season_manager");
-        $participantManager = $this->container->get("elite_fifa.participant_manager");
-        $matchManager = $this->container->get("elite_fifa.match_manager");
+        $fixtures = [];
 
-        $league1 = $leagueManager->getLeagueByName("League 1");
-        $worldSeason1 = $seasonManager->getSeasonByCompetitionAndNumber($league1, 1);
-        $participants = $participantManager->getParticipantsByCompetitionAndSeason($league1, $worldSeason1);
-        $fixtures = $matchManager->createFixtures($participants, $worldSeason1, $league1);
-        var_dump($fixtures);
-        //$matchManager->persist($fixtures);
+        $teams = ['Liverpool', 'Man Utd', 'Arsenal', 'Chelsea', 'Leicester', 'Everton'];
 
-        return $this->render('EliteFifaBundle:Default:index.html.twig', array(
+        $rounds = count($teams) - 1;
+        $away = array_splice($teams,(count($teams)/2));
+        $home = $teams;
+        for ($i=0; $i < $rounds; $i++){
+            for ($j=0; $j<count($home); $j++){
+                $round[$i][$j]["Home"]=$home[$j];
+                $round[$i][$j]["Away"]=$away[$j];
+            }
+            if(count($home)+count($away)-1 > 2){
+                array_unshift($away, current(array_splice($home,1,1)) );
+                array_push($home,array_pop($away));
+            }
+        }
+
+        $roundNumber = count($round);
+        foreach ($round as $r => $m) {
+            foreach ($m as $j => $match) {
+                $round[$roundNumber][$j]['Home'] = $match['Away'];
+                $round[$roundNumber][$j]['Away'] = $match['Home'];
+            }
+
+            $roundNumber++;
+        }
+
+
+        print_r($round);
+
+        return $this->render('BaseBundle:Default:index.html.twig', array(
 
         ));
     }

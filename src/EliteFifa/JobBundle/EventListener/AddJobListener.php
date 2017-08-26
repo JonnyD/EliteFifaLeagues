@@ -32,9 +32,12 @@ class AddJobListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param CompetitorEvent $competitorEvent
+     */
     public function onCompetitorRemoved(CompetitorEvent $competitorEvent)
     {
         $competitor = $competitorEvent->getCompetitor();
-
+        $this->jobService->addJobFromCompetitor($competitor);
     }
 }

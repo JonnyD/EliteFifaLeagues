@@ -2,9 +2,11 @@
 
 namespace EliteFifa\JobBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\RegionBundle\Entity\Region;
+use EliteFifa\SeasonBundle\Entity\Season;
 
 class Job
 {
@@ -12,11 +14,6 @@ class Job
      * @var int
      */
     private $id;
-
-    /**
-     * @var int
-     */
-    private $totalApplications;
 
     /**
      * @var bool
@@ -34,13 +31,23 @@ class Job
     private $competition;
 
     /**
+     * @var Season
+     */
+    private $season;
+
+    /**
      * @var Competitor
      */
     private $competitor;
 
+    /**
+     * @var ArrayCollection|JobApplication[]
+     */
+    private $jobApplications;
+
     public function __construct()
     {
-        $this->totalApplications = 0;
+        $this->jobApplications = new ArrayCollection();
     }
 
     /**
@@ -52,19 +59,27 @@ class Job
     }
 
     /**
-     * @return int
+     * @return ArrayCollection|JobApplication[]
      */
-    public function getTotalApplications()
+    public function getJobApplications()
     {
-        return $this->totalApplications;
+        return $this->jobApplications;
     }
 
     /**
-     * @param int $totalApplications
+     * @param $jobApplications
      */
-    public function setTotalApplications(int $totalApplications)
+    public function setJobApplications($jobApplications)
     {
-        $this->totalApplications = $totalApplications;
+        $this->jobApplications = $jobApplications;
+    }
+
+    /**
+     * @return int
+     */
+    public function totalApplications()
+    {
+        return count($this->jobApplications);
     }
 
     /**
@@ -113,6 +128,22 @@ class Job
     public function setCompetition(Competition $competition)
     {
         $this->competition = $competition;
+    }
+
+    /**
+     * @return Season
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param Season $season
+     */
+    public function setSeason(Season $season)
+    {
+        $this->season = $season;
     }
 
     /**

@@ -11,6 +11,18 @@ class JobRepository extends EntityRepository
      * @param Job $job
      * @param bool $sync
      */
+    public function remove(Job $job, bool $sync = true)
+    {
+        $this->getEntityManager()->remove($job);
+        if ($sync) {
+            $this->flush();
+        }
+    }
+
+    /**
+     * @param Job $job
+     * @param bool $sync
+     */
     public function save(Job $job, bool $sync = true)
     {
         $this->getEntityManager()->persist($job);

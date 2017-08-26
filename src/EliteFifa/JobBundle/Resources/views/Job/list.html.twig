@@ -31,7 +31,7 @@
                         <td>{{ job.totalApplications }}</td>
                         <td>{{ job.region.name }}</td>
                         <td>{{ job.competition.name }}</td>
-                        <td><a class="btn btn-default" href="#" role="button">Apply</a></td>
+                        <td><a class="btn btn-default" href="{{ path('elite_fifa.apply_job', {'id': job.id}) }}" role="button">Apply</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
