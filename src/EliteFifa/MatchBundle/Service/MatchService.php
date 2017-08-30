@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
+use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\MatchBundle\Repository\MatchRepository;
 use Doctrine\ORM\EntityManager;
@@ -61,15 +62,28 @@ class MatchService
         return $matches;
     }
 
-    public function createMatch(Team $homeTeam,
-                                Team $awayTeam,
-                                User $homeUser,
-                                User $awayUser,
-                                Competition $competition,
-                                Season $season,
-                                $round)
+    /**
+     * @param Competitor $homeCompetitor
+     * @param Competitor $awayCompetitor
+     * @param Team $homeTeam
+     * @param Team $awayTeam
+     * @param User $homeUser
+     * @param User $awayUser
+     * @param Competition $competition
+     * @param Season $season
+     * @param Round $round
+     * @return Match
+     */
+    public function createMatch(
+        Competitor $homeCompetitor, Competitor $awayCompetitor,
+        Team $homeTeam, Team $awayTeam,
+        User $homeUser, User $awayUser,
+        Competition $competition,
+        Season $season, Round $round)
     {
         $match = new Match();
+        $match->setHomeCompetitor($homeCompetitor);
+        $match->setAwayCompetitor($awayCompetitor);
         $match->setHomeTeam($homeTeam);
         $match->setAwayTeam($awayTeam);
         $match->setHomeUser($homeUser);
@@ -77,8 +91,6 @@ class MatchService
         $match->setRound($round);
         $match->setSeason($season);
         $match->setCompetition($competition);
-
-        //$this->persistAndFlush($match);
 
         return $match;
     }
@@ -242,45 +254,72 @@ class MatchService
     }
 
     /**
-     * @param $participants
+     * @param array $competitors
      * @param Competition $competition
      * @param Season $season
      * @return Match[]
      */
-    public function createFixtures($participants, Competition $competition, Season $season)
+    public function createFixtures($competitors, Competition $competition, Season $season)
     {
+        $rounds = [];
+
+        $roundsCount = count($competitors) - 1;
+
+        $away = array_splice($competitors,(count($competitors)/2));
+        $home = $competitors;
+        for ($r = 0; $r < $roundsCount; $r++) {
+            for ($j = 0; $j < count($home); $j++) {
+                $rounds[$r][$j]["Home"] = $home[$j];
+                $rounds[$r][$j]["Away"] = $away[$j];
+            }
+            if(count($home) + count($away) -1 > 2) {
+                array_unshift($away, current(array_splice($home, 1, 1)));
+                array_push($home, array_pop($away));
+            }
+        }
+
+        $roundNumber = count($rounds);
+        foreach ($rounds as $r => $m) {
+            foreach ($m as $j => $match) {
+                $rounds[$roundNumber][$j]['Home'] = $match['Away'];
+                $rounds[$roundNumber][$j]['Away'] = $match['Home'];
+            }
+
+            $roundNumber++;
+        }
+
+        $startDate = $season->getStartDate();
+        $endDate = $season->getEndDate();
+
+        $dateDifference = $startDate->diff($endDate);
+        $days = $dateDifference->days;
+
+        $totalRoundsCount = $roundsCount + $roundsCount;
+
+        $dayInterval = round($days / $totalRoundsCount, 0, PHP_ROUND_HALF_DOWN);
+
         $fixtures = [];
 
-        $teamsCount = count($participants);
-        $rounds = $teamsCount - 1;
-        $matchesPerRound = $teamsCount / 2;
+        $roundNumber = 1;
+        foreach ($rounds as $r => $m) {
+            $startDate = clone $startDate->add(new \DateInterval('P'.$dayInterval.'D'));
+            $round = new Round();
+            $round->setRound($roundNumber);
+            $round->setStartDate($startDate);
 
-        $awayTeams = array_splice($participants, $matchesPerRound);
-        $homeTeams = $participants;
+            foreach ($m as $j => $match) {
+                /** @var Competitor $homeCompetitor */
+                $homeCompetitor = $match['home'];
+                /** @var Competitor $awayCompetitor */
+                $awayCompetitor = $match['away'];
 
-        for ($r = 0; $r < $rounds; $r++) {
-            for ($m = 0; $m < $matchesPerRound; $m++) {
-                $homeParticipant = $homeTeams[$m];
-                $awayParticipant = $awayTeams[$m];
-
-                $homeTeam = $homeParticipant->getTeam();
-                $awayTeam = $awayParticipant->getTeam();
-
-                $homeUser = $homeTeam->getUser();
-                $awayUser = $awayTeam->getUser();
-
-                $firstLeg = $this->createMatch($homeTeam, $awayTeam, $homeUser, $awayUser, $competition, $season, $r + 1);
-                $secondLeg = $this->createMatch($awayTeam, $homeTeam, $awayUser, $homeUser, $competition, $season, $r + $rounds + 1);
-
-                $fixtures[] = $firstLeg;
-                //$this->persist($secondLeg);
+                $fixtures[] = $this->createMatch($homeCompetitor, $awayCompetitor,
+                    $homeCompetitor->getTeam(), $awayCompetitor->getTeam(),
+                    $homeCompetitor->getUser(), $awayCompetitor->getUser(),
+                    $competition, $season, $round);
             }
-            $spliced = array_splice($homeTeams, 1, 1);
-            $secondHomeTeam = array_shift($spliced);
-            array_unshift($awayTeams, $secondHomeTeam);
 
-            $lastAwayTeam = array_pop($awayTeams);
-            array_push($homeTeams, $lastAwayTeam);
+            $roundNumber++;
         }
 
         return $fixtures;

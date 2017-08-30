@@ -3,6 +3,10 @@
 namespace EliteFifa\BaseBundle\Controller;
 
 use EliteFifa\Bundle\Form\SelectSeasonForm;
+use EliteFifa\CompetitionBundle\Service\CompetitionService;
+use EliteFifa\CompetitorBundle\Service\CompetitorService;
+use EliteFifa\MatchBundle\Service\MatchService;
+use EliteFifa\SeasonBundle\Service\SeasonService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -11,37 +15,20 @@ class DefaultController extends Controller
 {
     public function showAction()
     {
-        $fixtures = [];
+        /** @var CompetitorService $competitorService */
+        $competitorService = $this->get('elite_fifa.competitor_service');
+        /** @var MatchService $matchService */
+        $matchService = $this->get('elite_fifa.match_service');
+        /** @var CompetitionService $competitionService */
+        $competitionService = $this->get('elite_fifa.competition_service');
+        /** @var SeasonService $seasonService */
+        $seasonService = $this->get('elite_fifa.season_service');
+        $season = $seasonService->getLatestSeason();
 
-        $teams = ['Liverpool', 'Man Utd', 'Arsenal', 'Chelsea', 'Leicester', 'Everton'];
+        $competition = $competitionService->getCompetitionBySlug('elite-league-1');
+        $competitors = $competitorService->getCompetitorsByCompetition($competition);
 
-        $rounds = count($teams) - 1;
-        $away = array_splice($teams,(count($teams)/2));
-        $home = $teams;
-        for ($i=0; $i < $rounds; $i++){
-            for ($j=0; $j<count($home); $j++){
-                $round[$i][$j]["Home"]=$home[$j];
-                $round[$i][$j]["Away"]=$away[$j];
-            }
-            if(count($home)+count($away)-1 > 2){
-                array_unshift($away, current(array_splice($home,1,1)) );
-                array_push($home,array_pop($away));
-            }
-        }
-
-        $roundNumber = count($round);
-        foreach ($round as $r => $m) {
-            foreach ($m as $j => $match) {
-                $round[$roundNumber][$j]['Home'] = $match['Away'];
-                $round[$roundNumber][$j]['Away'] = $match['Home'];
-            }
-
-            $roundNumber++;
-        }
-
-
-        print_r($round);
-
+        $matches = $matchService->createFixtures($competitors, $competition, $season);
         return $this->render('BaseBundle:Default:index.html.twig', array(
 
         ));
