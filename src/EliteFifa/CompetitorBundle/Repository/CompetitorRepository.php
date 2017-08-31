@@ -6,14 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use EliteFifa\CompetitorBundle\Criteria\CompetitorCriteria;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\SeasonBundle\Entity\Season;
 
 class CompetitorRepository extends EntityRepository
 {
     /**
      * @param array $competitions
+     * @param Season $season
      * @return ArrayCollection|Competitor[]
      */
-    public function findByCompetitions(array $competitions)
+    public function findByCompetitionsAndSeason(array $competitions, Season $season)
     {
         $qb = $this->createQueryBuilder('competitor');
         $qb->join('competitor.competitions', 'competition');
@@ -22,6 +24,10 @@ class CompetitorRepository extends EntityRepository
             $qb->andWhere($qb->expr()->eq('competition.id', ':competition' . $i));
             $qb->setParameter('competition' . $i, $competitions[$i]);
         }
+
+        $qb->andWhere('competitor.season = :season')
+            ->setParameter('season', $season);
+
         return $qb->getQuery()->getResult();
     }
 

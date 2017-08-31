@@ -1,6 +1,6 @@
 <?php
 
-namespace EliteFifa\BaseBundle\DataFixtures\ORM\Dev\Standing;
+namespace EliteFifa\BaseBundle\DataFixtures\ORM\Prod\Standing;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

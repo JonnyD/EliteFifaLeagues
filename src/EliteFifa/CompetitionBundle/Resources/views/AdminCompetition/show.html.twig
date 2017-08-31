@@ -123,12 +123,12 @@ Matches <br />
                 <td>{{ match.id }}</td>
                 <td>{{ match.homeCompetitor.team.name }}</td>
                 <td>{{ match.awayCompetitor.team.name }}</td>
-                <td>{{ match.homeCompetitor.user.username }}</td>
-                <td>{{ match.awayCompetitor.user.username }}</td>
+                <td>{% if match.homeCompetitor.user is not null %}{{ match.homeCompetitor.user.username }}{% endif %}</td>
+                <td>{% if match.awayCompetitor.user is not null %}{{ match.awayCompetitor.user.username }}{% endif %}</td>
                 <td>{{ match.homeScore }}</td>
                 <td>{{ match.awayScore }}</td>
-                <td>{{ match.reported|date('Y-m-d H:i:s') }}</td>
-                <td>{{ match.confirmed|date('Y-m-d H:i:s') }}</td>
+                <td>{% if match.reported is not null %}{{ match.reported|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if match.confirmed is not null %}{{ match.confirmed|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         {% endfor %}
     </tbody>
@@ -142,7 +142,7 @@ Competitors <br />
         <tr>
             <td>{{ competitor.id }}</td>
             <td>{{ competitor.team.name }}</td>
-            <td>{{ competitor.user.username }}</td>
+            <td>{% if competitor.user is not null %}{{ competitor.user.username }}{% endif %}</td>
         </tr>
     {% endfor %}
     </tbody>

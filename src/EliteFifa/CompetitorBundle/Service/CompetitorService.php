@@ -47,11 +47,12 @@ class CompetitorService
 
     /**
      * @param Competition $competition
+     * @param Season $season
      * @return Competitor[]
      */
-    public function getCompetitorsByCompetition(Competition $competition)
+    public function getCompetitorsByCompetitionAndSeason(Competition $competition, Season $season)
     {
-        return $this->competitorRepository->findByCompetitions(array($competition));
+        return $this->competitorRepository->findByCompetitionsAndSeason(array($competition), $season);
     }
 
     /**

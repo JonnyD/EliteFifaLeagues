@@ -18,8 +18,10 @@ EliteFifa\MatchBundle\Entity\Match:
       nullable: true
     reported:
       type: datetime
+      nullable: true
     confirmed:
       type: datetime
+      nullable: true
     status:
       type: string
   manyToOne:

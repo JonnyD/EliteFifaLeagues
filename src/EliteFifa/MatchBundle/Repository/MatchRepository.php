@@ -450,4 +450,21 @@ class MatchRepository extends EntityRepository
 
         return $results;
     }
+
+    /**
+     * @param Match $match
+     * @param bool $sync
+     */
+    public function save(Match $match, bool $sync = true)
+    {
+        $this->getEntityManager()->persist($match);
+        if ($sync) {
+            $this->flush();
+        }
+    }
+
+    public function flush()
+    {
+        $this->getEntityManager()->flush();
+    }
 }

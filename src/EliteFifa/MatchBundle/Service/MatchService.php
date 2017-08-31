@@ -7,6 +7,7 @@ use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Round;
+use EliteFifa\MatchBundle\Enum\MatchStatus;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\MatchBundle\Repository\MatchRepository;
 use Doctrine\ORM\EntityManager;
@@ -65,10 +66,6 @@ class MatchService
     /**
      * @param Competitor $homeCompetitor
      * @param Competitor $awayCompetitor
-     * @param Team $homeTeam
-     * @param Team $awayTeam
-     * @param User $homeUser
-     * @param User $awayUser
      * @param Competition $competition
      * @param Season $season
      * @param Round $round
@@ -76,21 +73,28 @@ class MatchService
      */
     public function createMatch(
         Competitor $homeCompetitor, Competitor $awayCompetitor,
-        Team $homeTeam, Team $awayTeam,
-        User $homeUser, User $awayUser,
         Competition $competition,
         Season $season, Round $round)
     {
         $match = new Match();
         $match->setHomeCompetitor($homeCompetitor);
         $match->setAwayCompetitor($awayCompetitor);
-        $match->setHomeTeam($homeTeam);
-        $match->setAwayTeam($awayTeam);
-        $match->setHomeUser($homeUser);
-        $match->setAwayUser($awayUser);
+        if ($homeCompetitor->getTeam()) {
+            $match->setHomeTeam($homeCompetitor->getTeam());
+        }
+        if ($awayCompetitor->getTeam()) {
+            $match->setAwayTeam($awayCompetitor->getTeam());
+        }
+        if ($homeCompetitor->getUser()) {
+            $match->setHomeUser($homeCompetitor->getUser());
+        }
+        if ($awayCompetitor->getUser()) {
+            $match->setAwayUser($awayCompetitor->getUser());
+        }
         $match->setRound($round);
         $match->setSeason($season);
         $match->setCompetition($competition);
+        $match->setStatus(MatchStatus::UNPLAYED);
 
         return $match;
     }
@@ -265,14 +269,14 @@ class MatchService
 
         $roundsCount = count($competitors) - 1;
 
-        $away = array_splice($competitors,(count($competitors)/2));
+        $away = array_splice($competitors, (count($competitors) / 2));
         $home = $competitors;
         for ($r = 0; $r < $roundsCount; $r++) {
             for ($j = 0; $j < count($home); $j++) {
                 $rounds[$r][$j]["Home"] = $home[$j];
                 $rounds[$r][$j]["Away"] = $away[$j];
             }
-            if(count($home) + count($away) -1 > 2) {
+            if (count($home) + count($away) -1 > 2) {
                 array_unshift($away, current(array_splice($home, 1, 1)));
                 array_push($home, array_pop($away));
             }
@@ -309,14 +313,11 @@ class MatchService
 
             foreach ($m as $j => $match) {
                 /** @var Competitor $homeCompetitor */
-                $homeCompetitor = $match['home'];
+                $homeCompetitor = $match['Home'];
                 /** @var Competitor $awayCompetitor */
-                $awayCompetitor = $match['away'];
+                $awayCompetitor = $match['Away'];
 
-                $fixtures[] = $this->createMatch($homeCompetitor, $awayCompetitor,
-                    $homeCompetitor->getTeam(), $awayCompetitor->getTeam(),
-                    $homeCompetitor->getUser(), $awayCompetitor->getUser(),
-                    $competition, $season, $round);
+                $fixtures[] = $this->createMatch($homeCompetitor, $awayCompetitor, $competition, $season, $round);
             }
 
             $roundNumber++;
@@ -425,5 +426,25 @@ class MatchService
     public function getAllMatchesBySeasonAndStatus(Season $season, string $status)
     {
         return $this->matchRepository->findAllBySeasonAndStatus($season, $status);
+    }
+
+    /**
+     * @param Match $match
+     * @param bool $sync
+     */
+    public function save(Match $match, bool $sync = true)
+    {
+        $this->matchRepository->save($match, $sync);
+    }
+
+    /**
+     * @param Match[] $matches
+     */
+    public function saveAll(array $matches)
+    {
+        foreach ($matches as $match) {
+            $this->save($match, false);
+        }
+        $this->matchRepository->flush();
     }
 }

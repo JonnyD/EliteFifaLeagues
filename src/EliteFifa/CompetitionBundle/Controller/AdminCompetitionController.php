@@ -14,10 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminCompetitionController extends Controller
 {
-    public function showAction(Request $request, $slug)
+    /**
+     * @param Request $request
+     * @param string $slug
+     * @return Response
+     */
+    public function showAction(Request $request, string $slug)
     {
         $competitionService = $this->getCompetitionService();
         $competition = $competitionService->getCompetitionBySlug($slug);
@@ -34,7 +40,7 @@ class AdminCompetitionController extends Controller
         $awayStandings = $standingService->getAwayStandingsByCompetitionAndSeason($competition, $season);
 
         $competitorService = $this->getCompetitorService();
-        $competitors = $competitorService->getCompetitorsByCompetition($competition);
+        $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($competition, $season);
 
         return $this->render('CompetitionBundle:AdminCompetition:show.html.twig', [
             'competition' => $competition,

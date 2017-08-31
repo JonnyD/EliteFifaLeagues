@@ -26,9 +26,10 @@ class DefaultController extends Controller
         $season = $seasonService->getLatestSeason();
 
         $competition = $competitionService->getCompetitionBySlug('elite-league-1');
-        $competitors = $competitorService->getCompetitorsByCompetition($competition);
+        $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($competition, $season);
 
         $matches = $matchService->createFixtures($competitors, $competition, $season);
+
         return $this->render('BaseBundle:Default:index.html.twig', array(
 
         ));
