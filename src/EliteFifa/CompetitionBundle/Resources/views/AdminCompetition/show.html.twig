@@ -20,7 +20,7 @@ Standings Overall<br />
     <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
-            <td>{{ standing.competitor.user.username }}</td>
+            <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% endif %}</td>
             <td>{{ standing.played }}</td>
             <td>{{ standing.won }}</td>
             <td>{{ standing.drawn }}</td>
@@ -54,7 +54,7 @@ Standings Home<br />
         <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
-            <td>{{ standing.competitor.user.username }}</td>
+            <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% endif %}</td>
             <td>{{ standing.played }}</td>
             <td>{{ standing.won }}</td>
             <td>{{ standing.drawn }}</td>
@@ -88,7 +88,7 @@ Standings Away<br />
         <tbody>
         <tr>
             <td>{{ standing.competitor.team.name }}</td>
-            <td>{{ standing.competitor.user.username }}</td>
+            <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% endif %}</td>
             <td>{{ standing.played }}</td>
             <td>{{ standing.won }}</td>
             <td>{{ standing.drawn }}</td>

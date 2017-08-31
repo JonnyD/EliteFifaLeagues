@@ -62,4 +62,21 @@ class StandingRepository extends EntityRepository
 
         return $qb;
     }
+
+    /**
+     * @param Standing $standing
+     * @param bool $sync
+     */
+    public function save(Standing $standing, bool $sync = true)
+    {
+        $this->getEntityManager()->persist($standing);
+        if ($sync) {
+            $this->flush();
+        }
+    }
+
+    public function flush()
+    {
+        $this->getEntityManager()->flush();
+    }
 }

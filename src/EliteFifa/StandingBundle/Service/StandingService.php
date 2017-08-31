@@ -30,6 +30,78 @@ class StandingService
     }
 
     /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createOverallStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::STANDARD);
+            $standing->setStandingType(StandingType::OVERALL);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createHomeStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::STANDARD);
+            $standing->setStandingType(StandingType::HOME);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createAwayStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::STANDARD);
+            $standing->setStandingType(StandingType::AWAY);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
      * @param Competition $competition
      * @param Season $season
      * @return Standing[]
@@ -104,6 +176,10 @@ class StandingService
         $standings = [];
 
         foreach ($matches as $match) {
+            if (!$match->isConfirmed()) {
+                continue;
+            }
+
             $homeCompetitor = $match->getHomeCompetitor();
             $awayCompetitor = $match->getAwayCompetitor();
 
@@ -180,5 +256,16 @@ class StandingService
         }
 
         return array_values($standings);
+    }
+
+    /**
+     * @param Standing[] $standings
+     */
+    public function saveAll(array $standings)
+    {
+        foreach ($standings as $standing) {
+            $this->standingRepository->save($standing, false);
+        }
+        $this->standingRepository->flush();
     }
 }

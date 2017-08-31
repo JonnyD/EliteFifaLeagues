@@ -78,6 +78,18 @@ class Standing
      */
     private $points;
 
+    public function __construct()
+    {
+        $this->played = 0;
+        $this->won = 0;
+        $this->drawn = 0;
+        $this->lost = 0;
+        $this->goalsFor = 0;
+        $this->goalsAgainst = 0;
+        $this->goalDifference = 0;
+        $this->points = 0;
+    }
+
     /**
      * @return int
      */
