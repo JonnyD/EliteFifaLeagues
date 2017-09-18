@@ -3,6 +3,7 @@
 namespace EliteFifa\StandingBundle\Criteria;
 
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\SeasonBundle\Entity\Season;
 
 class StandingCriteria
@@ -16,6 +17,11 @@ class StandingCriteria
      * @var string
      */
     private $standingType;
+
+    /**
+     * @var Competitor
+     */
+    private $competitor;
 
     /**
      * @var Competition
@@ -35,7 +41,7 @@ class StandingCriteria
     /**
      * @return string
      */
-    public function getTableType()
+    public function getTableType(): string
     {
         return $this->tableType;
     }
@@ -51,7 +57,7 @@ class StandingCriteria
     /**
      * @return string
      */
-    public function getStandingType()
+    public function getStandingType(): string
     {
         return $this->standingType;
     }
@@ -65,9 +71,25 @@ class StandingCriteria
     }
 
     /**
+     * @return Competitor
+     */
+    public function getCompetitor(): Competitor
+    {
+        return $this->competitor;
+    }
+
+    /**
+     * @param Competitor $competitor
+     */
+    public function setCompetitor(Competitor $competitor)
+    {
+        $this->competitor = $competitor;
+    }
+
+    /**
      * @return Competition
      */
-    public function getCompetition()
+    public function getCompetition(): Competition
     {
         return $this->competition;
     }
@@ -83,7 +105,7 @@ class StandingCriteria
     /**
      * @return Season
      */
-    public function getSeason()
+    public function getSeason(): Season
     {
         return $this->season;
     }
@@ -99,7 +121,7 @@ class StandingCriteria
     /**
      * @return array
      */
-    public function getSort()
+    public function getSort(): array
     {
         return $this->sort;
     }

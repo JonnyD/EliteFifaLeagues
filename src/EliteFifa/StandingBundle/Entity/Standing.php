@@ -93,7 +93,7 @@ class Standing
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -101,7 +101,7 @@ class Standing
     /**
      * @return string
      */
-    public function getTableType()
+    public function getTableType(): string
     {
         return $this->tableType;
     }
@@ -109,7 +109,7 @@ class Standing
     /**
      * @param string $tableType
      */
-    public function setTableType($tableType)
+    public function setTableType(string $tableType)
     {
         $this->tableType = $tableType;
     }
@@ -117,7 +117,7 @@ class Standing
     /**
      * @return string
      */
-    public function getStandingType()
+    public function getStandingType(): string
     {
         return $this->standingType;
     }
@@ -125,7 +125,7 @@ class Standing
     /**
      * @param string $standingType
      */
-    public function setStandingType($standingType)
+    public function setStandingType(string $standingType)
     {
         $this->standingType = $standingType;
     }
@@ -133,7 +133,7 @@ class Standing
     /**
      * @return Competitor
      */
-    public function getCompetitor()
+    public function getCompetitor(): Competitor
     {
         return $this->competitor;
     }
@@ -149,7 +149,7 @@ class Standing
     /**
      * @return Competition
      */
-    public function getCompetition()
+    public function getCompetition(): Competition
     {
         return $this->competition;
     }
@@ -165,7 +165,7 @@ class Standing
     /**
      * @return Season
      */
-    public function getSeason()
+    public function getSeason(): Season
     {
         return $this->season;
     }
@@ -181,7 +181,7 @@ class Standing
     /**
      * @return int
      */
-    public function getPlayed()
+    public function getPlayed(): int
     {
         return $this->played;
     }
@@ -189,15 +189,20 @@ class Standing
     /**
      * @param int $played
      */
-    public function setPlayed($played)
+    public function setPlayed(int $played)
     {
         $this->played = $played;
+    }
+
+    public function incrementPlayed()
+    {
+        $this->played++;
     }
 
     /**
      * @return int
      */
-    public function getWon()
+    public function getWon(): int
     {
         return $this->won;
     }
@@ -205,15 +210,20 @@ class Standing
     /**
      * @param int $won
      */
-    public function setWon($won)
+    public function setWon(int $won)
     {
         $this->won = $won;
+    }
+
+    public function incrementWon()
+    {
+        $this->won++;
     }
 
     /**
      * @return int
      */
-    public function getDrawn()
+    public function getDrawn(): int
     {
         return $this->drawn;
     }
@@ -221,15 +231,20 @@ class Standing
     /**
      * @param int $drawn
      */
-    public function setDrawn($drawn)
+    public function setDrawn(int $drawn)
     {
         $this->drawn = $drawn;
+    }
+
+    public function incrementDrawn()
+    {
+        $this->drawn++;
     }
 
     /**
      * @return int
      */
-    public function getLost()
+    public function getLost(): int
     {
         return $this->lost;
     }
@@ -237,15 +252,20 @@ class Standing
     /**
      * @param int $lost
      */
-    public function setLost($lost)
+    public function setLost(int $lost)
     {
         $this->lost = $lost;
+    }
+
+    public function incrementLost()
+    {
+        $this->lost++;
     }
 
     /**
      * @return int
      */
-    public function getGoalsFor()
+    public function getGoalsFor(): int
     {
         return $this->goalsFor;
     }
@@ -253,15 +273,23 @@ class Standing
     /**
      * @param int $goalsFor
      */
-    public function setGoalsFor($goalsFor)
+    public function setGoalsFor(int $goalsFor)
     {
         $this->goalsFor = $goalsFor;
     }
 
     /**
+     * @param int $goalsFor
+     */
+    public function addGoalsFor(int $goalsFor)
+    {
+        $this->goalsFor = $this->goalsFor + $goalsFor;
+    }
+
+    /**
      * @return int
      */
-    public function getGoalsAgainst()
+    public function getGoalsAgainst(): int
     {
         return $this->goalsAgainst;
     }
@@ -269,15 +297,23 @@ class Standing
     /**
      * @param int $goalsAgainst
      */
-    public function setGoalsAgainst($goalsAgainst)
+    public function setGoalsAgainst(int $goalsAgainst)
     {
         $this->goalsAgainst = $goalsAgainst;
     }
 
     /**
+     * @param int $goalsAgainst
+     */
+    public function addGoalsAgainst(int $goalsAgainst)
+    {
+        $this->goalsAgainst = $this->goalsAgainst + $goalsAgainst;
+    }
+
+    /**
      * @return int
      */
-    public function getGoalDifference()
+    public function getGoalDifference(): int
     {
         return $this->goalDifference;
     }
@@ -285,15 +321,20 @@ class Standing
     /**
      * @param int $goalDifference
      */
-    public function setGoalDifference($goalDifference)
+    public function setGoalDifference(int $goalDifference)
     {
         $this->goalDifference = $goalDifference;
+    }
+
+    public function updateGoalDifference()
+    {
+        $this->goalDifference = $this->goalsFor - $this->goalsAgainst;
     }
 
     /**
      * @return int
      */
-    public function getPoints()
+    public function getPoints(): int
     {
         return $this->points;
     }
@@ -301,7 +342,7 @@ class Standing
     /**
      * @param int $points
      */
-    public function setPoints($points)
+    public function setPoints(int $points)
     {
         $this->points = $points;
     }

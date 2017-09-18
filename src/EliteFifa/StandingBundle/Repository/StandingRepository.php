@@ -10,6 +10,21 @@ class StandingRepository extends EntityRepository
 {
     /**
      * @param StandingCriteria $criteria
+     * @return Standing
+     */
+    public function findStandingByCriteria(StandingCriteria $criteria)
+    {
+        $qb = $this->findStandingsByCriteriaQueryBuilder($criteria);
+        $qb->setMaxResults(1);
+
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+
+        return $result;
+    }
+
+    /**
+     * @param StandingCriteria $criteria
      * @return Standing[]
      */
     public function findStandingsByCriteria(StandingCriteria $criteria)
@@ -52,6 +67,11 @@ class StandingRepository extends EntityRepository
         if ($criteria->getSeason()) {
             $qb->andWhere('standing.season = :season')
                 ->setParameter('season', $criteria->getSeason());
+        }
+
+        if ($criteria->getCompetitor()) {
+            $qb->andWhere('standing.competitor = :competitor')
+                ->setParameter('competitor', $criteria->getCompetitor());
         }
 
         if ($criteria->getSort()) {

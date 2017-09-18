@@ -4,6 +4,7 @@ namespace EliteFifa\StandingBundle\Service;
 
 use EliteFifa\BaseBundle\Enum\Order;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitionBundle\Entity\League;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\StandingBundle\Criteria\StandingCriteria;
@@ -256,6 +257,89 @@ class StandingService
         }
 
         return array_values($standings);
+    }
+
+    public function updateStandingsByMatch(Match $match)
+    {
+        $competition = $match->getCompetition();
+        if (!($competition instanceof League)) {
+            return;
+        }
+
+        $homeScore = $match->getHomeScore();
+        $awayScore = $match->getAwayScore();
+
+        $criteria = new StandingCriteria();
+        $criteria->setCompetitor($match->getHomeCompetitor());
+        $criteria->setCompetition($match->getCompetition());
+        $criteria->setSeason($match->getSeason());
+        $criteria->setTableType(TableType::STANDARD);
+        $criteria->setStandingType(StandingType::OVERALL);
+        $homeOverallStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $criteria->setStandingType(StandingType::HOME);
+        $homeHomeStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $homeOverallStanding->incrementPlayed();
+        $homeOverallStanding->addGoalsFor($homeScore);
+        $homeOverallStanding->addGoalsAgainst($awayScore);
+        $homeOverallStanding->updateGoalDifference();
+
+        $homeHomeStanding->incrementPlayed();
+        $homeHomeStanding->addGoalsFor($homeScore);
+        $homeHomeStanding->addGoalsAgainst($awayScore);
+        $homeHomeStanding->updateGoalDifference();
+
+        $criteria->setCompetitor($match->getAwayCompetitor());
+        $criteria->setStandingType(StandingType::OVERALL);
+        $awayOverallStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $criteria->setStandingType(StandingType::AWAY);
+        $awayAwayStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $awayOverallStanding->incrementPlayed();
+        $awayOverallStanding->addGoalsFor($awayScore);
+        $awayOverallStanding->addGoalsAgainst($homeScore);
+        $awayOverallStanding->updateGoalDifference();
+
+        $awayAwayStanding->incrementPlayed();
+        $awayAwayStanding->addGoalsFor($awayScore);
+        $awayAwayStanding->addGoalsAgainst($homeScore);
+        $awayAwayStanding->updateGoalDifference();
+
+        if ($homeScore > $awayScore) {
+            $homeOverallStanding->incrementWon();
+            $homeHomeStanding->incrementWon();
+
+            $awayOverallStanding->incrementLost();
+            $awayAwayStanding->incrementLost();
+        } else if ($awayScore > $homeScore) {
+            $homeOverallStanding->incrementLost();
+            $homeHomeStanding->incrementLost();
+
+            $awayOverallStanding->incrementWon();
+            $awayAwayStanding->incrementWon();
+        } else {
+            $homeHomeStanding->incrementDrawn();
+            $homeHomeStanding->incrementDrawn();
+
+            $awayOverallStanding->incrementDrawn();
+            $awayAwayStanding->incrementDrawn();
+        }
+
+        $this->save($homeOverallStanding);
+        $this->save($homeHomeStanding);
+        $this->save($awayOverallStanding);
+        $this->save($awayAwayStanding);
+    }
+
+    /**
+     * @param Standing $standing
+     * @param bool $sync
+     */
+    public function save(Standing $standing, bool $sync = true)
+    {
+        $this->standingRepository->save($standing, $sync);
     }
 
     /**

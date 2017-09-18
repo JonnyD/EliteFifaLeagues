@@ -2,8 +2,6 @@
 
 namespace EliteFifa\CompetitionBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 class League extends Competition
 {
     /**
