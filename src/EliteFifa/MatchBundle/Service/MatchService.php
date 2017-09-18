@@ -57,8 +57,6 @@ class MatchService
     {
         $match->setConfirmed(new \DateTime());
         $this->save($match);
-
-        $this->eventDispatcher->dispatch(MatchEvents::CONFIRMED, new MatchEvent($match));
     }
 
     /**

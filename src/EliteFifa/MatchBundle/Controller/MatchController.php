@@ -4,6 +4,7 @@ namespace EliteFifa\MatchBundle\Controller;
 
 use EliteFifa\CompetitionBundle\Service\LeagueService;
 use EliteFifa\SeasonBundle\Service\SeasonService;
+use EliteFifa\StandingBundle\Service\StandingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use EliteFifa\MatchBundle\Entity\Match;
@@ -93,6 +94,9 @@ class MatchController extends Controller
             $matchService = $this->getMatchService();
             $matchService->confirm($match);
 
+            $standingService = $this->getStandingService();
+            $standingService->updateStandingsByMatch($match);
+
             return $this->redirect($this->generateUrl('elite_fifa.show_office'));
         }
 
@@ -156,5 +160,13 @@ class MatchController extends Controller
     private function getLeagueService()
     {
         return $this->get('elite_fifa.league_service');
+    }
+
+    /**
+     * @return StandingService
+     */
+    private function getStandingService()
+    {
+        return $this->get('elite_fifa.standing_service');
     }
 }
