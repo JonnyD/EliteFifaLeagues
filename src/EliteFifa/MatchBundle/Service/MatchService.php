@@ -2,39 +2,63 @@
 
 namespace EliteFifa\MatchBundle\Service;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\MatchBundle\Enum\MatchStatus;
+use EliteFifa\MatchBundle\Event\MatchEvent;
+use EliteFifa\MatchBundle\Event\MatchEvents;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\MatchBundle\Repository\MatchRepository;
-use Doctrine\ORM\EntityManager;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\TeamBundle\Entity\Team;
 use EliteFifa\UserBundle\Entity\User;
-use EliteFifa\CompetitionBundle\Entity\Tournament;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactory;
 
 //todo
 class MatchService
 {
     /**
-     * @var MatchRepository $matchRepository
+     * @var MatchRepository
      */
     private $matchRepository;
+
+    /**
+     * @var FormFactory
+     */
     private $formFactory;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
 
     /**
      * @param MatchRepository $matchRepository
      * @param FormFactory $formFactory
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(MatchRepository $matchRepository,
-                                FormFactory $formFactory)
+    public function __construct(
+        MatchRepository $matchRepository,
+        FormFactory $formFactory,
+        EventDispatcherInterface $eventDispatcher)
     {
         $this->matchRepository = $matchRepository;
         $this->formFactory = $formFactory;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * @param Match $match
+     */
+    public function confirm(Match $match)
+    {
+        $match->setConfirmed(new \DateTime());
+        $this->save($match);
+
+        $this->eventDispatcher->dispatch(MatchEvents::CONFIRMED, new MatchEvent($match));
     }
 
     /**
@@ -158,7 +182,11 @@ class MatchService
         return $this->matchRepository->findUnreportedMatches();
     }
 
-    public function getMatchById($id)
+    /**
+     * @param int $id
+     * @return null|Match
+     */
+    public function getMatchById(int $id)
     {
         return $this->matchRepository->find($id);
     }

@@ -90,13 +90,8 @@ class MatchController extends Controller
         $form = $this->createForm('confirm_match', $match);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $match->setConfirmed(new \DateTime());
-
             $matchService = $this->getMatchService();
-            $matchService->persist($match);
-
-            $leagueService = $this->getLeagueService();
-            $leagueService->updateStandingsByMatch($match);
+            $matchService->confirm($match);
 
             return $this->redirect($this->generateUrl('elite_fifa.show_office'));
         }
@@ -108,10 +103,10 @@ class MatchController extends Controller
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return Match
      */
-    private function getMatch($id)
+    private function getMatch(int $id)
     {
         $matchService = $this->getMatchService();
         $match = $matchService->getMatchById($id);
