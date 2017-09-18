@@ -73,7 +73,7 @@ class StandingCriteria
     /**
      * @return Competitor
      */
-    public function getCompetitor(): Competitor
+    public function getCompetitor()
     {
         return $this->competitor;
     }
@@ -89,7 +89,7 @@ class StandingCriteria
     /**
      * @return Competition
      */
-    public function getCompetition(): Competition
+    public function getCompetition()
     {
         return $this->competition;
     }
@@ -105,7 +105,7 @@ class StandingCriteria
     /**
      * @return Season
      */
-    public function getSeason(): Season
+    public function getSeason()
     {
         return $this->season;
     }
@@ -121,7 +121,7 @@ class StandingCriteria
     /**
      * @return array
      */
-    public function getSort(): array
+    public function getSort()
     {
         return $this->sort;
     }

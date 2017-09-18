@@ -31,23 +31,15 @@ class MatchService
     private $formFactory;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
      * @param MatchRepository $matchRepository
      * @param FormFactory $formFactory
-     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         MatchRepository $matchRepository,
-        FormFactory $formFactory,
-        EventDispatcherInterface $eventDispatcher)
+        FormFactory $formFactory)
     {
         $this->matchRepository = $matchRepository;
         $this->formFactory = $formFactory;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
