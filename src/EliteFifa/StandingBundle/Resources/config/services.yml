@@ -2,8 +2,12 @@ parameters:
     # repositories
     standing_repository.class: EliteFifa\StandingBundle\Repository\StandingRepository
     standing_repository.factory_argument: 'StandingBundle:Standing'
+
     # services
     standing_service.class: EliteFifa\StandingBundle\Service\StandingService
+
+    # listeners
+    update_standings_listener.class: EliteFifa\StandingBundle\EventListener\UpdateStandingsListener
 
 services:
     # services
@@ -18,3 +22,11 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
           - %standing_repository.factory_argument%
+
+    # listeners
+    elite_fifa.update_standings_listener:
+        class: %update_standings_listener.class%
+        arguments:
+            - '@elite_fifa.standing_service'
+        tags:
+            - { name: kernel.event_listener, event: match.confirmed, method: onMatchConfirmed }
