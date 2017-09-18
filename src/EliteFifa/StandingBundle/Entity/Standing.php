@@ -346,4 +346,12 @@ class Standing
     {
         $this->points = $points;
     }
+
+    /**
+     * @param int $points
+     */
+    public function addPoints(int $points)
+    {
+        $this->points = $this->points + $points;
+    }
 }

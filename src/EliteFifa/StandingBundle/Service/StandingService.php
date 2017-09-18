@@ -259,6 +259,9 @@ class StandingService
         return array_values($standings);
     }
 
+    /**
+     * @param Match $match
+     */
     public function updateStandingsByMatch(Match $match)
     {
         $competition = $match->getCompetition();
@@ -309,7 +312,9 @@ class StandingService
 
         if ($homeScore > $awayScore) {
             $homeOverallStanding->incrementWon();
+            $homeOverallStanding->addPoints(3);
             $homeHomeStanding->incrementWon();
+            $homeHomeStanding->addPoints(3);
 
             $awayOverallStanding->incrementLost();
             $awayAwayStanding->incrementLost();
@@ -318,13 +323,19 @@ class StandingService
             $homeHomeStanding->incrementLost();
 
             $awayOverallStanding->incrementWon();
+            $awayOverallStanding->addPoints(3);
             $awayAwayStanding->incrementWon();
+            $awayAwayStanding->addPoints(3);
         } else {
+            $homeOverallStanding->incrementDrawn();
+            $homeOverallStanding->addPoints(1);
             $homeHomeStanding->incrementDrawn();
-            $homeHomeStanding->incrementDrawn();
+            $homeHomeStanding->addPoints(1);
 
             $awayOverallStanding->incrementDrawn();
+            $awayOverallStanding->addPoints(1);
             $awayAwayStanding->incrementDrawn();
+            $awayAwayStanding->addPoints(1);
         }
 
         $this->save($homeOverallStanding);
