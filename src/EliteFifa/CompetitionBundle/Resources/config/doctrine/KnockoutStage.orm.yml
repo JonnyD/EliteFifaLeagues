@@ -1,0 +1,12 @@
+EliteFifa\CompetitionBundle\Entity\KnockoutStage:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\KnockoutStageRepository
+  oneToOne:
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: stage
+      cascade: ["persist"]
+      joinColumn:
+        name: stage_id
+        referencedColumnName: id
+        onDelete: set null

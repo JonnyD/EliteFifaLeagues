@@ -7,9 +7,13 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\Association\AssociationFixtures;
 use EliteFifa\AssociationBundle\Entity\Association;
+use EliteFifa\CompetitionBundle\Entity\GroupStage;
 use EliteFifa\CompetitionBundle\Entity\Knockout;
+use EliteFifa\CompetitionBundle\Entity\KnockoutStage;
 use EliteFifa\CompetitionBundle\Entity\League;
 use EliteFifa\BaseBundle\DataFixtures\ORM\Prod\Season\SeasonFixtures;
+use EliteFifa\CompetitionBundle\Entity\MultiStage;
+use EliteFifa\CompetitionBundle\Entity\Stage;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -152,6 +156,30 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
         $this->addReference('competition.ultra-league-1', $ultraLeague1);
         $this->addReference('competition.ultra-league-2', $ultraLeague2);
         $this->addReference('competition.ultra-cup', $ultraCup);
+
+        $championsLeague = $this->createMultiStage("Champions League", "CL");
+        $championsLeague->setRegion($worldRegion);
+        $championsLeague->addSeason($season1);
+
+        $groupA = $this->createLeague('Group A', 'CLGA', 1, null, 2, 0, 0);
+        $groupB = $this->createLeague('Group B', 'CLGB', 1, null, 2, 0, 0);
+        $groupC = $this->createLeague('Group C', 'CLGC', 1, null, 2, 0, 0);
+        $groupD = $this->createLeague('Group D', 'CLGD', 1, null, 2, 0, 0);
+        $championsLeagueGroupStage = new GroupStage();
+        $championsLeagueGroupStage->setCompetitions([
+            $groupA, $groupB, $groupC, $groupD
+        ]);
+        $championsLeagueGroupStage->setOrder(1);
+        $championsLeague->addStage($championsLeagueGroupStage);
+
+        $championsLeagueKnockout = $this->createKnockout('Knockout Stage', 'CLKO', null);
+        $championsLeagueKnockoutStage = new KnockoutStage();
+        $championsLeagueKnockoutStage->setCompetition($championsLeagueKnockout);
+        $championsLeagueKnockoutStage->setOrder(2);
+        $championsLeague->addStage($championsLeagueKnockoutStage);
+
+        $manager->persist($championsLeague);
+        $manager->flush();
     }
 
     /**
@@ -164,7 +192,7 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
      * @param int $relegationSpots
      * @return League
      */
-    private function createLeague(string $name, string $code, int $division, Association $association,
+    private function createLeague(string $name, string $code, int $division, Association $association = null,
                                   int $promotionSpots, int $playoffSpots, int $relegationSpots)
     {
         $league = new League();
@@ -179,18 +207,31 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
     }
 
     /**
-     * @param $name
-     * @param $code
-     * @param $association
+     * @param string $name
+     * @param string $code
+     * @param Association $association
      * @return Knockout
      */
-    private function createKnockout($name, $code, $association)
+    private function createKnockout(string $name, string $code, Association $association = null)
     {
         $knockout = new Knockout();
         $knockout->setName($name);
         $knockout->setCode($code);
         $knockout->setAssociation($association);
         return $knockout;
+    }
+
+    /**
+     * @param string $name
+     * @param string $code
+     * @return MultiStage
+     */
+    private function createMultiStage(string $name, string $code)
+    {
+        $multiStage = new MultiStage();
+        $multiStage->setName($name);
+        $multiStage->setCode($code);
+        return $multiStage;
     }
 
     /**

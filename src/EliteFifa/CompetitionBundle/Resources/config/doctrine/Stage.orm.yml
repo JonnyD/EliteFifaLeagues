@@ -1,6 +1,13 @@
 EliteFifa\CompetitionBundle\Entity\Stage:
   type: entity
   repositoryClass: EliteFifa\CompetitionBundle\Repository\StageRepository
+  inheritanceType: SINGLE_TABLE
+  discriminatorColumn:
+    name: discr
+    type: string
+  discriminatorMap:
+    group: EliteFifa\CompetitionBundle\Entity\GroupStage
+    knockout: EliteFifa\CompetitionBundle\Entity\KnockoutStage
   table: stage
   id:
     id:
@@ -15,12 +22,3 @@ EliteFifa\CompetitionBundle\Entity\Stage:
       joinColumn:
         name: parent_id
         referencedColumnName: id
-  oneToOne:
-    competition:
-      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
-      inversedBy: stage
-      cascade: ["persist"]
-      joinColumn:
-        name: stage_id
-        referencedColumnName: id
-        onDelete: set null

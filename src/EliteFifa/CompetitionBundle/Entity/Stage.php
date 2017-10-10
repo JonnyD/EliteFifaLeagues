@@ -2,7 +2,7 @@
 
 namespace EliteFifa\CompetitionBundle\Entity;
 
-class Stage
+abstract class Stage
 {
     /**
      * @var int
@@ -13,11 +13,6 @@ class Stage
      * @var int
      */
     private $order;
-
-    /**
-     * @var Competition
-     */
-    private $competition;
 
     /**
      * @var MultiStage
@@ -43,25 +38,9 @@ class Stage
     /**
      * @param int $order
      */
-    public function setOrder($order)
+    public function setOrder(int $order)
     {
         $this->order = $order;
-    }
-
-    /**
-     * @return Competition
-     */
-    public function getCompetition()
-    {
-        return $this->competition;
-    }
-
-    /**
-     * @param Competition $competition
-     */
-    public function setCompetition($competition)
-    {
-        $this->competition = $competition;
     }
 
     /**

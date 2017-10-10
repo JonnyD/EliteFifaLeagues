@@ -31,6 +31,27 @@ class MultiStage extends Competition
      */
     public function setStages($stages)
     {
-        $this->stages = $stages;
+        foreach ($stages as $stage) {
+            $this->addStage($stage);
+        }
+    }
+
+    /**
+     * @param Stage $stage
+     * @return bool
+     */
+    public function hasStage(Stage $stage)
+    {
+        return $this->stages->contains($stage);
+    }
+
+    /**
+     * @param Stage $stage
+     */
+    public function addStage(Stage $stage)
+    {
+        if (!$this->hasStage($stage)) {
+            $this->stages->add($stage);
+        }
     }
 }

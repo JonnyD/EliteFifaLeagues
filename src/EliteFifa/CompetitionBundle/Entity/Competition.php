@@ -164,12 +164,9 @@ abstract class Competition
      *
      * @param Association $association
      */
-    public function setAssociation(Association $association)
+    public function setAssociation(Association $association = null)
     {
-        if ($this->association == null) {
-            $this->association = $association;
-            $association->addCompetition($this);
-        }
+        $this->association = $association;
     }
 
     /**

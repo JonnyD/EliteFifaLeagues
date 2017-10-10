@@ -1,0 +1,8 @@
+EliteFifa\CompetitionBundle\Entity\GroupStage:
+  type: entity
+  repositoryClass: EliteFifa\CompetitionBundle\Repository\GroupStageRepository
+  oneToMany:
+      competitions:
+        targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+        mappedBy: stage
+        cascade: ["persist"]
