@@ -2,7 +2,9 @@
 
 namespace EliteFifa\MatchBundle\Service;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitionBundle\Entity\Stage;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Round;
@@ -49,6 +51,34 @@ class MatchService
     {
         $match->setConfirmed(new \DateTime());
         $this->save($match);
+    }
+
+    /**
+     * @param Stage $stage
+     * @param Season $season
+     * @return ArrayCollection|Match[]
+     */
+    public function getMatchesByStageAndSeason(Stage $stage, Season $season)
+    {
+        return $this->matchRepository->findMatchesByStageAndSeason($stage, $season);
+    }
+
+    /**
+     * @param Match[] $matches
+     * @return bool
+     */
+    public function haveAllMatchesBeenConfirmed($matches)
+    {
+        $allConfirmed = true;
+
+        foreach ($matches as $match) {
+            if (!$match->isConfirmed()) {
+                $allConfirmed = false;
+                break;
+            }
+        }
+
+        return $allConfirmed;
     }
 
     /**

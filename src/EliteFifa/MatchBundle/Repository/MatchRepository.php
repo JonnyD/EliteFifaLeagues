@@ -2,7 +2,9 @@
 
 namespace EliteFifa\MatchBundle\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use EliteFifa\CompetitionBundle\Entity\Stage;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
@@ -73,6 +75,24 @@ class MatchRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    /**
+     * @param Stage $stage
+     * @param Season $season
+     * @return ArrayCollection|Match[]
+     */
+    public function findMatchesByStageAndSeason(Stage $stage, Season $season)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT m FROM MatchBundle:Match m
+                JOIN m.competition c
+                WHERE c.stage = :stage
+                AND m.season = :season')
+            ->setParameter('stage', $stage)
+            ->setParameter('season', $season);
+
+        return $query->getResult();
     }
 
     public function findMatchesByTeam($team)
