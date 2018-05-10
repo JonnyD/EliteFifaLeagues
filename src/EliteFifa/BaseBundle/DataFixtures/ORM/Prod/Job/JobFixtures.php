@@ -32,11 +32,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
     {
         $worldRegion = $this->getRegion('World');
         $eliteLeague1 = $this->getCompetition('elite-league-1');
-        $competitor1 = $this->getCompetitor('competitor1');
-        $competitor2 = $this->getCompetitor('competitor2');
-        $competitor3 = $this->getCompetitor('competitor3');
-        $competitor4 = $this->getCompetitor('competitor4');
-        $competitor5 = $this->getCompetitor('competitor5');
+        $competitor1 = $this->getCompetitor('liverpool');
+        $competitor2 = $this->getCompetitor('realMadrid');
+        $competitor3 = $this->getCompetitor('borussiaDortmund');
+        $competitor4 = $this->getCompetitor('chelsea');
+        $competitor5 = $this->getCompetitor('barcelona');
         $job1 = $this->createJob($worldRegion, $eliteLeague1, $competitor1);
         $job2 = $this->createJob($worldRegion, $eliteLeague1, $competitor2);
         $job3 = $this->createJob($worldRegion, $eliteLeague1, $competitor3);
@@ -50,11 +50,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $eliteLeague2 = $this->getCompetition('elite-league-2');
-        $competitor6 = $this->getCompetitor('competitor6');
-        $competitor7 = $this->getCompetitor('competitor7');
-        $competitor8 = $this->getCompetitor('competitor8');
-        $competitor9 = $this->getCompetitor('competitor9');
-        $competitor10 = $this->getCompetitor('competitor10');
+        $competitor6 = $this->getCompetitor('arsenal');
+        $competitor7 = $this->getCompetitor('manUnited');
+        $competitor8 = $this->getCompetitor('bayernMunich');
+        $competitor9 = $this->getCompetitor('milan');
+        $competitor10 = $this->getCompetitor('athleticoMadrid');
         $job6 = $this->createJob($worldRegion, $eliteLeague2, $competitor6);
         $job7 = $this->createJob($worldRegion, $eliteLeague2, $competitor7);
         $job8 = $this->createJob($worldRegion, $eliteLeague2, $competitor8);
@@ -68,11 +68,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $superLeague1 = $this->getCompetition('super-league-1');
-        $competitor11 = $this->getCompetitor('competitor11');
-        $competitor12 = $this->getCompetitor('competitor12');
-        $competitor13 = $this->getCompetitor('competitor13');
-        $competitor14 = $this->getCompetitor('competitor14');
-        $competitor15 = $this->getCompetitor('competitor15');
+        $competitor11 = $this->getCompetitor('tottenham');
+        $competitor12 = $this->getCompetitor('roma');
+        $competitor13 = $this->getCompetitor('inter');
+        $competitor14 = $this->getCompetitor('psg');
+        $competitor15 = $this->getCompetitor('juventus');
         $job11 = $this->createJob($worldRegion, $superLeague1, $competitor11);
         $job12 = $this->createJob($worldRegion, $superLeague1, $competitor12);
         $job13 = $this->createJob($worldRegion, $superLeague1, $competitor13);
@@ -86,11 +86,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $superLeague2 = $this->getCompetition('super-league-2');
-        $competitor16 = $this->getCompetitor('competitor16');
-        $competitor17 = $this->getCompetitor('competitor17');
-        $competitor18 = $this->getCompetitor('competitor18');
-        $competitor19 = $this->getCompetitor('competitor19');
-        $competitor20 = $this->getCompetitor('competitor20');
+        $competitor16 = $this->getCompetitor('manCity');
+        $competitor17 = $this->getCompetitor('everton');
+        $competitor18 = $this->getCompetitor('southampton');
+        $competitor19 = $this->getCompetitor('fcSchalke');
+        $competitor20 = $this->getCompetitor('valencia');
         $job16 = $this->createJob($worldRegion, $superLeague2, $competitor16);
         $job17 = $this->createJob($worldRegion, $superLeague2, $competitor17);
         $job18 = $this->createJob($worldRegion, $superLeague2, $competitor18);
@@ -104,11 +104,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $premierLeague1 = $this->getCompetition('premier-league-1');
-        $competitor21 = $this->getCompetitor('competitor21');
-        $competitor22 = $this->getCompetitor('competitor22');
-        $competitor23 = $this->getCompetitor('competitor23');
-        $competitor24 = $this->getCompetitor('competitor24');
-        $competitor25 = $this->getCompetitor('competitor25');
+        $competitor21 = $this->getCompetitor('napoli');
+        $competitor22 = $this->getCompetitor('lyon');
+        $competitor23 = $this->getCompetitor('asMonaco');
+        $competitor24 = $this->getCompetitor('sportLisbon');
+        $competitor25 = $this->getCompetitor('ajax');
         $job21 = $this->createJob($worldRegion, $premierLeague1, $competitor21);
         $job22 = $this->createJob($worldRegion, $premierLeague1, $competitor22);
         $job23 = $this->createJob($worldRegion, $premierLeague1, $competitor23);
@@ -122,11 +122,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $premierLeague2 = $this->getCompetition('premier-league-2');
-        $competitor26 = $this->getCompetitor('competitor26');
-        $competitor27 = $this->getCompetitor('competitor27');
-        $competitor28 = $this->getCompetitor('competitor28');
-        $competitor29 = $this->getCompetitor('competitor29');
-        $competitor30 = $this->getCompetitor('competitor30');
+        $competitor26 = $this->getCompetitor('fcPorto');
+        $competitor27 = $this->getCompetitor('sunderland');
+        $competitor28 = $this->getCompetitor('bayerLeverkusen');
+        $competitor29 = $this->getCompetitor('galatasary');
+        $competitor30 = $this->getCompetitor('sportingCP');
         $job26 = $this->createJob($worldRegion, $premierLeague2, $competitor26);
         $job27 = $this->createJob($worldRegion, $premierLeague2, $competitor27);
         $job28 = $this->createJob($worldRegion, $premierLeague2, $competitor28);
@@ -140,11 +140,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $ultraLeague1 = $this->getCompetition('ultra-league-1');
-        $competitor31 = $this->getCompetitor('competitor31');
-        $competitor32 = $this->getCompetitor('competitor32');
-        $competitor33 = $this->getCompetitor('competitor33');
-        $competitor34 = $this->getCompetitor('competitor34');
-        $competitor35 = $this->getCompetitor('competitor35');
+        $competitor31 = $this->getCompetitor('lazio');
+        $competitor32 = $this->getCompetitor('astonVilla');
+        $competitor33 = $this->getCompetitor('newcastleUnited');
+        $competitor34 = $this->getCompetitor('hamburgerSV');
+        $competitor35 = $this->getCompetitor('realSociedad');
         $job31 = $this->createJob($worldRegion, $ultraLeague1, $competitor31);
         $job32 = $this->createJob($worldRegion, $ultraLeague1, $competitor32);
         $job33 = $this->createJob($worldRegion, $ultraLeague1, $competitor33);
@@ -158,11 +158,11 @@ class JobFixtures extends AbstractFixture implements DependentFixtureInterface, 
         $manager->flush();
 
         $ultraLeague2 = $this->getCompetition('ultra-league-2');
-        $competitor36 = $this->getCompetitor('competitor36');
-        $competitor37 = $this->getCompetitor('competitor37');
-        $competitor38 = $this->getCompetitor('competitor38');
-        $competitor39 = $this->getCompetitor('competitor39');
-        $competitor40 = $this->getCompetitor('competitor40');
+        $competitor36 = $this->getCompetitor('sevilla');
+        $competitor37 = $this->getCompetitor('ogcNice');
+        $competitor38 = $this->getCompetitor('rbLeipzig');
+        $competitor39 = $this->getCompetitor('malaga');
+        $competitor40 = $this->getCompetitor('leicesterCity');
         $job36 = $this->createJob($worldRegion, $ultraLeague2, $competitor36);
         $job37 = $this->createJob($worldRegion, $ultraLeague2, $competitor37);
         $job38 = $this->createJob($worldRegion, $ultraLeague2, $competitor38);

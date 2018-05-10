@@ -12,6 +12,7 @@ use EliteFifa\CompetitorBundle\Service\CompetitorService;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\MatchBundle\Enum\MatchStatus;
+use EliteFifa\MatchBundle\Service\MatchFixturesService;
 use EliteFifa\MatchBundle\Service\MatchService;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\TeamBundle\Entity\Team;
@@ -52,8 +53,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($eliteLeague1, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $eliteLeague1, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $eliteLeague1, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -65,8 +68,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($eliteLeague2, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $eliteLeague2, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $eliteLeague2, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -78,8 +83,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($superLeague1, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $superLeague1, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $superLeague1, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -91,8 +98,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($superLeague2, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $superLeague2, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $superLeague2, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -104,8 +113,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($premierLeague1, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $premierLeague1, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $premierLeague1, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -117,8 +128,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($premierLeague2, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $premierLeague2, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $premierLeague2, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -130,8 +143,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($ultraLeague1, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $ultraLeague1, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $ultraLeague1, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -143,8 +158,10 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
         $competitorService = $this->getCompetitorService();
         $competitors = $competitorService->getCompetitorsByCompetitionAndSeason($ultraLeague2, $worldSeason1);
 
+        $matchFixturesService = $this->getMatchFixturesService();
+        $matches = $matchFixturesService->createFixtures($competitors, $ultraLeague2, $worldSeason1);
+
         $matchService = $this->getMatchService();
-        $matches = $matchService->createFixtures($competitors, $ultraLeague2, $worldSeason1);
         $matchService->saveAll($matches);
     }
 
@@ -164,6 +181,14 @@ class MatchFixtures extends AbstractFixture implements DependentFixtureInterface
     private function getSeason($key)
     {
         return $this->getReference('season.'.$key);
+    }
+
+    /**
+     * @return MatchFixturesService
+     */
+    private function getMatchFixturesService()
+    {
+        return $this->container->get('elite_fifa.match_fixtures_service');
     }
 
     /**

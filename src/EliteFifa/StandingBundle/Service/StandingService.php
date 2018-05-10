@@ -169,6 +169,29 @@ class StandingService
     }
 
     /**
+     * @param League $league
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getPromotedStandingsByCompetitionAndSeason(League $league, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::STANDARD);
+        $criteria->setStandingType(StandingType::OVERALL);
+        $criteria->setCompetition($league);
+        $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
+        ]);
+        $criteria->setLimit($competition->getPromotionSpots());
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
      * @param Match[] $matches
      * @return Standing[]
      */

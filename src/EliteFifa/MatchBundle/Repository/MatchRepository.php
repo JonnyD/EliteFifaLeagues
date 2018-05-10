@@ -68,6 +68,16 @@ class MatchRepository extends EntityRepository
                 ->setParameter('awayUser', $criteria->getAwayUser());
         }
 
+        if ($criteria->getRound()) {
+            $qb->andWhere('match.round = :round')
+                ->setParameter('round', $criteria->getRound());
+        }
+
+        if ($criteria->getSeasson()) {
+            $qb->andWhere('match.season = :season')
+                ->setParameter('season', $criteria->getSeason());
+        }
+
         if ($criteria->getSort()) {
             foreach ($criteria->getSort() as $column => $direction) {
                 $qb->addOrderBy($qb->getRootAliases()[0] . '.' . $column, $direction);

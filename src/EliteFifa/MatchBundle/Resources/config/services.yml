@@ -11,6 +11,7 @@ parameters:
 
     # services
     match_service.class:                EliteFifa\MatchBundle\Service\MatchService
+    match_fixtures_service.class:       EliteFifa\MatchBundle\Service\MatchFixturesService
     goal_service.class:                 EliteFifa\MatchBundle\Service\GoalService
     event_service.class:                EliteFifa\MatchBundle\Service\EventService
     result_service.class:               EliteFifa\MatchBundle\Service\ResultService
@@ -28,6 +29,12 @@ services:
         arguments:
           - '@elite_fifa.match_repository'
           - '@=service("form.factory")'
+
+    elite_fifa.match_fixtures_service:
+        class: %match_fixtures_service.class%
+        arguments:
+          - '@elite_fifa.match_service'
+          - '@elite_fifa.standing_service'
 
     elite_fifa.event_service:
         class: %event_service.class%

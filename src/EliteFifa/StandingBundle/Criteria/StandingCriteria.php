@@ -39,6 +39,11 @@ class StandingCriteria
     private $sort;
 
     /**
+     * @var int
+     */
+    private $limit;
+
+    /**
      * @return string
      */
     public function getTableType(): string
@@ -132,5 +137,21 @@ class StandingCriteria
     public function setSort($sort)
     {
         $this->sort = $sort;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->limit;
+    }
+
+    /**
+     * @param int $limit
+     */
+    public function setLimit(int $limit)
+    {
+        $this->limit = $limit;
     }
 }

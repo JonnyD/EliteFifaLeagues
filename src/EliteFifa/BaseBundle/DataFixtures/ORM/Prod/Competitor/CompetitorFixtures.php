@@ -41,6 +41,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $this->createPremierLeague2Competitors($manager);
         $this->createUltraLeague1Competitors($manager);
         $this->createUltraLeague2Competitors($manager);
+
+        $this->createChampionsLeagueGroupACompetitors($manager);
+        $this->createChampionsLeagueGroupBCompetitors($manager);
+        $this->createChampionsLeagueGroupCCompetitors($manager);
+        $this->createChampionsLeagueGroupDCompetitors($manager);
     }
 
     private function createEliteLeague1Competitors(ObjectManager $manager)
@@ -67,11 +72,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor5);
         $manager->flush();
 
-        $this->addCompetitor('competitor1', $competitor1);
-        $this->addCompetitor('competitor2', $competitor2);
-        $this->addCompetitor('competitor3', $competitor3);
-        $this->addCompetitor('competitor4', $competitor4);
-        $this->addCompetitor('competitor5', $competitor5);
+        $this->addCompetitor('liverpool', $competitor1);
+        $this->addCompetitor('realMadrid', $competitor2);
+        $this->addCompetitor('borussiaDortmund', $competitor3);
+        $this->addCompetitor('chelsea', $competitor4);
+        $this->addCompetitor('barcelona', $competitor5);
     }
 
     private function createEliteLeague2Competitors(ObjectManager $manager)
@@ -98,11 +103,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor10);
         $manager->flush();
 
-        $this->addCompetitor('competitor6', $competitor6);
-        $this->addCompetitor('competitor7', $competitor7);
-        $this->addCompetitor('competitor8', $competitor8);
-        $this->addCompetitor('competitor9', $competitor9);
-        $this->addCompetitor('competitor10', $competitor10);
+        $this->addCompetitor('arsenal', $competitor6);
+        $this->addCompetitor('manUnited', $competitor7);
+        $this->addCompetitor('bayernMunich', $competitor8);
+        $this->addCompetitor('milan', $competitor9);
+        $this->addCompetitor('athleticoMadrid', $competitor10);
     }
 
     private function createSuperLeague1Competitors(ObjectManager $manager)
@@ -129,11 +134,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor15);
         $manager->flush();
 
-        $this->addCompetitor('competitor11', $competitor11);
-        $this->addCompetitor('competitor12', $competitor12);
-        $this->addCompetitor('competitor13', $competitor13);
-        $this->addCompetitor('competitor14', $competitor14);
-        $this->addCompetitor('competitor15', $competitor15);
+        $this->addCompetitor('tottenham', $competitor11);
+        $this->addCompetitor('roma', $competitor12);
+        $this->addCompetitor('inter', $competitor13);
+        $this->addCompetitor('psg', $competitor14);
+        $this->addCompetitor('juventus', $competitor15);
     }
 
     private function createSuperLeague2Competitors(ObjectManager $manager)
@@ -160,11 +165,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor20);
         $manager->flush();
 
-        $this->addCompetitor('competitor16', $competitor16);
-        $this->addCompetitor('competitor17', $competitor17);
-        $this->addCompetitor('competitor18', $competitor18);
-        $this->addCompetitor('competitor19', $competitor19);
-        $this->addCompetitor('competitor20', $competitor20);
+        $this->addCompetitor('manCity', $competitor16);
+        $this->addCompetitor('everton', $competitor17);
+        $this->addCompetitor('southampton', $competitor18);
+        $this->addCompetitor('fcSchalke', $competitor19);
+        $this->addCompetitor('valencia', $competitor20);
     }
 
     private function createPremierLeague1Competitors(ObjectManager $manager)
@@ -191,11 +196,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor25);
         $manager->flush();
 
-        $this->addCompetitor('competitor21', $competitor21);
-        $this->addCompetitor('competitor22', $competitor22);
-        $this->addCompetitor('competitor23', $competitor23);
-        $this->addCompetitor('competitor24', $competitor24);
-        $this->addCompetitor('competitor25', $competitor25);
+        $this->addCompetitor('napoli', $competitor21);
+        $this->addCompetitor('lyon', $competitor22);
+        $this->addCompetitor('asMonaco', $competitor23);
+        $this->addCompetitor('sportLisbon', $competitor24);
+        $this->addCompetitor('ajax', $competitor25);
     }
 
     private function createPremierLeague2Competitors(ObjectManager $manager)
@@ -222,11 +227,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor30);
         $manager->flush();
 
-        $this->addCompetitor('competitor26', $competitor26);
-        $this->addCompetitor('competitor27', $competitor27);
-        $this->addCompetitor('competitor28', $competitor28);
-        $this->addCompetitor('competitor29', $competitor29);
-        $this->addCompetitor('competitor30', $competitor30);
+        $this->addCompetitor('fcPorto', $competitor26);
+        $this->addCompetitor('sunderland', $competitor27);
+        $this->addCompetitor('bayerLeverkusen', $competitor28);
+        $this->addCompetitor('galatasary', $competitor29);
+        $this->addCompetitor('sportingCP', $competitor30);
     }
 
     private function createUltraLeague1Competitors(ObjectManager $manager)
@@ -253,11 +258,11 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor35);
         $manager->flush();
 
-        $this->addCompetitor('competitor31', $competitor31);
-        $this->addCompetitor('competitor32', $competitor32);
-        $this->addCompetitor('competitor33', $competitor33);
-        $this->addCompetitor('competitor34', $competitor34);
-        $this->addCompetitor('competitor35', $competitor35);
+        $this->addCompetitor('lazio', $competitor31);
+        $this->addCompetitor('astonVilla', $competitor32);
+        $this->addCompetitor('newcastleUnited', $competitor33);
+        $this->addCompetitor('hamburgerSV', $competitor34);
+        $this->addCompetitor('realSociedad', $competitor35);
     }
 
     private function createUltraLeague2Competitors(ObjectManager $manager)
@@ -284,11 +289,107 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
         $manager->persist($competitor40);
         $manager->flush();
 
-        $this->addCompetitor('competitor36', $competitor36);
-        $this->addCompetitor('competitor37', $competitor37);
-        $this->addCompetitor('competitor38', $competitor38);
-        $this->addCompetitor('competitor39', $competitor39);
-        $this->addCompetitor('competitor40', $competitor40);
+        $this->addCompetitor('sevilla', $competitor36);
+        $this->addCompetitor('ogcNice', $competitor37);
+        $this->addCompetitor('rbLeipzig', $competitor38);
+        $this->addCompetitor('malaga', $competitor39);
+        $this->addCompetitor('leicesterCity', $competitor40);
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function createChampionsLeagueGroupACompetitors(ObjectManager $manager)
+    {
+        $groupA = $this->getCompetition('group-a');
+
+        $liverpool = $this->getCompetitor('liverpool');
+        $roma = $this->getCompetitor('roma');
+        $asMonaco = $this->getCompetitor('asMonaco');
+        $hamburgerSV = $this->getCompetitor('hamburgerSV');
+
+        $liverpool->addCompetition($groupA);
+        $roma->addCompetition($groupA);
+        $asMonaco->addCompetition($groupA);
+        $hamburgerSV->addCompetition($groupA);
+
+        $manager->persist($liverpool);
+        $manager->persist($roma);
+        $manager->persist($asMonaco);
+        $manager->persist($hamburgerSV);
+        $manager->flush();
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function createChampionsLeagueGroupBCompetitors(ObjectManager $manager)
+    {
+        $groupB = $this->getCompetition('group-b');
+
+        $tottenham = $this->getCompetitor('tottenham');
+        $realMadrid = $this->getCompetitor('realMadrid');
+        $newcastleUnited = $this->getCompetitor('newcastleUnited');
+        $sportLisbon = $this->getCompetitor('sportLisbon');
+
+        $tottenham->addCompetition($groupB);
+        $realMadrid->addCompetition($groupB);
+        $newcastleUnited->addCompetition($groupB);
+        $sportLisbon->addCompetition($groupB);
+
+        $manager->persist($tottenham);
+        $manager->persist($realMadrid);
+        $manager->persist($newcastleUnited);
+        $manager->persist($sportLisbon);
+        $manager->flush();
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function createChampionsLeagueGroupCCompetitors(ObjectManager $manager)
+    {
+        $groupC = $this->getCompetition('group-c');
+
+        $napoli = $this->getCompetitor('napoli');
+        $astonVilla = $this->getCompetitor('astonVilla');
+        $borrusiaDortmund = $this->getCompetitor('borussiaDortmund');
+        $milan = $this->getCompetitor('milan');
+
+        $napoli->addCompetition($groupC);
+        $astonVilla->addCompetition($groupC);
+        $borrusiaDortmund->addCompetition($groupC);
+        $milan->addCompetition($groupC);
+
+        $manager->persist($napoli);
+        $manager->persist($astonVilla);
+        $manager->persist($borrusiaDortmund);
+        $manager->persist($milan);
+        $manager->flush();
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
+    public function createChampionsLeagueGroupDCompetitors(ObjectManager $manager)
+    {
+        $groupD = $this->getCompetition('group-d');
+
+        $lazio = $this->getCompetitor('lazio');
+        $lyon = $this->getCompetitor('lyon');
+        $inter = $this->getCompetitor('inter');
+        $chelsea = $this->getCompetitor('chelsea');
+
+        $lazio->addCompetition($groupD);
+        $lyon->addCompetition($groupD);
+        $inter->addCompetition($groupD);
+        $chelsea->addCompetition($groupD);
+
+        $manager->persist($lazio);
+        $manager->persist($lyon);
+        $manager->persist($inter);
+        $manager->persist($chelsea);
+        $manager->flush();
     }
 
     /**
@@ -342,6 +443,15 @@ class CompetitorFixtures extends AbstractFixture implements DependentFixtureInte
     private function addCompetitor(string $key, Competitor $competitor)
     {
         $this->addReference('competitor.'.$key, $competitor);
+    }
+
+    /**
+     * @param string $key
+     * @return Competitor
+     */
+    public function getCompetitor(string $key)
+    {
+        return $this->getReference('competitor.'.$key);
     }
 
     /**

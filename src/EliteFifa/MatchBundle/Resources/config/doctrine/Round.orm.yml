@@ -11,6 +11,9 @@ EliteFifa\MatchBundle\Entity\Round:
     round:
       type: integer
       nullable: true
+    name:
+      type: string
+      nullable: true
     startDate:
       type: datetime
       column: start_date

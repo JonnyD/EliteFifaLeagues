@@ -170,16 +170,23 @@ class CompetitionFixtures extends AbstractFixture implements DependentFixtureInt
             $groupA, $groupB, $groupC, $groupD
         ]);
         $championsLeagueGroupStage->setOrder(1);
-        $championsLeague->addStage($championsLeagueGroupStage);
 
         $championsLeagueKnockout = $this->createKnockout('Knockout Stage', 'CLKO', null);
         $championsLeagueKnockoutStage = new KnockoutStage();
         $championsLeagueKnockoutStage->setCompetition($championsLeagueKnockout);
         $championsLeagueKnockoutStage->setOrder(2);
+
+        $championsLeagueGroupStage->setNextStage($championsLeagueKnockoutStage);
+        $championsLeague->addStage($championsLeagueGroupStage);
         $championsLeague->addStage($championsLeagueKnockoutStage);
 
         $manager->persist($championsLeague);
         $manager->flush();
+
+        $this->addReference('competition.group-a', $groupA);
+        $this->addReference('competition.group-b', $groupB);
+        $this->addReference('competition.group-c', $groupC);
+        $this->addReference('competition.group-d', $groupD);
     }
 
     /**

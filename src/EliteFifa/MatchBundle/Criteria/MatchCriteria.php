@@ -3,6 +3,8 @@
 namespace EliteFifa\MatchBundle\Criteria;
 
 use EliteFifa\CompetitorBundle\Entity\Competitor;
+use EliteFifa\MatchBundle\Entity\Round;
+use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\TeamBundle\Entity\Team;
 use EliteFifa\UserBundle\Entity\User;
 
@@ -37,6 +39,16 @@ class MatchCriteria
      * @var User
      */
     private $awayUser;
+
+    /**
+     * @var Round
+     */
+    private $round;
+
+    /**
+     * @var Season
+     */
+    private $season;
 
     /**
      * @var array
@@ -137,6 +149,38 @@ class MatchCriteria
     public function setAwayUser(User $awayUser)
     {
         $this->awayUser = $awayUser;
+    }
+
+    /**
+     * @return Round
+     */
+    public function getRound()
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param Round $round
+     */
+    public function setRound(Round $round)
+    {
+        $this->round = $round;
+    }
+
+    /**
+     * @return Season
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param Season $season
+     */
+    public function setSeason(Season $season)
+    {
+        $this->season = $season;
     }
 
     /**

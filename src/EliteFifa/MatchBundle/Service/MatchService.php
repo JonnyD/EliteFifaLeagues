@@ -4,11 +4,14 @@ namespace EliteFifa\MatchBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
+use EliteFifa\CompetitionBundle\Entity\GroupStage;
+use EliteFifa\CompetitionBundle\Entity\KnockoutStage;
 use EliteFifa\CompetitionBundle\Entity\Stage;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\MatchBundle\Enum\MatchStatus;
+use EliteFifa\MatchBundle\Enum\ResultCode;
 use EliteFifa\MatchBundle\Event\MatchEvent;
 use EliteFifa\MatchBundle\Event\MatchEvents;
 use EliteFifa\SeasonBundle\Entity\Season;
@@ -157,9 +160,26 @@ class MatchService
         return $match;
     }
 
+    /**
+     * @return Match[]
+     */
     public function getAllMatches()
     {
         return $this->matchRepository->findAll();
+    }
+
+    /**
+     * @param Round $round
+     * @param Season $season
+     * @return Match[]
+     */
+    public function getMatchesByRoundAndSeason(Round $round, Season $season)
+    {
+        $criteria = new MatchCriteria();
+        $criteria->setRound($round);
+        $criteria->setSeason($season);
+
+        return $this->matchRepository->findMatchesByCriteria($criteria);
     }
 
     public function getMatchesByUser($user)
@@ -305,75 +325,6 @@ class MatchService
         return $this->matchRepository->findAverageGoalsPerMatchByCompetitionAndSeason($competition, $season);
     }
 
-    /**
-     * @param array $competitors
-     * @param Competition $competition
-     * @param Season $season
-     * @return Match[]
-     */
-    public function createFixtures($competitors, Competition $competition, Season $season)
-    {
-        $rounds = [];
-
-        $roundsCount = count($competitors) - 1;
-
-        $away = array_splice($competitors, (count($competitors) / 2));
-        $home = $competitors;
-        for ($r = 0; $r < $roundsCount; $r++) {
-            for ($j = 0; $j < count($home); $j++) {
-                $rounds[$r][$j]["Home"] = $home[$j];
-                $rounds[$r][$j]["Away"] = $away[$j];
-            }
-            if (count($home) + count($away) -1 > 2) {
-                array_unshift($away, current(array_splice($home, 1, 1)));
-                array_push($home, array_pop($away));
-            }
-        }
-
-        $roundNumber = count($rounds);
-        foreach ($rounds as $r => $m) {
-            foreach ($m as $j => $match) {
-                $rounds[$roundNumber][$j]['Home'] = $match['Away'];
-                $rounds[$roundNumber][$j]['Away'] = $match['Home'];
-            }
-
-            $roundNumber++;
-        }
-
-        $startDate = $season->getStartDate();
-        $endDate = $season->getEndDate();
-
-        $dateDifference = $startDate->diff($endDate);
-        $days = $dateDifference->days;
-
-        $totalRoundsCount = $roundsCount + $roundsCount;
-
-        $dayInterval = round($days / $totalRoundsCount, 0, PHP_ROUND_HALF_DOWN);
-
-        $fixtures = [];
-
-        $roundNumber = 1;
-        foreach ($rounds as $r => $m) {
-            $startDate = clone $startDate->add(new \DateInterval('P'.$dayInterval.'D'));
-            $round = new Round();
-            $round->setRound($roundNumber);
-            $round->setStartDate($startDate);
-
-            foreach ($m as $j => $match) {
-                /** @var Competitor $homeCompetitor */
-                $homeCompetitor = $match['Home'];
-                /** @var Competitor $awayCompetitor */
-                $awayCompetitor = $match['Away'];
-
-                $fixtures[] = $this->createMatch($homeCompetitor, $awayCompetitor, $competition, $season, $round);
-            }
-
-            $roundNumber++;
-        }
-
-        return $fixtures;
-    }
-
     public function updateMatch(Match $match, $homeScore, $awayScore, $reported, $confirmed)
     {
         $match->setHomeScore($homeScore);
@@ -413,6 +364,11 @@ class MatchService
         return $selectRoundForm;
     }
 
+    /**
+     * @param Team $selectedTeam
+     * @param Match $match
+     * @return string
+     */
     public function getResultCode(Team $selectedTeam, Match $match)
     {
         $homeTeam = $match->getHomeTeam();
@@ -421,25 +377,43 @@ class MatchService
         $awayScore = $match->getAwayScore();
 
         $resultCode = "";
-        if ($selectedTeam == $homeTeam) {
+        if ($selectedTeam === $homeTeam) {
             if ($homeScore > $awayScore) {
-                $resultCode = "W";
+                $resultCode = ResultCode::WIN;
             } else if ($homeScore < $awayScore) {
-                $resultCode = "L";
+                $resultCode = ResultCode::LOSS;
             } else if ($homeScore == $awayScore) {
-                $resultCode = "D";
+                $resultCode = ResultCode::DRAW;
             }
-        } else if ($selectedTeam == $awayTeam) {
+        } else if ($selectedTeam === $awayTeam) {
             if ($homeScore > $awayScore) {
-                $resultCode = "L";
+                $resultCode = ResultCode::LOSS;
             } else if ($homeScore < $awayScore) {
-                $resultCode = "W";
+                $resultCode = ResultCode::WIN;
             } else if ($homeScore == $awayScore) {
-                $resultCode = "D";
+                $resultCode = ResultCode::DRAW;
             }
         }
 
         return $resultCode;
+    }
+
+    /**
+     * @param Match $match
+     * @return Competitor|null
+     */
+    public function getWinner(Match $match)
+    {
+        $homeTeam = $match->getHomeCompetitor()->getTeam();
+        $awayTeam = $match->getAwayCompetitor()->getTeam();
+
+        if ($this->getResultCode($homeTeam, $match) === ResultCode::WIN) {
+            return $match->getHomeCompetitor();
+        } else if ($this->getResultCode($awayTeam, $match) === ResultCode::WIN) {
+            return $match->getAwayCompetitor();
+        } else {
+            return null;
+        }
     }
 
     public function getFormByTeam(Team $team)

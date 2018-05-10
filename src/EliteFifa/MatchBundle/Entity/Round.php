@@ -22,6 +22,11 @@ class Round
     private $round;
 
     /**
+     * @var string
+     */
+    private $name;
+
+    /**
      * @var /DateTime $startDate
      */
     private $startDate;
@@ -85,6 +90,22 @@ class Round
     public function setRound($round)
     {
         $this->round = $round;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 
     /**

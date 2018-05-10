@@ -80,6 +80,10 @@ class StandingRepository extends EntityRepository
             }
         }
 
+        if ($criteria->getLimit()) {
+            $qb->setMaxResults($criteria->getLimit());
+        }
+
         return $qb;
     }
 

@@ -22,3 +22,11 @@ EliteFifa\CompetitionBundle\Entity\Stage:
       joinColumn:
         name: parent_id
         referencedColumnName: id
+  oneToOne:
+      nextStage:
+        targetEntity: EliteFifa\CompetitionBundle\Entity\Stage
+        cascade: ["persist"]
+        joinColumn:
+          name: next_stage_id
+          referencedColumnName: id
+          onDelete: set null
