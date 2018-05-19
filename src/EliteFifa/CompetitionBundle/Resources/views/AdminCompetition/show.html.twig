@@ -115,6 +115,8 @@ Matches <br />
             <td>Away Score</td>
             <td>Reported</td>
             <td>Confirmed</td>
+            <td>Round</td>
+            <td>Simulated</td>
         </tr>
     </thead>
     <tbody>
@@ -129,6 +131,8 @@ Matches <br />
                 <td>{{ match.awayScore }}</td>
                 <td>{% if match.reported is not null %}{{ match.reported|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if match.confirmed is not null %}{{ match.confirmed|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ match.round.round }}</td>
+                <td>{{ match.isSimulated }}</td>
             </tr>
         {% endfor %}
     </tbody>

@@ -92,9 +92,15 @@ class Match
      */
     private $confirmed;
 
+    /**
+     * @var bool $simulated
+     */
+    private $simulated;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->simulated = false;
     }
 
     /**
@@ -531,55 +537,48 @@ class Match
     }
 
     /**
+     * Set confirmed to right now
+     */
+    public function setConfirmedToNow()
+    {
+        $this->confirmed = new \DateTime();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSimulated()
+    {
+        return $this->simulated;
+    }
+
+    /**
+     * @param bool $simulated
+     */
+    public function setSimulated(bool $simulated)
+    {
+        $this->simulated = $simulated;
+    }
+
+    /**
      * Is home
      *
-     * @param Team $team
+     * @param Competitor $competitor
      * @return boolean
      */
-    public function isHome(Team $team)
+    public function isHome(Competitor $competitor)
     {
-        return $this->homeTeam == $team;
+        return $this->homeCompetitor == $competitor;
     }
 
     /**
      * Is away
      *
-     * @param Team $team
+     * @param Competitor $competitor
      * @return boolean
      */
-    public function isAway(Team $team)
+    public function isAway(Competitor $competitor)
     {
-        return $this->awayTeam == $team;
-    }
-
-    /**
-     * Get result
-     *
-     * @param User $user
-     * @return string
-     */
-    public function getResult(User $user)
-    {
-        $result = "";
-
-        if ($user == $this->homeUser) {
-            if ($this->homeScore > $this->awayScore) {
-                $result = "Win";
-            } else if ($this->homeScore == $this->awayScore) {
-                $result = "Draw";
-            } else {
-                $result = "Loss";
-            }
-        } else if ($user == $this->awayUser) {
-            if ($this->awayScore > $this->homeScore) {
-                $result = "Win";
-            } else if ($this->homeScore == $this->awayScore) {
-                $result = "Draw";
-            } else {
-                $result = "Loss";
-            }
-        }
-
-        return $result;
+        return $this->awayCompetitor == $competitor;
     }
 }

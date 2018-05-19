@@ -38,18 +38,21 @@ class TeamFixtures extends AbstractFixture implements DependentFixtureInterface,
         $this->createTeam("Borussia Dortmund", "user3", "Signal Iduna Park", 81, '22.png');
         $this->createTeam("Chelsea", "user4", "Stamford Bridge", 82, '5.png');
         $this->createTeam("Barcelona", "user5", "Camp Nou", 84, '241.png');
+        $this->createTeam('Parma', "user41", "Arena d'Oro", 70, '');
 
         $this->createTeam("Arsenal", "user6", "Emirates", 80, '1.png');
         $this->createTeam("Manchester United", "user7", "Old Trafford", 82, '11.png');
         $this->createTeam("Bayern Munich", "user8", "Allianz Arena", 84, '21.png');
         $this->createTeam("Milan", "user9", "San Siro", 78, '47.png');
         $this->createTeam("Athletico Madrid", "user10", "Estadio Vicente Calderon", 81, '240.png');
+        $this->createTeam('Olympique de Marseille ', 'user42', 'Stade Velodrome', 70, '');
 
         $this->createTeam("Tottenham Hotspur", "user11", "White Hart Lane", 80, '18.png');
         $this->createTeam("Roma", "user12", "Stadio Olimpico", 79, '52.png');
         $this->createTeam("Inter", "user13", "San Siro", 78, '44.png');
         $this->createTeam("Paris Saint-Germain", "user14", "Parc des Princes", 82, '73.pngs');
         $this->createTeam("Juventus", "user15", "Juventus Stadium", 81, '45.png');
+        $this->createTeam('VfB Stuttgart', 'user43', 'Waldstadion (Fussballstadion)', 75, '');
 
         $this->createTeam("Manchester City", "user16", "Etihad", 83, '10.png');
         $this->createTeam("Everton", "user17", "Goodison Park", 78, '7.png');

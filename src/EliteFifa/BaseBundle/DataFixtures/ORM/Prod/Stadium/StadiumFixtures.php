@@ -60,6 +60,9 @@ class StadiumFixtures extends AbstractFixture implements ContainerAwareInterface
         $this->createStadium("Imtech Arena");
         $this->createStadium("O Dromo");
         $this->createStadium("El Libertador");
+        $this->createStadium("Arena d'Oro");
+        $this->createStadium('Stade Velodrome');
+        $this->createStadium('Waldstadion (Fussballstadion)');
 
         $this->createStadium('Test');
 

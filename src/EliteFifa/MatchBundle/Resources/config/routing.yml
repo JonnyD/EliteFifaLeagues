@@ -1,19 +1,23 @@
+elite_fifa.simulate_matches:
+    path: /admin/match/simulate/{competitorId}
+    defaults: { _controller: MatchBundle:AdminMatch:simulate }
+
 elite_fifa.show_match:
-    pattern: /match/{id}
-    defaults: { _controller: EliteFifaBundle:Match:show }
+    path: /match/{id}
+    defaults: { _controller: MatchBundle:Match:show }
 
 elite_fifa.list_matches:
-    pattern: /matches
-    defaults: { _controller: EliteFifaBundle:Match:list }
+    path: /matches
+    defaults: { _controller: MatchBundle:Match:list }
 
 elite_fifa.report_ladder_match:
-    pattern: /match/report/ladder
-    defaults: { _controller: EliteFifaBundle:Match:reportLadder }
+    path: /match/report/ladder
+    defaults: { _controller: MatchBundle:Match:reportLadder }
 
 elite_fifa.report_match:
-    pattern: /match/report/{id}
-    defaults: { _controller: EliteFifaBundle:Match:report }
+    path: /match/report/{id}
+    defaults: { _controller: MatchBundle:Match:report }
 
 elite_fifa.confirm_match:
-    pattern: /match/confirm/{id}
-    defaults: { _controller: EliteFifaBundle:Match:confirm }
+    path: /match/confirm/{id}
+    defaults: { _controller: MatchBundle:Match:confirm }

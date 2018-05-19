@@ -5,6 +5,7 @@ namespace EliteFifa\MatchBundle\Service;
 use Doctrine\Common\Collections\ArrayCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitionBundle\Entity\GroupStage;
+use EliteFifa\CompetitionBundle\Entity\Knockout;
 use EliteFifa\CompetitionBundle\Entity\KnockoutStage;
 use EliteFifa\CompetitionBundle\Entity\Stage;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
@@ -53,6 +54,7 @@ class MatchService
     public function confirm(Match $match)
     {
         $match->setConfirmed(new \DateTime());
+        $match->setStatus(MatchStatus::CONFIRMED);
         $this->save($match);
     }
 
@@ -161,6 +163,34 @@ class MatchService
     }
 
     /**
+     * @param Match $match
+     * @param Competitor $competitor
+     */
+    public function simulateMatch(Match $match, Competitor $competitor)
+    {
+        $isHome = $match->isHome($competitor);
+        $isAway = $match->isAway($competitor);
+
+        if ($match->getCompetition() instanceof Knockout) {
+            if ($isHome) {
+                $match->setHomeScore(0);
+                $match->setAwayScore(1);
+            } else if ($isAway) {
+                $match->setHomeScore(1);
+                $match->setAwayScore(0);
+            }
+        } else {
+            $match->setHomeScore(0);
+            $match->setAwayScore(0);
+        }
+
+        $match->setReportedToNow();
+        $match->setSimulated(true);
+
+        $this->confirm($match);
+    }
+
+    /**
      * @return Match[]
      */
     public function getAllMatches()
@@ -234,35 +264,6 @@ class MatchService
     public function getLast5MatchesPlayedByTeam($team)
     {
         return $this->matchRepository->findLast5MatchesPlayed($team);
-    }
-
-    public function calculateResultType($match, $selectedTeam)
-    {
-        $homeTeam = $match->getHomeTeam();
-        $awayTeam = $match->getAwayTeam();
-        $homeScore = $match->getHomeScore();
-        $awayScore = $match->getAwayScore();
-
-        $resultType = "";
-        if ($selectedTeam == $homeTeam) {
-            if ($homeScore > $awayScore) {
-                $resultType = "W";
-            } else if ($homeScore < $awayScore) {
-                $resultType = "";
-            } else if ($homeScore == $awayScore) {
-                $resultType = "";
-            }
-        } else if ($selectedTeam == $awayTeam) {
-            if ($homeScore > $awayScore) {
-                $resultType = "";
-            } else if ($homeScore < $awayScore) {
-                $resultType = "";
-            } else if ($homeScore == $awayScore) {
-                $resultType = "";
-            }
-        }
-
-        return $resultType;
     }
 
     public function getMatchesByCompetitionSeasonOrderedByRound($competition, $season)

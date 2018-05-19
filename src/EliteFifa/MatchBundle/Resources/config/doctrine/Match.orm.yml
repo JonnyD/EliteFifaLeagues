@@ -24,6 +24,8 @@ EliteFifa\MatchBundle\Entity\Match:
       nullable: true
     status:
       type: string
+    simulated:
+      type: boolean
   manyToOne:
     round:
       targetEntity: EliteFifa\MatchBundle\Entity\Round

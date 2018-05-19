@@ -287,6 +287,10 @@ class StandingService
      */
     public function updateStandingsByMatch(Match $match)
     {
+        if (!$match->isConfirmed()) {
+            return;
+        }
+
         $competition = $match->getCompetition();
         if (!($competition instanceof League)) {
             return;

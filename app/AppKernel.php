@@ -31,7 +31,6 @@ class AppKernel extends Kernel
             new EliteFifa\RegionBundle\RegionBundle(),
             new EliteFifa\AssociationBundle\AssociationBundle(),
             new EliteFifa\CompetitionBundle\CompetitionBundle(),
-            new EliteFifa\MatchBundle\MatchBundle(),
             new EliteFifa\ParticipantBundle\ParticipantBundle(),
             new EliteFifa\PlayerBundle\PlayerBundle(),
             new EliteFifa\SeasonBundle\SeasonBundle(),
@@ -42,7 +41,8 @@ class AppKernel extends Kernel
             new EliteFifa\StandingBundle\StandingBundle(),
             new EliteFifa\OfficeBundle\OfficeBundle(),
             new EliteFifa\CareerBundle\CareerBundle(),
-            new EliteFifa\JobBundle\JobBundle()
+            new EliteFifa\JobBundle\JobBundle(),
+            new EliteFifa\MatchBundle\MatchBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

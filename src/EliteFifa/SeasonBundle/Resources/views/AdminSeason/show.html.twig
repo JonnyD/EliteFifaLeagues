@@ -16,6 +16,7 @@ Competitors <br />
             <td>{% if competitor.hasUser %}{{ competitor.user.username }}{% endif %}</td>
             <td><a href="{{ path('elite_fifa.remove_user', { 'id': competitor.id }) }}">Remove</a></td>
             <td><a href="{{ path('elite_fifa.change_competitor', { 'id': competitor.id }) }}">Change</a></td>
+            <td><a href="{{ path('elite_fifa.simulate_matches', { 'competitorId': competitor.id }) }}">Simulate</a></td>
         </tr>
     {% endfor %}
     </tbody>

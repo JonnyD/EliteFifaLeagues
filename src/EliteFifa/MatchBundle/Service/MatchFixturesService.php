@@ -53,13 +53,15 @@ class MatchFixturesService
 
         $away = array_splice($competitors, (count($competitors) / 2));
         $home = $competitors;
-        for ($r = 0; $r < $roundsCount; $r++) {
+        for ($r = 0; $r < count($home)+count($away)-1; $r++) {
             for ($j = 0; $j < count($home); $j++) {
                 $rounds[$r][$j]["Home"] = $home[$j];
                 $rounds[$r][$j]["Away"] = $away[$j];
             }
-            if (count($home) + count($away) -1 > 2) {
-                array_unshift($away, current(array_splice($home, 1, 1)));
+            if ((count($home) + count($away) -1) > 2) {
+                $splice = array_splice($home, 1, 1);
+                $shift = array_shift($splice);
+                array_unshift($away, $shift);
                 array_push($home, array_pop($away));
             }
         }
