@@ -112,6 +112,36 @@ class MatchFixturesService
     }
 
     /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Match[]
+     */
+    public function createRoundOf16Fixtures($competitors, Competition $competition, Season $season)
+    {
+        $round = new Round();
+        $round->setRound(1);
+        $round->setName(RoundName::ROUND_OF_16);
+        $startDate = clone $season->getStartDate();
+        $round->setStartDate($startDate);
+
+        $fixtures = [];
+        while (count($competitors) > 0) {
+            $randomWinnerRand = rand(0, count($competitors) - 1);
+            $randomWinner1 = $competitors[$randomWinnerRand];
+            unset($competitors[$randomWinnerRand]);
+
+            $randomWinnerRand = rand(0, count($competitors) - 1);
+            $randomWinner2 = $competitors[$randomWinnerRand];
+            unset($competitors[$randomWinnerRand]);
+
+            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $competition, $season, $round);
+        }
+
+        return $fixtures;
+    }
+
+    /**
      * @param Match $match
      * @return Match[]|void
      */
@@ -124,24 +154,17 @@ class MatchFixturesService
         $fixtures = [];
 
         if ($match->getCompetition() instanceof Knockout) {
-
+            $round = $match->getRound();
+            $matchesFromRound = $this->matchService->getMatchesByRoundAndSeason($round, $match->getSeason());
+            if ($this->matchService->haveAllMatchesBeenConfirmed($matchesFromRound)) {
+                $fixtures = $this->createNextRoundFixtures($match);
+            }
         } else {
             $stage = $match->getCompetition()->getStage();
             if ($stage instanceof GroupStage) {
                 $matchesFromStage = $this->matchService->getMatchesByStageAndSeason($stage, $match->getSeason());
                 if ($this->matchService->haveAllMatchesBeenConfirmed($matchesFromStage)) {
                     $fixtures = $this->createChampionsLeagueQuarterFinalFixtures($match);
-                }
-            } else if ($stage instanceof KnockoutStage) {
-                $round = $match->getRound();
-                $matchesFromRound = $this->matchService->getMatchesByRoundAndSeason($round, $match->getSeason());
-                if ($this->matchService->haveAllMatchesBeenConfirmed($matchesFromRound)) {
-                    $roundName = $match->getRound()->getName();
-                    if ($roundName === RoundName::QUARTER_FINAL) {
-                        $fixtures = $this->createChampionsLeagueSemiFinalFixtures($match);
-                    } else if ($roundName === RoundName::SEMI_FINAL) {
-                        $fixtures = $this->createChampionsLeagueFinalFixtures($match);
-                    }
                 }
             }
         }
@@ -151,7 +174,42 @@ class MatchFixturesService
 
     public function createNextRoundFixtures(Match $match)
     {
+        $matches = $this->matchService->getMatchesByRoundAndSeason($match->getRound(), $match->getSeason());
 
+        $winners = [];
+        foreach ($matches as $match) {
+            $winners[] = $this->matchService->getWinner($match);
+        }
+
+        $round = new Round();
+        $round->setRound($match->getRound()->getRound() + 1);
+        if (count($winners) === 8) {
+            $roundName = RoundName::QUARTER_FINAL;
+        } else if (count($winners) === 4) {
+            $roundName = RoundName::SEMI_FINAL;
+        } else if (count($winners) === 2) {
+            $roundName = RoundName::THE_FINAL;
+        } else if (count($winners) === 1) {
+            return;
+        }
+        $round->setName($roundName);
+        $startDate = clone $match->getRound()->getStartDate()->add(new \DateInterval('P1D'));
+        $round->setStartDate($startDate);
+
+        $fixtures = [];
+        while (count($winners) > 0) {
+            $randomWinnerRand = rand(0, count($winners) - 1);
+            $randomWinner1 = $winners[$randomWinnerRand];
+            unset($winners[$randomWinnerRand]);
+
+            $randomWinnerRand = rand(0, count($winners) - 1);
+            $randomWinner2 = $winners[$randomWinnerRand];
+            unset($winners[$randomWinnerRand]);
+
+            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $match->getCompetition(), $match->getSeason(), $round);
+        }
+
+        return $fixtures;
     }
 
     /**
@@ -202,63 +260,6 @@ class MatchFixturesService
 
             $fixtures[] = $this->matchService->createMatch($randomWinner, $randomRunnerUp, $nextStage->getCompetition(), $match->getSeason(), $round);
         }
-
-        return $fixtures;
-    }
-
-    public function createChampionsLeagueSemiFinalFixtures(Match $match)
-    {
-        $matches = $this->matchService->getMatchesByRoundAndSeason($match->getRound(), $match->getSeason());
-
-        $winners = [];
-        foreach ($matches as $match) {
-            $winners[] = $this->matchService->getWinner($match);
-        }
-
-        $round = new Round();
-        $round->setRound($match->getRound()->getRound() + 1);
-        $round->setName(RoundName::SEMI_FINAL);
-        $startDate = clone $match->getRound()->getStartDate()->add(new \DateInterval('P1D'));
-        $round->setStartDate($startDate);
-
-        $fixtures = [];
-        while (count($winners) > 0) {
-            $randomWinnerRand = rand(0, count($winners) - 1);
-            $randomWinner1 = $winners[$randomWinnerRand];
-            unset($winners[$randomWinnerRand]);
-
-            $randomWinnerRand = rand(0, count($winners) - 1);
-            $randomWinner2 = $winners[$randomWinnerRand];
-            unset($winners[$randomWinnerRand]);
-
-            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $match->getCompetition(), $match->getSeason(), $round);
-        }
-
-        return $fixtures;
-    }
-
-    /**
-     * @param Match $match
-     * @return Match[]
-     * @throws \Exception
-     */
-    public function createChampionsLeagueFinalFixtures(Match $match)
-    {
-        $matches = $this->matchService->getMatchesByRoundAndSeason($match->getRound(), $match->getSeason());
-
-        $winners = [];
-        foreach ($matches as $match) {
-            $winners[] = $this->matchService->getWinner($match);
-        }
-
-        $round = new Round();
-        $round->setRound($match->getRound()->getRound() + 1);
-        $round->setName(RoundName::THE_FINAL);
-        $startDate = clone $match->getRound()->getStartDate()->add(new \DateInterval('P1D'));
-        $round->setStartDate($startDate);
-
-        $fixtures = [];
-        $fixtures[] = $this->matchService->createMatch($winners[0], $winners[1], $match->getCompetition(), $match->getSeason(), $round);
 
         return $fixtures;
     }
