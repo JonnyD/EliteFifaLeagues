@@ -1,31 +1,5 @@
 <?php
 
-$fixtures = [];
-
-$participants = ['Liverpool', 'Man Utd', 'Arsenal', 'Chelsea', 'Leicester', 'Everton'];
-$teamsCount = count($participants);
-$rounds = $teamsCount - 1;
-$matchesPerRound = $teamsCount / 2;
-
-$awayTeams = array_splice($participants, $matchesPerRound);
-$homeTeams = $participants;
-
-for ($r = 0; $r < $rounds; $r++) {
-    for ($m = 0; $m < $matchesPerRound; $m++) {
-        $homeParticipant = $homeTeams[$m];
-        $awayParticipant = $awayTeams[$m];
-
-        $fixtures[] = ['home'=> $homeParticipant, 'away' => $awayParticipant];
-    }
-    $spliced = array_splice($homeTeams, 1, 1);
-    $secondHomeTeam = array_shift($spliced);
-    array_unshift($awayTeams, $secondHomeTeam);
-
-    $lastAwayTeam = array_pop($awayTeams);
-    array_push($homeTeams, $lastAwayTeam);
-}
-
-var_dump($fixtures);
 ?>
 
 <html>

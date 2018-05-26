@@ -1,15 +1,8 @@
 <?php
-/**
- * This class calculates ratings based on the Elo system used in chess.
- *
- * @author Michal Chovanec <michalchovaneceu@gmail.com>
- * @copyright Copyright © 2012 - 2014 Michal Chovanec
- * @license Creative Commons Attribution 4.0 International License
- */
 
 namespace EliteFifa\StandingBundle\VO;
 
-class Rating
+class ELORating
 {
     /**
      * @var int The K Factor used.

@@ -13,6 +13,7 @@ use EliteFifa\StandingBundle\Enum\OrderBy;
 use EliteFifa\StandingBundle\Enum\StandingType;
 use EliteFifa\StandingBundle\Enum\TableType;
 use EliteFifa\StandingBundle\Repository\StandingRepository;
+use EliteFifa\StandingBundle\VO\ELORating;
 use EliteFifa\StandingBundle\VO\Rating;
 use EliteFifa\StandingBundle\VO\Standing as StandingVO;
 use EliteFifa\UserBundle\Entity\User;
@@ -201,7 +202,7 @@ class StandingService
             OrderBy::GOAL_DIFFERENCE => Order::DESC,
             OrderBy::WON => Order::DESC
         ]);
-        $criteria->setLimit($competition->getPromotionSpots());
+        $criteria->setLimit($league->getPromotionSpots());
 
         $standings = $this->standingRepository->findStandingsByCriteria($criteria);
         return $standings;
@@ -399,14 +400,13 @@ class StandingService
         $criteria = new StandingCriteria();
         $criteria->setTableType(TableType::RANKING);
         $criteria->setUser($match->getHomeUser());
-
         $homeRanking = $this->standingRepository->findStandingByCriteria($criteria);
         if ($homeRanking == null) {
             $homeRanking = $this->createRankingStanding($match->getHomeUser());
             $this->save($homeRanking);
         }
-        $criteria->setUser($match->getAwayUser());
 
+        $criteria->setUser($match->getAwayUser());
         $awayRanking = $this->standingRepository->findStandingByCriteria($criteria);
         if ($awayRanking == null) {
             $awayRanking = $this->createRankingStanding($match->getAwayUser());
@@ -420,11 +420,11 @@ class StandingService
         $awayPoints = $awayRanking->getPoints();
 
         if ($homeScore > $awayScore) {
-            $rating = new Rating($homePoints, $awayPoints, Rating::WIN, Rating::LOST);
+            $rating = new ELORating($homePoints, $awayPoints, ELORating::WIN, ELORating::LOST);
         } else if ($awayScore > $homeScore) {
-            $rating = new Rating($homePoints, $awayPoints, Rating::LOST, Rating::WIN);
+            $rating = new ELORating($homePoints, $awayPoints, ELORating::LOST, ELORating::WIN);
         } else {
-            $rating = new Rating($homePoints, $awayPoints, Rating::DRAW, Rating::DRAW);
+            $rating = new ELORating($homePoints, $awayPoints, ELORating::DRAW, ELORating::DRAW);
         }
 
         $results = $rating->getNewRatings();
