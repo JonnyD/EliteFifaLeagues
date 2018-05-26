@@ -34,6 +34,12 @@ EliteFifa\StandingBundle\Entity\Standing:
       points:
         type: integer
   manyToOne:
+    user:
+      targetEntity: EliteFifa\UserBundle\Entity\User
+      inversedBy: standings
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
     competitor:
       targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
       inversedBy: standings

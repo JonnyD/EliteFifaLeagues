@@ -69,6 +69,11 @@ class StandingRepository extends EntityRepository
                 ->setParameter('season', $criteria->getSeason());
         }
 
+        if ($criteria->getUser()) {
+            $qb->andWhere('standing.user = :user')
+                ->setParameter('user', $criteria->getUser());
+        }
+
         if ($criteria->getCompetitor()) {
             $qb->andWhere('standing.competitor = :competitor')
                 ->setParameter('competitor', $criteria->getCompetitor());

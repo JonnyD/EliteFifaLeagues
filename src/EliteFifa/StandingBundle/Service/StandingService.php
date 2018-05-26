@@ -13,7 +13,9 @@ use EliteFifa\StandingBundle\Enum\OrderBy;
 use EliteFifa\StandingBundle\Enum\StandingType;
 use EliteFifa\StandingBundle\Enum\TableType;
 use EliteFifa\StandingBundle\Repository\StandingRepository;
+use EliteFifa\StandingBundle\VO\Rating;
 use EliteFifa\StandingBundle\VO\Standing as StandingVO;
+use EliteFifa\UserBundle\Entity\User;
 
 class StandingService
 {
@@ -100,6 +102,20 @@ class StandingService
         }
 
         return $standings;
+    }
+
+    /**
+     * @param User $user
+     * @return Standing
+     */
+    public function createRankingStanding(User $user)
+    {
+        $standing = new Standing();
+        $standing->setUser($user);
+        $standing->setTableType(TableType::RANKING);
+        $standing->setPoints(1200);
+
+        return $standing;
     }
 
     /**
@@ -369,6 +385,54 @@ class StandingService
         $this->save($homeHomeStanding);
         $this->save($awayOverallStanding);
         $this->save($awayAwayStanding);
+    }
+
+    /**
+     * @param Match $match
+     */
+    public function updateRankingsByMatch(Match $match)
+    {
+        if (!$match->getRanking()) {
+            return;
+        }
+
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::RANKING);
+        $criteria->setUser($match->getHomeUser());
+
+        $homeRanking = $this->standingRepository->findStandingByCriteria($criteria);
+        if ($homeRanking == null) {
+            $homeRanking = $this->createRankingStanding($match->getHomeUser());
+            $this->save($homeRanking);
+        }
+        $criteria->setUser($match->getAwayUser());
+
+        $awayRanking = $this->standingRepository->findStandingByCriteria($criteria);
+        if ($awayRanking == null) {
+            $awayRanking = $this->createRankingStanding($match->getAwayUser());
+            $this->save($awayRanking);
+        }
+
+        $homeScore = $match->getHomeScore();
+        $awayScore = $match->getAwayScore();
+
+        $homePoints = $homeRanking->getPoints();
+        $awayPoints = $awayRanking->getPoints();
+
+        if ($homeScore > $awayScore) {
+            $rating = new Rating($homePoints, $awayPoints, Rating::WIN, Rating::LOST);
+        } else if ($awayScore > $homeScore) {
+            $rating = new Rating($homePoints, $awayPoints, Rating::LOST, Rating::WIN);
+        } else {
+            $rating = new Rating($homePoints, $awayPoints, Rating::DRAW, Rating::DRAW);
+        }
+
+        $results = $rating->getNewRatings();
+        $homeRanking->setPoints($results['a']);
+        $awayRanking->setPoints($results['b']);
+
+        $this->save($homeRanking);
+        $this->save($awayRanking);
     }
 
     /**

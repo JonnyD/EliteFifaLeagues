@@ -26,6 +26,8 @@ EliteFifa\MatchBundle\Entity\Match:
       type: string
     simulated:
       type: boolean
+    ranking:
+      type: boolean
   manyToOne:
     round:
       targetEntity: EliteFifa\MatchBundle\Entity\Round

@@ -5,6 +5,7 @@ namespace EliteFifa\StandingBundle\Criteria;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\SeasonBundle\Entity\Season;
+use EliteFifa\UserBundle\Entity\User;
 
 class StandingCriteria
 {
@@ -17,6 +18,11 @@ class StandingCriteria
      * @var string
      */
     private $standingType;
+
+    /**
+     * @var User
+     */
+    private $user;
 
     /**
      * @var Competitor
@@ -73,6 +79,22 @@ class StandingCriteria
     public function setStandingType($standingType)
     {
         $this->standingType = $standingType;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 
     /**

@@ -118,12 +118,14 @@ class MatchService
      * @param Competition $competition
      * @param Season $season
      * @param Round $round
+     * @param bool $ranking
      * @return Match
      */
     public function createMatch(
         Competitor $homeCompetitor, Competitor $awayCompetitor,
         Competition $competition,
-        Season $season, Round $round)
+        Season $season, Round $round,
+        bool $ranking)
     {
         $match = new Match();
         $match->setHomeCompetitor($homeCompetitor);
@@ -144,6 +146,7 @@ class MatchService
         $match->setSeason($season);
         $match->setCompetition($competition);
         $match->setStatus(MatchStatus::UNPLAYED);
+        $match->setRanking($ranking);
 
         return $match;
     }

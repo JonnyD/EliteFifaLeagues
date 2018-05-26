@@ -97,10 +97,16 @@ class Match
      */
     private $simulated;
 
+    /**
+     * @var bool $ranking
+     */
+    private $ranking;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->simulated = false;
+        $this->ranking = false;
     }
 
     /**
@@ -558,6 +564,22 @@ class Match
     public function setSimulated(bool $simulated)
     {
         $this->simulated = $simulated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
+
+    /**
+     * @param bool $ranking
+     */
+    public function setRanking(bool $ranking)
+    {
+        $this->ranking = $ranking;
     }
 
     /**

@@ -102,7 +102,7 @@ class MatchFixturesService
                 /** @var Competitor $awayCompetitor */
                 $awayCompetitor = $match['Away'];
 
-                $fixtures[] = $this->matchService->createMatch($homeCompetitor, $awayCompetitor, $competition, $season, $round);
+                $fixtures[] = $this->matchService->createMatch($homeCompetitor, $awayCompetitor, $competition, $season, $round, true);
             }
 
             $roundNumber++;
@@ -135,7 +135,7 @@ class MatchFixturesService
             $randomWinner2 = $competitors[$randomWinnerRand];
             unset($competitors[$randomWinnerRand]);
 
-            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $competition, $season, $round);
+            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $competition, $season, $round, true);
         }
 
         return $fixtures;
@@ -206,7 +206,7 @@ class MatchFixturesService
             $randomWinner2 = $winners[$randomWinnerRand];
             unset($winners[$randomWinnerRand]);
 
-            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $match->getCompetition(), $match->getSeason(), $round);
+            $fixtures[] = $this->matchService->createMatch($randomWinner1, $randomWinner2, $match->getCompetition(), $match->getSeason(), $round, true);
         }
 
         return $fixtures;
@@ -258,7 +258,7 @@ class MatchFixturesService
             $randomRunnerUp = $runnerUps[$randomRunnerUpRand];
             unset($runnerUps[$randomRunnerUpRand]);
 
-            $fixtures[] = $this->matchService->createMatch($randomWinner, $randomRunnerUp, $nextStage->getCompetition(), $match->getSeason(), $round);
+            $fixtures[] = $this->matchService->createMatch($randomWinner, $randomRunnerUp, $nextStage->getCompetition(), $match->getSeason(), $round, true);
         }
 
         return $fixtures;

@@ -85,7 +85,7 @@ class MatchController extends Controller
 
         $awayUser = $match->getAwayTeam()->getUser();
         if ($loggedInUser != $awayUser) {
-            throw $this->createNotFoundException('Only away team can report match');
+            throw $this->createNotFoundException('Only away team can confirm match');
         }
 
         $form = $this->createForm('confirm_match', $match);
@@ -96,6 +96,7 @@ class MatchController extends Controller
 
             $standingService = $this->getStandingService();
             $standingService->updateStandingsByMatch($match);
+            $standingService->updateRankingsByMatch($match);
 
             return $this->redirect($this->generateUrl('elite_fifa.show_office'));
         }
