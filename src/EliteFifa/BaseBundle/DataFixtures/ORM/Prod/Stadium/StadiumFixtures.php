@@ -63,9 +63,35 @@ class StadiumFixtures extends AbstractFixture implements ContainerAwareInterface
         $this->createStadium("Arena d'Oro");
         $this->createStadium('Stade Velodrome');
         $this->createStadium('Waldstadion (Fussballstadion)');
-
+        $this->createStadium('Turf Moor');
+        $this->createStadium('Court Lane');
+        $this->createStadium('Ivy Lane');
+        $this->createStadium('BORUSSIA-PARK');
+        $this->createStadium('Selhurst Park');
+        $this->createStadium('Villa Park');
+        $this->createStadium('Stadio Classico');
+        $this->createStadium('Britannia Stadium (Stoke City Football Stadium)');
+        $this->createStadium('Vicarage Road');
+        $this->createStadium('Eastpoint Arena (Football Ground)');
+        $this->createStadium('Stadion Europa (Generic Europe 2)');
+        $this->createStadium('Liberty Stadium');
+        $this->createStadium('Donbass Arena');
+        $this->createStadium('The Hawthorns');
+        $this->createStadium('El Libertador (La Bombastico)');
+        $this->createStadium('Olympiastadion');
+        $this->createStadium('StubHub Center');
+        $this->createStadium('Vitality Stadium (Goldsands Stadium)');
+        $this->createStadium('Crown Lane');
+        $this->createStadium('El Monumento (Estadio Latino)');
+        $this->createStadium('Stadion Neder');
+        $this->createStadium("La Bombonera");
+        $this->createStadium("Stadion 23. Maj");
+        $this->createStadium("340");
+        $this->createStadium("384");
+        $this->createStadium("Molton Road (Sheldon Stadium)");
         $this->createStadium('Test');
-
+        $this->createStadium("El Monumental");
+        $this->createStadium("Carrow Road");
         $manager->flush();
     }
 

@@ -40,7 +40,7 @@ class UserFixtures extends AbstractFixture implements DependentFixtureInterface,
         $userRole = 'ROLE_USER';
         $adminRole = 'ROLE_ADMIN';
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 96; $i++) {
             if ($i == 1) {
                 $this->createUser($adminRole, $i);
             } else {
