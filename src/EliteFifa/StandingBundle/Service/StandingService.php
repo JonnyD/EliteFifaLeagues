@@ -5,7 +5,9 @@ namespace EliteFifa\StandingBundle\Service;
 use EliteFifa\BaseBundle\Enum\Order;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitionBundle\Entity\League;
+use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Entity\Match;
+use EliteFifa\MatchBundle\Service\MatchService;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\StandingBundle\Criteria\StandingCriteria;
 use EliteFifa\StandingBundle\Entity\Standing;
@@ -26,11 +28,20 @@ class StandingService
     private $standingRepository;
 
     /**
-     * @param StandingRepository $standingRepository
+     * @var MatchService
      */
-    public function __construct(StandingRepository $standingRepository)
+    private $matchService;
+
+    /**
+     * @param StandingRepository $standingRepository
+     * @param MatchService $matchService
+     */
+    public function __construct(
+        StandingRepository $standingRepository,
+        MatchService $matchService)
     {
         $this->standingRepository = $standingRepository;
+        $this->matchService = $matchService;
     }
 
     /**
@@ -210,7 +221,7 @@ class StandingService
 
     /**
      * @param Match[] $matches
-     * @return Standing[]
+     * @return StandingVO[]
      */
     public function getStandingsByMatches($matches)
     {
@@ -386,6 +397,110 @@ class StandingService
         $this->save($homeHomeStanding);
         $this->save($awayOverallStanding);
         $this->save($awayAwayStanding);
+    }
+
+    /**
+     * @param Match $match
+     */
+    public function updateFormByMatch(Match $match)
+    {
+        if (!$match->isConfirmed()) {
+            return;
+        }
+
+        $competition = $match->getCompetition();
+        if (!($competition instanceof League)) {
+            return;
+        }
+
+        $criteria = new StandingCriteria();
+        $criteria->setCompetitor($match->getHomeCompetitor());
+        $criteria->setCompetition($match->getCompetition());
+        $criteria->setSeason($match->getSeason());
+        $criteria->setTableType(TableType::FORM);
+        $criteria->setStandingType(StandingType::OVERALL);
+        $homeOverallStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $criteria->setStandingType(StandingType::HOME);
+        $homeHomeStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $criteria->setCompetitor($match->getAwayCompetitor());
+        $criteria->setStandingType(StandingType::OVERALL);
+        $awayOverallStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $criteria->setStandingType(StandingType::AWAY);
+        $awayAwayStanding = $this->standingRepository->findStandingByCriteria($criteria);
+
+        $homeOverallMatches = $this->matchService->getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($match->getHomeCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
+        $homeHomeMatches = $this->matchService->getHomeMatchesByCompetitorWithLimit($match->getHomeCompetitor(), 8);
+        $awayOverallMatches = $this->matchService->getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($match->getAwayCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
+        $awayAwayMatches = $this->matchService->getAwayMatchesByCompetitorWIthLimit($match->getAwayCompetitor(), 8);
+
+        $homeOverallStandingByMatches = $this->getStandingByMatches($homeOverallMatches, $match->getHomeCompetitor());
+        $this->combineStandingAndStandingVO($homeOverallStanding, $homeOverallStandingByMatches);
+
+        $homeHomeStandingByMatches = $this->getStandingByMatches($homeHomeMatches, $match->getHomeCompetitor());
+        $this->combineStandingAndStandingVO($homeHomeStanding, $homeHomeStandingByMatches);
+
+        $awayOverallStandingByMatches = $this->getStandingByMatches($awayOverallMatches, $match->getAwayCompetitor());
+        $this->combineStandingAndStandingVO($awayOverallStanding, $awayOverallStandingByMatches);
+
+        $awayAwayStandingByMatches = $this->getStandingByMatches($awayAwayMatches, $match->getAwayCompetitor());
+        $this->combineStandingAndStandingVO($awayAwayStanding, $awayAwayStandingByMatches);
+
+        $this->save($homeOverallStanding);
+        $this->save($homeHomeStanding);
+        $this->save($awayOverallStanding);
+        $this->save($awayAwayStanding);
+    }
+
+    /**
+     * @param Match[] $matches
+     * @param Competitor $competitor
+     * @return StandingVO
+     */
+    public function getStandingByMatches(array $matches, Competitor $competitor)
+    {
+        $standing = new StandingVO();
+
+        foreach ($matches as $match) {
+            $standing->incrementPlayed();
+
+            $winner = $this->matchService->getWinner($match);
+            if ($winner === $competitor) {
+                $standing->incrementWon();
+                $standing->addPoints(3);
+            } else if ($winner !== $competitor) {
+                $standing->incrementLost();
+            } else {
+                $standing->incrementDrawn();
+                $standing->addPoints(1);
+            }
+
+            if ($match->getHomeCompetitor() === $competitor) {
+                $standing->addGoalsFor($match->getHomeScore());
+                $standing->addGoalsAgainst($match->getAwayScore());
+            } else {
+                $standing->addGoalsFor($match->getAwayScore());
+                $standing->addGoalsAgainst($match->getHomeScore());
+            }
+
+            $standing->updateGoalDifference();
+        }
+
+        return $standing;
+    }
+
+    public function combineStandingAndStandingVO(Standing $standing, StandingVO $standingVO)
+    {
+        $standing->setPlayed($standingVO->getPlayed());
+        $standing->setWon($standingVO->getWon());
+        $standing->setDrawn($standingVO->getDrawn());
+        $standing->setLost($standingVO->getLost());
+        $standing->setGoalsFor($standingVO->getGoalsFor());
+        $standing->setGoalsAgainst($standingVO->getGoalsAgainst());
+        $standing->setGoalDifference($standingVO->getGoalDifference());
+        $standing->setPoints($standingVO->getPoints());
     }
 
     /**

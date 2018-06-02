@@ -4,7 +4,9 @@ namespace EliteFifa\MatchBundle\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitionBundle\Entity\Stage;
+use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Match;
 use EliteFifa\SeasonBundle\Entity\Season;
@@ -84,6 +86,10 @@ class MatchRepository extends EntityRepository
             }
         }
 
+        if ($criteria->getLimit()) {
+            $qb->setMaxResults($criteria->getLimit());
+        }
+
         return $qb;
     }
 
@@ -146,6 +152,32 @@ class MatchRepository extends EntityRepository
             ->setParameter('team', $team)
             ->setParameter('competition', $competition)
             ->setParameter('season', $season);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param Competitor $competitor
+     * @param Competition $competition
+     * @param Season $season
+     * @param int $limit
+     * @return Match[]
+     */
+    public function findConfirmedMatchesByCompetitorompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT m FROM MatchBundle:Match m
+                WHERE (m.homeCompetitor = :competitor
+                    OR m.awayCompetitor = :competitor)
+                  AND m.confirmed IS NOT NULL
+                  AND m.competition = :competition
+                  AND m.season = :season
+                ORDER BY m.confirmed DESC')
+            ->setParameter('team', $team)
+            ->setParameter('competition', $competition)
+            ->setParameter('season', $season);
+
+        $query->setMaxResults($limit);
 
         return $query->getResult();
     }

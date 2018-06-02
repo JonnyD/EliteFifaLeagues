@@ -101,6 +101,20 @@ class MatchService
 
     /**
      * @param Competitor $competitor
+     * @param int $limit
+     * @return Match[]
+     */
+    public function getHomeMatchesByCompetitorWithLimit(Competitor $competitor, int $limit)
+    {
+        $criteria = new MatchCriteria();
+        $criteria->setHomeCompetitor($competitor);
+        $criteria->setLimit($limit);
+
+        return $this->matchRepository->findMatchesByCriteria($criteria);
+    }
+
+    /**
+     * @param Competitor $competitor
      * @return Match[]
      */
     public function getAwayMatchesByCompetitor(Competitor $competitor)
@@ -110,6 +124,20 @@ class MatchService
 
         $matches = $this->matchRepository->findMatchesByCriteria($criteria);
         return $matches;
+    }
+
+    /**
+     * @param Competitor $competitor
+     * @param int $limit
+     * @return Match[]
+     */
+    public function getAwayMatchesByCompetitorWIthLimit(Competitor $competitor, int $limit)
+    {
+        $criteria = new MatchCriteria();
+        $criteria->setAwayCompetitor($competitor);
+        $criteria->setLimit($limit);
+
+        return $this->matchRepository->findMatchesByCriteria($criteria);
     }
 
     /**
@@ -243,6 +271,18 @@ class MatchService
     public function getMatchesByTeamCompetitionSeason($team, $competition, $season)
     {
         return $this->matchRepository->findMatchesByTeamCompetitionSeason($team, $competition, $season);
+    }
+
+    /**
+     * @param Competitor $competitor
+     * @param Competition $competition
+     * @param Season $season
+     * @param int $limit
+     * @return Match[]
+     */
+    public function getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
+    {
+        return $this->matchRepository->findConfirmedMatchesByCompetitorompetitionSeasonWithLimitOrderedByConfirmedDesc($competitor, $competition, $season, $limit);
     }
 
     public function getConfirmedMatchesByTeamCompetitionSeasonOrderedByConfirmedDesc($team, $competition, $season)
