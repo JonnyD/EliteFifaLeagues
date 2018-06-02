@@ -117,6 +117,78 @@ class StandingService
     }
 
     /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createOverallFormStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::FORM);
+            $standing->setStandingType(StandingType::OVERALL);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createHomeFormStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::FORM);
+            $standing->setStandingType(StandingType::HOME);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
+     * @param $competitors
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function createAwayFormStandingsForCompetitors($competitors, Competition $competition, Season $season)
+    {
+        $standings = [];
+
+        foreach ($competitors as $competitor) {
+            $standing = new Standing();
+            $standing->setCompetitor($competitor);
+            $standing->setCompetition($competition);
+            $standing->setSeason($season);
+            $standing->setTableType(TableType::FORM);
+            $standing->setStandingType(StandingType::AWAY);
+
+            $standings[] = $standing;
+        }
+
+        return $standings;
+    }
+
+    /**
      * @param User $user
      * @return Standing
      */

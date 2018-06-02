@@ -15,6 +15,7 @@ services:
         class: %standing_service.class%
         arguments:
           - '@elite_fifa.standing_repository'
+          - '@elite_fifa.match_service'
 
     # repositories
     elite_fifa.standing_repository:
