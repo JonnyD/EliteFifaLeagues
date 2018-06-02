@@ -1,5 +1,5 @@
 <?php
-
+var_dump($_POST);
 ?>
 
 <html>
@@ -71,7 +71,11 @@
     <a class="decrease_goals" data-id="goals_1" href="#">-</a>
     <br>
     Robbie Fowler:<br>
-    <input id="goals_1" type="hidden" name="goals[2]" value="0" autocomplete="off"> + -
+    <input id="goals_2" type="hidden" name="goals[2]" value="0" autocomplete="off">
+    <span class="goals_2">0</span>
+    <a class="increase_goals" data-id="goals_2" href="#">+</a>
+    <a class="decrease_goals" data-id="goals_2" href="#">-</a>
+    <br>
     <br><br>
     <input id="submit" name="submit" type="submit" value="Submit">
 </form>
