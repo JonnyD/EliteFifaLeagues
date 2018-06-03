@@ -8,6 +8,7 @@ use EliteFifa\CompetitionBundle\Collection\CompetitionCollection;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\JobBundle\Entity\Job;
 use EliteFifa\MatchBundle\Entity\Match;
+use EliteFifa\MatchBundle\Entity\Sequence;
 use EliteFifa\SeasonBundle\Entity\Season;
 use EliteFifa\TeamBundle\Entity\Team;
 use EliteFifa\UserBundle\Entity\User;
@@ -63,6 +64,11 @@ class Competitor
      * @var ArrayCollection|Job[]
      */
     private $jobs;
+
+    /**
+     * @var Sequence
+     */
+    private $sequence;
 
     public function __construct()
     {
@@ -302,5 +308,21 @@ class Competitor
     public function setJobs($jobs)
     {
         $this->jobs = $jobs;
+    }
+
+    /**
+     * @return Sequence
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * @param Sequence $sequence
+     */
+    public function setSequence(Sequence $sequence)
+    {
+        $this->sequence = $sequence;
     }
 }

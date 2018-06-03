@@ -444,6 +444,98 @@ class MatchService
 
     /**
      * @param Match $match
+     * @param Competitor $competitor
+     * @return bool
+     */
+    public function hasWon(Match $match, Competitor $competitor)
+    {
+        $hasWon = false;
+
+        if ($this->getWinner($match) === $competitor) {
+            $hasWon = true;
+        }
+
+        return $hasWon;
+    }
+
+    /**
+     * @param Match $match
+     * @param Competitor $competitor
+     * @return bool
+     */
+    public function hasDrawn(Match $match, Competitor $competitor)
+    {
+        $hasDrawn = false;
+
+        if ($this->getWinner($match) === null) {
+            $hasDrawn = true;
+        }
+
+        return $hasDrawn;
+    }
+
+    /**
+     * @param Match $match
+     * @param Competitor $competitor
+     * @return bool
+     */
+    public function hasLost(Match $match, Competitor $competitor)
+    {
+        $hasLost = false;
+
+        if ($this->getWinner($match) !== $competitor) {
+            $hasLost = true;
+        }
+
+        return $hasLost;
+    }
+
+    /**
+     * @param Match $match
+     * @param Competitor $competitor
+     * @return bool
+     */
+    public function hasGoalsFor(Match $match, Competitor $competitor)
+    {
+        $hasGoalsFor = false;
+
+        if ($match->isHome($competitor)) {
+            if ($match->getHomeScore() > 0) {
+                $hasGoalsFor = true;
+            }
+        } else if ($match->isAway($competitor)) {
+            if ($match->getAwayScore() > 0) {
+                $hasGoalsFor = true;
+            }
+        }
+
+        return $hasGoalsFor;
+    }
+
+    /**
+     * @param Match $match
+     * @param Competitor $competitor
+     * @return bool
+     */
+    public function hasGoalsAgainst(Match $match, Competitor $competitor)
+    {
+        $hasGoalsAgainst = false;
+
+        if ($match->isHome($competitor)) {
+            if ($match->getAwayScore() > 0) {
+                $hasGoalsAgainst = true;
+            }
+        } else if ($match->isAway($competitor)) {
+            if ($match->getHomeScore() > 0) {
+                $hasGoalsAgainst = true;
+            }
+        }
+
+        return $hasGoalsAgainst;
+    }
+
+    /**
+     * @param Match $match
      * @return Competitor|null
      */
     public function getWinner(Match $match)

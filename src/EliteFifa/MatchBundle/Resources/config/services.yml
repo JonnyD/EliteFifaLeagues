@@ -8,6 +8,8 @@ parameters:
     event_type_repository.factory_argument: 'MatchBundle:EventType'
     round_repository.class:             EliteFifa\MatchBundle\Repository\RoundRepository
     round_repository.factory_argument:  'MatchBundle:Round'
+    sequence_repository.class:          EliteFifa\MatchBundle\Repository\SequenceRepository
+    sequence_repository.factory_argument: 'MatchBundle:Sequence'
 
     # services
     match_service.class:                EliteFifa\MatchBundle\Service\MatchService
@@ -16,6 +18,7 @@ parameters:
     event_service.class:                EliteFifa\MatchBundle\Service\EventService
     result_service.class:               EliteFifa\MatchBundle\Service\ResultService
     round_service.class:                EliteFifa\MatchBundle\Service\RoundService
+    sequence_service.class:             EliteFifa\MatchBundle\Service\SequenceService
 
     # forms
     report_match_form.class:            EliteFifa\MatchBundle\Form\ReportMatchForm
@@ -52,6 +55,12 @@ services:
         arguments:
           - '@elite_fifa.round_repository'
 
+    elite_fifa.sequence_service:
+       class: %sequence_service.class%
+       arguments:
+         - '@elite_fifa.sequence_repository'
+         - '@elite_fifa.match_service'
+
     # repositories
     elite_fifa.match_repository:
         class:           %match_repository.class%
@@ -76,6 +85,12 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
           - %round_repository.factory_argument%
+
+    elite_fifa.sequence_repository:
+        class: %sequence_repository.class%
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+          - %sequence_repository.factory_argument%
 
     # forms
     elite_fifa.form.report_match:

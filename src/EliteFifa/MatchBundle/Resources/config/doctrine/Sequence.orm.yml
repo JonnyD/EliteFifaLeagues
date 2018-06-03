@@ -1,0 +1,64 @@
+EliteFifa\MatchBundle\Entity\Sequence:
+  type: entity
+  repositoryClass: EliteFifa\MatchBundle\Repository\SequenceRepository
+  table: sequence
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    wins:
+      type: integer
+      nullable: true
+    draws:
+      type: integer
+      nullable: true
+    losses:
+      type: integer
+      nullable: true
+    withoutWins:
+      type: integer
+      column: without_wins
+      nullable: true
+    withoutDraws:
+      type: integer
+      column: without_draws
+      nullable: true
+    withoutLosses:
+      type: integer
+      column: without_losses
+      nullable: true
+    withoutGoalsFor:
+      type: integer
+      column: without_goals_for
+      nullable: true
+    withoutGoalsAgainst:
+      type: integer
+      column: without_goals_against
+      nullable: true
+    sequenceType:
+      type: string
+      column: sequence_type
+  manyToOne:
+    competitor:
+      targetEntity: EliteFifa\CompetitorBundle\Entity\Competitor
+      inversedBy: sequence
+      cascade: ["persist"]
+      joinColumn:
+        name: competitor_id
+        referencedColumnName: id
+    competition:
+      targetEntity: EliteFifa\CompetitionBundle\Entity\Competition
+      inversedBy: sequences
+      cascade: ["persist"]
+      joinColumn:
+        name: competition_id
+        referencedColumnName: id
+    season:
+      targetEntity: EliteFifa\SeasonBundle\Entity\Season
+      inversedBy: sequences
+      cascade: ["persist"]
+      joinColumn:
+        name: season_id
+        referencedColumnName: id

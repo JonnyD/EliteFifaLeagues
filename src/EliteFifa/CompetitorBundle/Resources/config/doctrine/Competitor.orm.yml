@@ -60,3 +60,10 @@ EliteFifa\CompetitorBundle\Entity\Competitor:
       targetEntity: EliteFifa\JobBundle\Entity\Job
       mappedBy: competitor
       cascade: ["persist"]
+  oneToOne:
+    sequence:
+      targetEntity: EliteFifa\MatchBundle\Entity\Sequence
+      joinColumn:
+        name: sequence_id
+        referencedColumnName: id
+        onDelete: set null
