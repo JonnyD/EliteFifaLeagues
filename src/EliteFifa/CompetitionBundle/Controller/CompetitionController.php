@@ -25,12 +25,22 @@ class CompetitionController extends Controller
         $matches = $matchService->getMatchesByCompetitionAndSeason($competition, $season);
 
         $standingService = $this->getStandingService();
-        $standings = $standingService->getStandingsByMatches($matches);
+        $overallStandings = $standingService->getOverallStandingsByCompetitionAndSeason($competition, $season);
+        $homeStandings = $standingService->getHomeStandingsByCompetitionAndSeason($competition, $season);
+        $awayStandings = $standingService->getAwayStandingsByCompetitionAndSeason($competition, $season);
+        $overallFormStandings = $standingService->getOverallFormStandingsByCompetitionAndSeason($competition, $season);
+        $homeFormStandings = $standingService->getHomeFormStandingsByCompetitionAndSeason($competition, $season);
+        $awayFormStandings = $standingService->getAwayFormStandingsByCompetitionAndSeason($competition, $season);
 
         return $this->render('CompetitionBundle:Competition:show.html.twig', [
             'season' => $season,
             'competition' => $competition,
-            'standings' => $standings
+            'overallStandings' => $overallStandings,
+            'homeStandings' => $homeStandings,
+            'awayStandings' => $awayStandings,
+            'overallFormStandings' => $overallFormStandings,
+            'homeFormStandings' => $homeFormStandings,
+            'awayFormStandings' => $awayFormStandings
         ]);
     }
 

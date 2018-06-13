@@ -269,6 +269,72 @@ class StandingService
     }
 
     /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getOverallFormStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::FORM);
+        $criteria->setStandingType(StandingType::OVERALL);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
+        ]);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getHomeFormStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::FORM);
+        $criteria->setStandingType(StandingType::HOME);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
+        ]);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
+     * @param Competition $competition
+     * @param Season $season
+     * @return Standing[]
+     */
+    public function getAwayFormStandingsByCompetitionAndSeason(Competition $competition, Season $season)
+    {
+        $criteria = new StandingCriteria();
+        $criteria->setTableType(TableType::FORM);
+        $criteria->setStandingType(StandingType::AWAY);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
+        $criteria->setSort([
+            OrderBy::POINTS => Order::DESC,
+            OrderBy::GOAL_DIFFERENCE => Order::DESC,
+            OrderBy::WON => Order::DESC
+        ]);
+
+        $standings = $this->standingRepository->findStandingsByCriteria($criteria);
+        return $standings;
+    }
+
+    /**
      * @param League $league
      * @param Season $season
      * @return Standing[]
@@ -504,9 +570,9 @@ class StandingService
         $awayAwayStanding = $this->standingRepository->findStandingByCriteria($criteria);
 
         $homeOverallMatches = $this->matchService->getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($match->getHomeCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
-        $homeHomeMatches = $this->matchService->getHomeMatchesByCompetitorWithLimit($match->getHomeCompetitor(), 8);
+        $homeHomeMatches = $this->matchService->getConfirmedHomeMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($match->getHomeCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
         $awayOverallMatches = $this->matchService->getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($match->getAwayCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
-        $awayAwayMatches = $this->matchService->getAwayMatchesByCompetitorWIthLimit($match->getAwayCompetitor(), 8);
+        $awayAwayMatches = $this->matchService->getConfirmedAwayMatchesByCompetitorCompetitionSeasonWIthLimitOrderedByConfirmedDesc($match->getAwayCompetitor(), $match->getCompetition(), $match->getSeason(), 8);
 
         $homeOverallStandingByMatches = $this->getStandingByMatches($homeOverallMatches, $match->getHomeCompetitor());
         $this->combineStandingAndStandingVO($homeOverallStanding, $homeOverallStandingByMatches);
@@ -542,11 +608,11 @@ class StandingService
             if ($winner === $competitor) {
                 $standing->incrementWon();
                 $standing->addPoints(3);
-            } else if ($winner !== $competitor) {
-                $standing->incrementLost();
-            } else {
+            } else if ($winner === null) {
                 $standing->incrementDrawn();
                 $standing->addPoints(1);
+            } else {
+                $standing->incrementLost();
             }
 
             if ($match->getHomeCompetitor() === $competitor) {

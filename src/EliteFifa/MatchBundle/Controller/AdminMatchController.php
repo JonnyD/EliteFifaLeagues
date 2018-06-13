@@ -31,6 +31,7 @@ class AdminMatchController extends Controller
                 if (!$match->isConfirmed()) {
                     $matchService->simulateMatch($match, $competitor);
                     $standingService->updateStandingsByMatch($match);
+                    $standingService->updateFormByMatch($match);
                 }
             }
         }
@@ -40,6 +41,7 @@ class AdminMatchController extends Controller
                 if (!$match->isConfirmed()) {
                     $matchService->simulateMatch($match, $competitor);
                     $standingService->updateStandingsByMatch($match);
+                    $standingService->updateFormByMatch($match);
                 }
             }
         }

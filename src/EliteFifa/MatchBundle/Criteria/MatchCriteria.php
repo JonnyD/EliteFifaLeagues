@@ -2,6 +2,7 @@
 
 namespace EliteFifa\MatchBundle\Criteria;
 
+use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\SeasonBundle\Entity\Season;
@@ -46,6 +47,11 @@ class MatchCriteria
     private $round;
 
     /**
+     * @var Competition
+     */
+    private $competition;
+
+    /**
      * @var Season
      */
     private $season;
@@ -59,6 +65,11 @@ class MatchCriteria
      * @var int
      */
     private $limit;
+
+    /**
+     * @var string
+     */
+    private $status;
 
     /**
      * @return Competitor
@@ -173,6 +184,22 @@ class MatchCriteria
     }
 
     /**
+     * @return Competition
+     */
+    public function getCompetition()
+    {
+        return $this->competition;
+    }
+
+    /**
+     * @param Competition $competition
+     */
+    public function setCompetition(Competition $competition)
+    {
+        $this->competition = $competition;
+    }
+
+    /**
      * @return Season
      */
     public function getSeason()
@@ -218,5 +245,21 @@ class MatchCriteria
     public function setLimit(int $limit)
     {
         $this->limit = $limit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
     }
 }

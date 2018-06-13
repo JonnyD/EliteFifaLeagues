@@ -2,28 +2,61 @@
 
 {% block body %}
     <div class="page-header">
-        <h1>Elite League 1</h1>
+        <h1>{{ competition.name }}</h1>
     </div>
-    <div class="panel with-nav-tabs panel-default">
-        <div class="panel-heading">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1default" data-toggle="tab">Overall</a></li>
-                <li><a href="#tab2default" data-toggle="tab">Wide</a></li>
-                <li><a href="#tab3default" data-toggle="tab">Home</a></li>
-                <li><a href="#tab3default" data-toggle="tab">Away</a></li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
-                        <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab1default">
-                    <table class="table" style="margin-bottom: 0">
-                        <thead>
+
+    <h2>Standings</h2>
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Overall</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Home</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">Away</a></li>
+                </ul>
+            </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <table class="table" style="margin-bottom: 0">
+                            <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Team</th>
+                                    <th>Manager</th>
+                                    <th>P</th>
+                                    <th>W</th>
+                                    <th>D</th>
+                                    <th>L</th>
+                                    <th>GF</th>
+                                    <th>GA</th>
+                                    <th>GD</th>
+                                    <th>Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for standing in overallStandings %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                    {{ standing.competitor.team.name }}
+                                </td>
+                                <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
+                                <td>{{ standing.played }}</td>
+                                <td>{{ standing.won }}</td>
+                                <td>{{ standing.drawn }}</td>
+                                <td>{{ standing.lost }}</td>
+                                <td>{{ standing.goalsFor }}</td>
+                                <td>{{ standing.goalsAgainst }}</td>
+                                <td>{{ standing.goalDifference }}</td>
+                                <td>{{ standing.points }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">
+                        <table class="table" style="margin-bottom: 0">
+                            <thead>
                             <tr>
                                 <th>Position</th>
                                 <th>Team</th>
@@ -37,31 +70,86 @@
                                 <th>GD</th>
                                 <th>Pts</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                        {% for standing in standings %}
-                        <tr>
-                            <td></td>
-                            <td>{{ standing.competitor.team.name }}</td>
-                            <td>{{ standing.competitor.user.username }}</td>
-                            <td>{{ standing.played }}</td>
-                            <td>{{ standing.won }}</td>
-                            <td>{{ standing.drawn }}</td>
-                            <td>{{ standing.lost }}</td>
-                            <td>{{ standing.goalsFor }}</td>
-                            <td>{{ standing.goalsAgainst }}</td>
-                            <td>{{ standing.goalDifference }}</td>
-                            <td>{{ standing.points }}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {% for standing in homeStandings %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>
+                                        <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                        {{ standing.competitor.team.name }}
+                                    </td>
+                                    <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
+                                    <td>{{ standing.played }}</td>
+                                    <td>{{ standing.won }}</td>
+                                    <td>{{ standing.drawn }}</td>
+                                    <td>{{ standing.lost }}</td>
+                                    <td>{{ standing.goalsFor }}</td>
+                                    <td>{{ standing.goalsAgainst }}</td>
+                                    <td>{{ standing.goalDifference }}</td>
+                                    <td>{{ standing.points }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="tab3default">
+                        <table class="table" style="margin-bottom: 0">
+                            <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Team</th>
+                                <th>Manager</th>
+                                <th>P</th>
+                                <th>W</th>
+                                <th>D</th>
+                                <th>L</th>
+                                <th>GF</th>
+                                <th>GA</th>
+                                <th>GD</th>
+                                <th>Pts</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for standing in awayStandings %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>
+                                        <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                        {{ standing.competitor.team.name }}
+                                    </td>
+                                    <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
+                                    <td>{{ standing.played }}</td>
+                                    <td>{{ standing.won }}</td>
+                                    <td>{{ standing.drawn }}</td>
+                                    <td>{{ standing.lost }}</td>
+                                    <td>{{ standing.goalsFor }}</td>
+                                    <td>{{ standing.goalsAgainst }}</td>
+                                    <td>{{ standing.goalDifference }}</td>
+                                    <td>{{ standing.points }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="tab2default">
-                    <table class="table">
+        </div>
+
+    <h2>Form</h2>
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1form" data-toggle="tab">Overall</a></li>
+                    <li><a href="#tab2form" data-toggle="tab">Home</a></li>
+                    <li><a href="#tab3form" data-toggle="tab">Away</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab1form">
+                    <table class="table" style="margin-bottom: 0">
                         <thead>
                         <tr>
-                            <th>Pos</th>
+                            <th>Position</th>
                             <th>Team</th>
                             <th>Manager</th>
                             <th>P</th>
@@ -72,26 +160,17 @@
                             <th>GA</th>
                             <th>GD</th>
                             <th>Pts</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>GF</th>
-                            <th>GA</th>
-                            <th>GD</th>
-                            <td>W</td>
-                            <td>D</td>
-                            <td>L</td>
-                            <td>GF</td>
-                            <td>GA</td>
-                            <td>GD</td>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for standing in standings %}
+                        {% for standing in overallFormStandings %}
                             <tr>
-                                <td>1</td>
-                                <td>{{ standing.competitor.team.name }}</td>
-                                <td>{{ standing.competitor.user.username }}</td>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                    {{ standing.competitor.team.name }}
+                                </td>
+                                <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
                                 <td>{{ standing.played }}</td>
                                 <td>{{ standing.won }}</td>
                                 <td>{{ standing.drawn }}</td>
@@ -100,28 +179,89 @@
                                 <td>{{ standing.goalsAgainst }}</td>
                                 <td>{{ standing.goalDifference }}</td>
                                 <td>{{ standing.points }}</td>
-
-                                <td>{{ standing.homeWon }}</td>
-                                <td>{{ standing.homeDrawn }}</td>
-                                <td>{{ standing.homeLost }}</td>
-                                <td>{{ standing.homeGoalsFor }}</td>
-                                <td>{{ standing.homeGoalsAgainst }}</td>
-                                <td>{{ standing.homeGoalDifference }}</td>
-
-                                <td>{{ standing.awayWon }}</td>
-                                <td>{{ standing.awayDrawn }}</td>
-                                <td>{{ standing.awayLost }}</td>
-                                <td>{{ standing.awayGoalsFor }}</td>
-                                <td>{{ standing.awayGoalsAgainst }}</td>
-                                <td>{{ standing.awayGoalDifference }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="tab3default">Default 3</div>
-                <div class="tab-pane fade" id="tab4default">Default 4</div>
-                <div class="tab-pane fade" id="tab5default">Default 5</div>
+                <div class="tab-pane fade" id="tab2form">
+                    <table class="table" style="margin-bottom: 0">
+                        <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Team</th>
+                            <th>Manager</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for standing in homeFormStandings %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                    {{ standing.competitor.team.name }}
+                                </td>
+                                <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
+                                <td>{{ standing.played }}</td>
+                                <td>{{ standing.won }}</td>
+                                <td>{{ standing.drawn }}</td>
+                                <td>{{ standing.lost }}</td>
+                                <td>{{ standing.goalsFor }}</td>
+                                <td>{{ standing.goalsAgainst }}</td>
+                                <td>{{ standing.goalDifference }}</td>
+                                <td>{{ standing.points }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="tab3form">
+                    <table class="table" style="margin-bottom: 0">
+                        <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Team</th>
+                            <th>Manager</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for standing in awayFormStandings %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>
+                                    <img height="25" width="25" src="{{ asset('bundles/team/images/'  ~ standing.competitor.team.logo ) }}" />
+                                    {{ standing.competitor.team.name }}
+                                </td>
+                                <td>{% if standing.competitor.user is not null %}{{ standing.competitor.user.username }}{% else %}None{% endif %}</td>
+                                <td>{{ standing.played }}</td>
+                                <td>{{ standing.won }}</td>
+                                <td>{{ standing.drawn }}</td>
+                                <td>{{ standing.lost }}</td>
+                                <td>{{ standing.goalsFor }}</td>
+                                <td>{{ standing.goalsAgainst }}</td>
+                                <td>{{ standing.goalDifference }}</td>
+                                <td>{{ standing.points }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-    </div>
+        </div>
 {% endblock %}

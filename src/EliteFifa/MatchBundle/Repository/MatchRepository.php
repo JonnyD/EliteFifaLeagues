@@ -75,9 +75,19 @@ class MatchRepository extends EntityRepository
                 ->setParameter('round', $criteria->getRound());
         }
 
-        if ($criteria->getSeasson()) {
+        if ($criteria->getCompetition()) {
+            $qb->andWhere('match.competition = :competition')
+                ->setParameter('competition', $criteria->getCompetition());
+        }
+
+        if ($criteria->getSeason()) {
             $qb->andWhere('match.season = :season')
                 ->setParameter('season', $criteria->getSeason());
+        }
+
+        if ($criteria->getStatus()) {
+            $qb->andWhere('match.status = :status')
+                ->setParameter('status', $criteria->getStatus());
         }
 
         if ($criteria->getSort()) {
@@ -163,7 +173,7 @@ class MatchRepository extends EntityRepository
      * @param int $limit
      * @return Match[]
      */
-    public function findConfirmedMatchesByCompetitorompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
+    public function findConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
     {
         $query = $this->getEntityManager()
             ->createQuery('SELECT m FROM MatchBundle:Match m
@@ -173,7 +183,7 @@ class MatchRepository extends EntityRepository
                   AND m.competition = :competition
                   AND m.season = :season
                 ORDER BY m.confirmed DESC')
-            ->setParameter('team', $team)
+            ->setParameter('competitor', $competitor)
             ->setParameter('competition', $competition)
             ->setParameter('season', $season);
 

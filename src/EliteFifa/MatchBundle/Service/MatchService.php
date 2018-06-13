@@ -3,6 +3,7 @@
 namespace EliteFifa\MatchBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use EliteFifa\BaseBundle\Enum\Order;
 use EliteFifa\CompetitionBundle\Entity\Competition;
 use EliteFifa\CompetitionBundle\Entity\GroupStage;
 use EliteFifa\CompetitionBundle\Entity\Knockout;
@@ -12,6 +13,7 @@ use EliteFifa\CompetitorBundle\Entity\Competitor;
 use EliteFifa\MatchBundle\Criteria\MatchCriteria;
 use EliteFifa\MatchBundle\Entity\Round;
 use EliteFifa\MatchBundle\Enum\MatchStatus;
+use EliteFifa\MatchBundle\Enum\OrderBy;
 use EliteFifa\MatchBundle\Enum\ResultCode;
 use EliteFifa\MatchBundle\Event\MatchEvent;
 use EliteFifa\MatchBundle\Event\MatchEvents;
@@ -101,14 +103,22 @@ class MatchService
 
     /**
      * @param Competitor $competitor
+     * @param Competition $competition
+     * @param Season $season
      * @param int $limit
      * @return Match[]
      */
-    public function getHomeMatchesByCompetitorWithLimit(Competitor $competitor, int $limit)
+    public function getConfirmedHomeMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
     {
         $criteria = new MatchCriteria();
         $criteria->setHomeCompetitor($competitor);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
         $criteria->setLimit($limit);
+        $criteria->setStatus(MatchStatus::CONFIRMED);
+        $criteria->setSort([
+            OrderBy::CONFIRMED => Order::DESC
+        ]);
 
         return $this->matchRepository->findMatchesByCriteria($criteria);
     }
@@ -128,14 +138,22 @@ class MatchService
 
     /**
      * @param Competitor $competitor
+     * @param Competition $competition
+     * @param Season $season
      * @param int $limit
      * @return Match[]
      */
-    public function getAwayMatchesByCompetitorWIthLimit(Competitor $competitor, int $limit)
+    public function getConfirmedAwayMatchesByCompetitorCompetitionSeasonWIthLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
     {
         $criteria = new MatchCriteria();
         $criteria->setAwayCompetitor($competitor);
+        $criteria->setCompetition($competition);
+        $criteria->setSeason($season);
         $criteria->setLimit($limit);
+        $criteria->setStatus(MatchStatus::CONFIRMED);
+        $criteria->setSort([
+            OrderBy::CONFIRMED => Order::DESC
+        ]);
 
         return $this->matchRepository->findMatchesByCriteria($criteria);
     }
@@ -282,7 +300,7 @@ class MatchService
      */
     public function getConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc(Competitor $competitor, Competition $competition, Season $season, int $limit)
     {
-        return $this->matchRepository->findConfirmedMatchesByCompetitorompetitionSeasonWithLimitOrderedByConfirmedDesc($competitor, $competition, $season, $limit);
+        return $this->matchRepository->findConfirmedMatchesByCompetitorCompetitionSeasonWithLimitOrderedByConfirmedDesc($competitor, $competition, $season, $limit);
     }
 
     public function getConfirmedMatchesByTeamCompetitionSeasonOrderedByConfirmedDesc($team, $competition, $season)
